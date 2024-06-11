@@ -1,0 +1,29 @@
+@import '../../styles/import.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: #02000e;
+  height: 80px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+
+  div {
+    width: 32px;
+  }
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.profile {
+  cursor: pointer;
+}

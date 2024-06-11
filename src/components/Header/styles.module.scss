@@ -22,8 +22,33 @@
 
 .logo {
   cursor: pointer;
+  width: 167px;
+  height: 32px;
+  display: inline-block;
 }
 
 .profile {
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .header {
+    padding: 0 24px;
+  }
+
+  .logo {
+    width: 120px;
+    height: 22px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 0 23px;
+  }
+
+  .logo {
+    width: 108px;
+    height: 20px;
+  }
 }

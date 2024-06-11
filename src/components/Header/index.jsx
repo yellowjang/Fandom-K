@@ -13,8 +13,6 @@ function Header() {
             className={styles.logo}
             src={logo}
             alt='팬덤 케이'
-            width={168}
-            height={32}
           />
         </Link>
         <Link>

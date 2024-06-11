@@ -1,0 +1,6 @@
+$default-font-family: 'Pretendard', sans-serif;
+
+@mixin font-default {
+  font-family: $default-font-family;
+  font-style: normal;
+}

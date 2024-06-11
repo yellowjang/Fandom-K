@@ -1,0 +1,25 @@
+@import '../../../../styles/import.scss';
+
+.back-button {
+  font-family: 'Pretendard';
+  font-weight: 300;
+  background-color: mediumseagreen;
+  border-radius: 99999px;
+  width: 240px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  cursor: pointer;
+
+  .inner-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

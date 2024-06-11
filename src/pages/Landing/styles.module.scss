@@ -1,0 +1,67 @@
+@import '../../styles/import.scss';
+
+.container {
+  max-height: 4680px;
+  background-color: #02000e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../../assets/images/landing/top-vector.png');
+  background-repeat: no-repeat;
+}
+
+.wrapper {
+  width: 1200px;
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 1080px;
+  background-image: url('../../assets/images/landing/bg-1.png');
+  background-position: center;
+}
+
+.description {
+  width: 932px;
+  height: 781px;
+  margin-top: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  p {
+    color: #fff;
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 26px;
+    color: #fff;
+    padding-bottom: 30px;
+    text-align: center;
+
+    span {
+      color: #f96d69;
+    }
+  }
+}
+
+.start_button {
+  // button 처리를 어떻게 하면 더 좋을지
+  padding-top: 600px;
+
+  button {
+    color: #fff;
+    width: 477px;
+    height: 48px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-style: normal;
+    background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
+  }
+}

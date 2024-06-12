@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from '@/App';
 import NotFound from '@/pages/NotFound';
-import DonationList from '@/pages/List/components/DonationList/DonationElement';
+import DonationList from '@/pages/List/components/DonationList';
 
 function Main() {
   return (

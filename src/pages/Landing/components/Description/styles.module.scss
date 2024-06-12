@@ -6,35 +6,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
 }
 
-.background_image_1 {
+.background-image-1 {
   background-image: url('../../../../assets/images/landing/bg-2.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.background_image_2 {
+.background-image-2 {
   background-image: url('../../../../assets/images/landing/bg-3.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.background_image_3 {
+.background-image-3 {
   background-image: url('../../../../assets/images/landing/bg-4.png');
-}
-
-.wrapper {
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .description {
   padding-top: 160px;
   text-align: center;
-
-  span {
-    color: #d2c030;
-    font-family: 'Pretendard';
-    font-weight: 500;
-    font-style: normal;
-    font-size: 16px;
-  }
 
   p {
     color: #fff;
@@ -45,7 +39,103 @@
     margin-top: 8px;
   }
 
+  span {
+    color: #d2c030;
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+  }
+
   img {
     padding-top: 60px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    height: 744px;
+  }
+
+  .background-image-1 {
+    background-size: 744px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .background_image_2 {
+    background-size: 744px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .background_image_3 {
+    background-size: 744px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .description {
+    padding-top: 104px;
+
+    p {
+      font-size: 20px;
+    }
+
+    img {
+      width: 200px;
+      height: 433px;
+      padding-top: 0;
+      margin-top: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    height: 812px;
+  }
+
+  .background-image-1 {
+    background-size: 600px;
+    background-repeat: no-repeat;
+    background-position: center 40px;
+  }
+
+  .background_image_2 {
+    background-size: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .background_image_3 {
+    background-size: 600px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .description {
+    padding-top: 76px;
+    width: 311px;
+
+    .description-title {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .even {
+      text-align: right;
+    }
+
+    p {
+      padding-bottom: 66px;
+    }
+
+    img {
+      width: 240px;
+      height: 520px;
+      padding-top: 0;
+    }
   }
 }

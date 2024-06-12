@@ -27,7 +27,7 @@
 .description {
   width: 932px;
   height: 781px;
-  margin-top: 140px;
+  padding-top: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,9 +49,9 @@
   }
 }
 
-.start_button {
+.start-button {
   // button 처리를 어떻게 하면 더 좋을지
-  padding-top: 600px;
+  padding-top: 570px;
 
   button {
     color: #fff;
@@ -63,5 +63,61 @@
     font-weight: 700;
     font-style: normal;
     background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .main {
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center 250px;
+    height: 1200px;
+  }
+
+  .description {
+    height: 812px;
+
+    p {
+      font-size: 20px;
+    }
+
+    img {
+      width: 325px;
+      height: 62px;
+    }
+  }
+
+  .start-button {
+    padding-top: 700px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main {
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center 250px;
+    height: 812px;
+  }
+
+  .description {
+    p {
+      font-size: 20px;
+    }
+
+    img {
+      width: 236px;
+      height: 45px;
+    }
+
+    .start-button {
+      padding-top: 450px;
+
+      button {
+        width: 230px;
+        height: 48px;
+        font-weight: 500;
+      }
+    }
   }
 }

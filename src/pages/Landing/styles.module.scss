@@ -1,11 +1,37 @@
 @import '../../styles/import.scss';
 
+$colors: (
+  primary: #02000e,
+  secondary: #f96d69,
+  white: #fff
+);
+
+@mixin flex-center($direction: column, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin text-style($color, $size, $weight: 700, $style: normal) {
+  color: $color;
+  font-family: 'Pretendard';
+  font-weight: $weight;
+  font-style: $style;
+  font-size: $size;
+}
+
+@mixin background-image($url, $size: cover, $repeat: no-repeat, $position: center) {
+  background-image: url($url);
+  background-size: $size;
+  background-repeat: $repeat;
+  background-position: $position;
+}
+
 .container {
   max-height: 4680px;
-  background-color: #02000e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-color: map-get($colors, primary);
+  @include flex-center(column, center, flex-start);
   background-image: url('../../assets/images/landing/top-vector.png');
   background-repeat: no-repeat;
 }
@@ -16,61 +42,44 @@
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex-center(column, center, flex-start);
   height: 1080px;
-  background-image: url('../../assets/images/landing/bg-1.png');
-  background-position: center;
+  @include background-image('../../assets/images/landing/bg-1.png');
 }
 
 .description {
   width: 932px;
   height: 781px;
   padding-top: 140px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include flex-center(column, center, flex-start);
   position: relative;
 
   p {
-    color: #fff;
-    font-family: 'Pretendard';
-    font-weight: 700;
-    font-style: normal;
-    font-size: 26px;
-    color: #fff;
+    @include text-style(map-get($colors, white), 26px);
     padding-bottom: 30px;
     text-align: center;
 
     span {
-      color: #f96d69;
+      color: map-get($colors, secondary);
     }
   }
 }
 
 .start-button {
-  // button 처리를 어떻게 하면 더 좋을지
   padding-top: 570px;
 
   button {
-    color: #fff;
+    @include text-style(map-get($colors, white), 14px);
     width: 477px;
     height: 48px;
     border-radius: 3px;
-    font-size: 14px;
-    font-family: 'Pretendard';
-    font-weight: 700;
-    font-style: normal;
     background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .main {
-    background-size: 80%;
-    background-repeat: no-repeat;
-    background-position: center 250px;
+    @include background-image('../../assets/images/landing/bg-1.png', 80%);
     height: 1200px;
   }
 
@@ -94,9 +103,7 @@
 
 @media screen and (max-width: 767px) {
   .main {
-    background-size: 50%;
-    background-repeat: no-repeat;
-    background-position: center 250px;
+    @include background-image('../../assets/images/landing/bg-1.png', 50%);
     height: 812px;
   }
 
@@ -109,15 +116,15 @@
       width: 236px;
       height: 45px;
     }
+  }
 
-    .start-button {
-      padding-top: 450px;
+  .start-button {
+    padding-top: 450px;
 
-      button {
-        width: 230px;
-        height: 48px;
-        font-weight: 500;
-      }
+    button {
+      width: 230px;
+      height: 48px;
+      font-weight: 500;
     }
   }
 }

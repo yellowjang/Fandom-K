@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from '@/App';
 import NotFound from '@/pages/NotFound';
+import DonationList from '@/pages/List/components/DonationList/DonationElement';
 
 function Main() {
   return (
@@ -8,7 +9,7 @@ function Main() {
       <Routes>
         <Route path='/' element={<App />}>
           {/* <Route index element={<List />} /> */}
-          {/* <Route path='mypage' element={<MyPage />} /> */}
+          <Route path='/list' element={<DonationList />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

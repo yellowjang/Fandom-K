@@ -1,18 +1,13 @@
 import styles from './styles.module.scss';
 import testItem from './mock.json';
+import IdolCircleImage from '@/components/IdolCircleImage';
 
 function ChartListItem({ item, isLastLine }) {
   const bottomLineStyle = isLastLine ? undefined : styles['middle-item'];
   return (
     <div className={`${styles['chart-list-item']} ${bottomLineStyle}`}>
       <div className={styles['info']}>
-        <div className={styles['image-container']}>
-          <img
-            className={styles['image']}
-            src={item.profilePicture}
-            alt={item.name + ' 사진'}
-          />
-        </div>
+        <IdolCircleImage imgUrl={item.profilePicture} idolName={item.name} />
         <p className={styles['rank']}>{item.rank}</p>
         <h1 className={styles['name']}>{item.name}</h1>
       </div>

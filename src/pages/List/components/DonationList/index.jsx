@@ -1,7 +1,7 @@
 import DonationElement from './DonationElement';
 import styles from './styles.module.scss';
-import arrowLeft from '../../../../assets/buttons/pagination_arrow_left.png';
-import arrowRight from '../../../../assets/buttons/pagination_arrow_right.png';
+import arrowLeft from '@/assets/buttons/pagination_arrow_left.png';
+import arrowRight from '@/assets/buttons/pagination_arrow_right.png';
 
 function DonationList() {
   return (

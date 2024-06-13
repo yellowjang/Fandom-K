@@ -1,3 +1,19 @@
-selct-idol {
-    
+@import 'src/styles/import.scss';
+
+
+
+
+.seltct-idol-title {
+    font-size: 24px;
+    font-weight: 700px;
+    line-height: 26px;
+    color: #F6f6f8;
+}
+
+
+.list-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 32px;
 }

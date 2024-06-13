@@ -1,0 +1,69 @@
+@import 'src/styles/import.scss';
+
+.chart-list-item {
+  color: $tj-color-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  font-family: 'Pretendard';
+  font-size: 14px;
+}
+
+.list-container {
+  display: grid;
+  grid-template:
+    repeat(5, 1fr) /
+    repeat(2, 1fr);
+  gap: 0 24px;
+}
+
+.middle-item {
+  border-bottom: 1px solid $tj-color-white-aplha-10;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.image-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0);
+  outline: 1px solid $tj-color-orange;
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1.5);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.rank {
+  color: $tj-color-orange;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.vote {
+  color: $tj-color-white-aplha-60;
+}
+
+/* Tablet */
+@media (max-width: $width-max-tablet) {
+  .list-container {
+    grid-template:
+      repeat(5, 1fr) /
+      repeat(1, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: $width-max-mobile) {
+}

@@ -10,14 +10,14 @@ function SelectIdolList({ items }) {
         <h3>관심있는 아이돌을 추가해보세요.</h3>
       </div>
 
-      <div className={styles['list-container']}>
+      <div className={styles['idol-list-container']}>
         {items?.map((item) => {
           return <IdolCard key={item.id} item={item} />;
         })}
       </div>
-
-      <div>
-        <button></button>
+      <div className={styles['add-btn']}>
+        <p className={styles['plus-text']}>+</p>
+        <button className={styles['add-btn-text']}>추가하기</button>
       </div>
     </div>
   );

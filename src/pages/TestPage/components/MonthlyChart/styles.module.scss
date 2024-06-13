@@ -1,0 +1,92 @@
+@import 'src/styles/import.scss';
+
+.montyly-chart {
+  color: $tj-color-white;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Pretendard';
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .vote-btn {
+    font-family: 'Pretendard';
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 128px;
+    height: 32px;
+    color: $tj-color-white;
+    background: $tj-gradient-orange-to-pink;
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:hover {
+      color: $tj-color-white-aplha-60;
+    }
+  }
+}
+
+.gender-tab {
+  display: flex;
+  button {
+    width: 100%;
+  }
+}
+.gender-tab {
+  * {
+    color: $tj-color-gray-500;
+    height: 42px;
+    cursor: pointer;
+    // border: 1px solid white;
+  }
+
+  .focus {
+    color: $tj-color-white;
+    background-color: $tj-color-white-aplha-10;
+    border-bottom: 1px solid white;
+  }
+}
+
+.more-btn {
+  color: $tj-color-white;
+  background-color: $tj-color-white-aplha-10;
+  border: 1px solid $tj-color-white-aplha-80;
+  border-radius: 3px;
+  width: 326px;
+  height: 42px;
+  margin: 27px auto 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+/* Tablet */
+@media (max-width: $width-max-tablet) {
+  .more-btn {
+    margin: 3px auto 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: $width-max-mobile) {
+  .montyly-chart {
+    gap: 16px;
+  }
+  .more-btn {
+    margin: 17px auto 0;
+  }
+}

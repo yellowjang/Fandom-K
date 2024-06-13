@@ -1,4 +1,4 @@
-@import '../../styles/import.scss';
+@import 'src/styles/import.scss';
 
 .not-found {
   text-align: center;
@@ -9,6 +9,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $tj-color-white;
   @include font-default;
 }

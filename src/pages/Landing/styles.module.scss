@@ -1,0 +1,130 @@
+@import '../../styles/import.scss';
+
+$colors: (
+  primary: #02000e,
+  secondary: #f96d69,
+  white: #fff
+);
+
+@mixin flex-center($direction: column, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin text-style($color, $size, $weight: 700, $style: normal) {
+  color: $color;
+  font-family: 'Pretendard';
+  font-weight: $weight;
+  font-style: $style;
+  font-size: $size;
+}
+
+@mixin background-image($url, $size: cover, $repeat: no-repeat, $position: center) {
+  background-image: url($url);
+  background-size: $size;
+  background-repeat: $repeat;
+  background-position: $position;
+}
+
+.container {
+  max-height: 4680px;
+  background-color: map-get($colors, primary);
+  @include flex-center(column, center, flex-start);
+  background-image: url('../../assets/images/landing/top-vector.png');
+  background-repeat: no-repeat;
+}
+
+.wrapper {
+  width: 1200px;
+  height: 100%;
+}
+
+.main {
+  @include flex-center(column, center, flex-start);
+  height: 1080px;
+  @include background-image('../../assets/images/landing/bg-1.png');
+}
+
+.description {
+  width: 932px;
+  height: 781px;
+  padding-top: 140px;
+  @include flex-center(column, center, flex-start);
+  position: relative;
+
+  p {
+    @include text-style(map-get($colors, white), 26px);
+    padding-bottom: 30px;
+    text-align: center;
+
+    span {
+      color: map-get($colors, secondary);
+    }
+  }
+}
+
+.start-button {
+  padding-top: 570px;
+
+  button {
+    @include text-style(map-get($colors, white), 14px);
+    width: 477px;
+    height: 48px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .main {
+    @include background-image('../../assets/images/landing/bg-1.png', 80%);
+    height: 1200px;
+  }
+
+  .description {
+    height: 812px;
+
+    p {
+      font-size: 20px;
+    }
+
+    img {
+      width: 325px;
+      height: 62px;
+    }
+  }
+
+  .start-button {
+    padding-top: 700px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main {
+    @include background-image('../../assets/images/landing/bg-1.png', 50%);
+    height: 812px;
+  }
+
+  .description {
+    p {
+      font-size: 20px;
+    }
+
+    img {
+      width: 236px;
+      height: 45px;
+    }
+  }
+
+  .start-button {
+    padding-top: 450px;
+
+    button {
+      width: 230px;
+      height: 48px;
+      font-weight: 500;
+    }
+  }
+}

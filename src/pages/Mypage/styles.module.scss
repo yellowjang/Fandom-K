@@ -1,0 +1,17 @@
+@import '../../styles/import.scss';
+
+.mypage {
+  background-color: #02000E;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  @include font-default;
+  gap: 10px;
+}
+
+
+.mypage-wrapper {
+  width: 1200px; 
+  margin: 0 auto;
+} 

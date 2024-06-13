@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
-import donationWonpil from '../../../../../assets/images/donation/day6_wonpil.jpg';
-import creditImg from '../../../../../assets/images/img_diamond.png';
+import donationWonpil from '@/assets/images/donation/day6_wonpil.jpg';
+import creditImg from '@/assets/images/img_diamond.png';
 function DonationElement() {
   return (
     <div className={styles['donation-element']}>

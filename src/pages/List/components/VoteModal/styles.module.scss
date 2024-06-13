@@ -1,0 +1,155 @@
+@import '../../../../styles/import.scss';
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal {
+  cursor: pointer;
+  width: 128px;
+  height: 32px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #f86f65, #fe5493);
+  font: 700 14px/26px Pretendard;
+  color: #ffffff;
+
+  &:hover {
+    background: linear-gradient(270deg, #f86f65, #fe5493);
+  }
+}
+
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: $color-background-black;
+  padding: 24px 24px 0 24px;
+  border-radius: 12px;
+  width: 525px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+
+  > h2 {
+    font: 600 18px/21.48px Pretendard;
+    color: #f7f7f8;
+  }
+
+  > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+main {
+  margin: 20px 0;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > input[type='radio'] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 3px solid white;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    background-color: gray;
+    box-shadow: 0 0 0 1px gray;
+  }
+  > input[type='radio']:checked {
+    background-color: #f96d69;
+    box-shadow: 0 0 0 1px #f96d69;
+  }
+}
+
+.list-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 167px;
+  height: 70px;
+
+  > h1 {
+    color: #f96d69;
+  }
+}
+
+.idol-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  border: solid 1px #f96d69;
+  padding: 5px;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 66px;
+  height: 38px;
+  white-space: nowrap;
+
+  > h1 {
+    color: white;
+  }
+  > h2 {
+    color: gray;
+  }
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > button {
+    cursor: pointer;
+    width: 477px;
+    height: 42px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #f86f65, #fe5493);
+    font: 700 14px/26px Pretendard;
+    color: #ffffff;
+
+    &:hover {
+      background: linear-gradient(270deg, #f86f65, #fe5493);
+    }
+  }
+
+  > span {
+    font-family: Pretendard;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 26px;
+    text-align: left;
+    color: white;
+    > span {
+      color: #f96d69;
+    }
+  }
+}

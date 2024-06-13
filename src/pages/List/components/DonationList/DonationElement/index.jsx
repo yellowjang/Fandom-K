@@ -26,7 +26,7 @@ function DonationElement() {
                   className={styles['credit-img']}
                   src={creditImg}
                   alt='크레딧 이미지'
-                ></img>
+                />
                 <p>6,000 현재 크레딧 수</p>
               </div>
               <p className={styles['date-left']}>남은 기한</p>

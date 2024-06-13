@@ -8,7 +8,7 @@ function Main() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
-        <Route path='/landing' element={<Landing />} />
+        <Route path='landing' element={<Landing />} />
           {/* <Route index element={<List />} /> */}
           {/* <Route path='mypage' element={<MyPage />} /> */}
           <Route path='*' element={<NotFound />} />

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
-import homeImage1 from '../../../../assets/images/landing/home-1.png';
-import homeImage2 from '../../../../assets/images/landing/home-2.png';
-import homeImage3 from '../../../../assets/images/landing/home-3.png';
+import homeImage1 from '@/assets/images/landing/home-1.png';
+import homeImage2 from '@/assets/images/landing/home-2.png';
+import homeImage3 from '@/assets/images/landing/home-3.png';
 import React from 'react';
 
 const sections = [

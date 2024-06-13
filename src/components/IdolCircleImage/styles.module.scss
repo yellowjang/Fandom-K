@@ -1,0 +1,26 @@
+@import 'src/styles/import.scss';
+
+.idol-circle-image {
+  color: $tj-color-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  font-family: 'Pretendard';
+  font-size: 14px;
+}
+
+.image-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0);
+  outline: 1px solid $tj-color-orange;
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1.5);
+  border: 1px solid rgba(0, 0, 0, 0);
+}

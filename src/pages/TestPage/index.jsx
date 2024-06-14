@@ -1,16 +1,14 @@
-import MonthlyChart from './components/MonthlyChart';
 import styles from './styles.module.scss';
+// import MonthlyChart from './components/MonthlyChart';
 
-function NotFound() {
+function TestPage() {
   return (
     <div className={styles['test-page']}>
       <header />
-      <main>
-        <MonthlyChart />
-      </main>
+      <main>{/* <MonthlyChart /> */}</main>
       <footer />
     </div>
   );
 }
 
-export default NotFound;
+export default TestPage;

@@ -1,7 +1,7 @@
-@import 'src/styles/import.scss';
+@import '@/styles/import.scss';
 
 .chart-list-item {
-  color: $tj-color-white;
+  color: $color-white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,7 +19,7 @@
 }
 
 .middle-item {
-  border-bottom: 1px solid $tj-color-white-aplha-10;
+  border-bottom: 1px solid $color-white-aplha-10;
 }
 
 .info {
@@ -29,7 +29,7 @@
 }
 
 .rank {
-  color: $tj-color-orange;
+  color: $color-orange;
 }
 
 .name {
@@ -37,7 +37,7 @@
 }
 
 .vote {
-  color: $tj-color-white-aplha-60;
+  color: $color-white-aplha-60;
 }
 
 /* Tablet */

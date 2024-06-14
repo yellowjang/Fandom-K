@@ -1,14 +1,13 @@
-// import { Outlet } from 'react-router-dom';
-import Landing from '@/pages/Landing';
+import { Outlet } from 'react-router-dom';
+import Header from '../src/components/Header';
 
 function App() {
   return (
     <>
-      {/* <Header /> */}
-      {/* <div>
+      <Header />
+      <div>
         <Outlet />
-      </div> */}
-      <Landing/>
+      </div>
       {/* <Footer /> */}
     </>
   );

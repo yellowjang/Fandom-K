@@ -15,6 +15,7 @@ function IdolCard({ item }) {
         <h3 className={styles['group']}>{item.group}</h3>
         <h3 className={styles['name']}>{item.name}</h3>
       </div>
+      
     </div>
   );
 }

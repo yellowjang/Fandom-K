@@ -6,13 +6,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   color: white;
   @include font-default;
   gap: 10px;
 }
 
 
-.mypage-wrapper {
-  width: 1200px; 
-  margin: 0 auto;
-} 
+// .mypage-wrapper {
+//   width: 1400px; 
+//   margin: 0 auto;
+// } 

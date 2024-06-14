@@ -1,9 +1,15 @@
 @import 'src/styles/import.scss';
 
+.favorite-idol-title {
+  margin: 76px 0px 0px 41px;
+  font-size: 24px;
+  line-height: 26px;
+  font-weight: 700;
+}
 
 
 .favorite-add-info {
-  min-height: 144px;
+  height: 172px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,9 +26,9 @@
 }
 
 .bottom-line {
-  border-bottom: 1px solid $tj-color-white ;
-  max-width:  90%;
+  border-bottom: 1px solid $tj-color-white;
+  max-width: 90%;
   margin-inline: auto;
-  margin-block: 50px;
-  opacity: .1;
+  margin-block: 40px;
+  opacity: 0.3;
 }

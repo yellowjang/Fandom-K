@@ -1,18 +1,48 @@
 @import 'src/styles/import.scss';
 
+// .selcet-idol {
+//   width: 1314px;
+// }
 .seltct-idol-title {
+  width: 314px;
+  height: 26px;
+  font-family: 'Pretendard';
   font-size: 24px;
   font-weight: 700px;
   line-height: 26px;
   color: #f6f6f8;
-  margin-top: 40px;
+  margin: 40px 0px 0px 41px;
+}
+
+.selct-idol-wrapper {
+  // width: 1314px;
+  display: flex;
+  align-items: center;
+}
+
+.arrow-btn {
+  border: none;
+  background: none;
+}
+
+.arrow-img {
+  width: 40px;
+  height: 100%;
 }
 
 .idol-list-container {
-  display: flex;
+  width: 1190px;
+  height: 400px;
+  padding: 0 4px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  gap: 31px 22px;
   align-items: center;
-  gap: 24px;
   margin-top: 32px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  grid-auto-flow: column;
 }
 
 .add-btn {
@@ -27,8 +57,6 @@
   position: absolute;
   padding: 79px;
   font-size: 24px;
-
-
 }
 
 .add-btn-text {

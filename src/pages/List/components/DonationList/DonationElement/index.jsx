@@ -1,22 +1,30 @@
 import styles from './styles.module.scss';
-import donationWonpil from '@/assets/images/donation/day6_wonpil.jpg';
 import creditImg from '@/assets/images/img_diamond.png';
-function DonationElement() {
+
+function DonationElement({ donation }) {
+  const calculateDaysLeft = (deadline) => {
+    const deadlineDate = new Date(deadline);
+    const today = new Date();
+    const timeDiff = deadlineDate - today;
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return daysLeft > 0 ? `${daysLeft}일 남음` : '기한 만료';
+  };
+
   return (
     <div className={styles['donation-element']}>
       <div className={styles['image-box']}>
         <div className={styles['gradation']}></div>
         <img
           className={styles['donation-img']}
-          src={donationWonpil}
+          src={donation.idol.profilePicture}
           alt='후원광고사진'
         />
         <button>후원하기</button>
       </div>
       <div className={styles['donation-contents']}>
         <div className={styles['title-wrapper']}>
-          <p className={styles['subtitle']}>수지구청역 광고(subtitle)</p>
-          <p className={styles['title']}>데이식스 원필 지하철 광고(title)</p>
+          <p className={styles['subtitle']}>{donation.subtitle}</p>
+          <p className={styles['title']}>{donation.title}</p>
         </div>
         <div className={styles['current-credit-box']}>
           <div>
@@ -27,9 +35,11 @@ function DonationElement() {
                   src={creditImg}
                   alt='크레딧 이미지'
                 />
-                <p>6,000 현재 크레딧 수</p>
+                <p>{donation.receivedDonations.toLocaleString()}</p>
               </div>
-              <p className={styles['date-left']}>남은 기한</p>
+              <p className={styles['date-left']}>
+                {calculateDaysLeft(donation.deadline)}
+              </p>
             </div>
           </div>
           <div className={styles['progress-bar']}>progress-bar</div>

@@ -14,9 +14,14 @@ function DonationList() {
       setDonations(list);
     };
 
+<<<<<<< HEAD
     
     fetchData();
     }, []);
+=======
+    fetchData();
+  }, []);
+>>>>>>> b3e2b72411a45570bb2a22eb9d9b2cb0562a98ad
 
   return (
     <>
@@ -33,7 +38,11 @@ function DonationList() {
             <p className={styles['list-title']}>후원을 기다리는 조공</p>
 
             <div className={styles['components-wrapper']}>
+<<<<<<< HEAD
               {donations.map((donation) => (
+=======
+              {donations.reverse().map((donation) => (
+>>>>>>> b3e2b72411a45570bb2a22eb9d9b2cb0562a98ad
                 <DonationElement key={donation.id} donation={donation} />
               ))}
             </div>

@@ -38,7 +38,10 @@ function DonationElement({ donation }) {
                 />
                 <p>{donation.receivedDonations.toLocaleString()}</p>
               </div>
-              <p className={styles['date-left']}>{calculateDaysLeft(donation.deadline)}</p>
+
+              <p className={styles['date-left']}>
+                {calculateDaysLeft(donation.deadline)}
+              </p>
             </div>
           </div>
           <div className={styles['progress-bar']}>progress-bar</div>

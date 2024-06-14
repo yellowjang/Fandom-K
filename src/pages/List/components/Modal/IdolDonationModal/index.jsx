@@ -2,22 +2,12 @@ import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import idolImg from '@/assets/images/img_idol.png';
 import creditIcon from '@/assets/images/img_diamond.png';
-import { useRef } from 'react';
+import ModalBackground from '../components/ModalBackground';
 
 const IdolDonationModal = ({ isModalOpen, closeModal }) => {
-  const modalBackgroundRef = useRef();
   return (
     <>
-      <div
-        style={{ display: isModalOpen ? 'block' : 'none' }}
-        className={style.modal_background}
-        ref={modalBackgroundRef}
-        onClick={(e) => {
-          if (e.target === modalBackgroundRef.current) {
-            closeModal();
-          }
-        }}
-      >
+      <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
         <div
           style={{ display: isModalOpen ? 'block' : 'none' }}
           className={style['container']}
@@ -45,7 +35,7 @@ const IdolDonationModal = ({ isModalOpen, closeModal }) => {
             <button>충전하기</button>
           </div>
         </div>
-      </div>
+      </ModalBackground>
     </>
   );
 };

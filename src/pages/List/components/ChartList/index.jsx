@@ -19,7 +19,7 @@ function ChartListItem({ item, isLastLine }) {
 }
 
 function ChartList({ items }) {
-  items = testItem;
+  // items = testItem;
   return (
     <div className={styles['chart-item']}>
       <div className={styles['list-container']}>

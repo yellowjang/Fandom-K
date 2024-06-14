@@ -1,0 +1,47 @@
+@import '@/styles/import.scss';
+
+.container {
+  @include Flex(row, space-between, center, 0);
+  border: 1px solid rgba(241, 238, 249, 0.8);
+  border-radius: 8px;
+  padding: 52px 78px;
+  width: 100%;
+
+  > .credit-state {
+    margin-top: -20px;
+
+    > p {
+      font: 400 16px/19.09px Pretendard;
+      color: rgba(255, 255, 255, 0.6);
+      padding: 0px 5px;
+    }
+
+    > .credit-money {
+      display: flex;
+      margin-top: 14.13px;
+
+      > img {
+        width: 23px;
+        height: 27px;
+      }
+
+      > p {
+        font: 700 24px/26px Pretendard;
+        color: rgba(255, 255, 255, 0.87);
+      }
+    }
+  }
+
+  > button {
+    cursor: pointer;
+    font: 700 16px/26px Pretendard;
+    letter-spacing: 1px;
+    color: $tj-color-orange;
+    background: none;
+    border: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}

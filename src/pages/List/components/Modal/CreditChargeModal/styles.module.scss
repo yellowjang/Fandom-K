@@ -1,14 +1,5 @@
 @import '@/styles/import.scss';
 
-.modal-background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.65);
-}
-
 .container {
   position: absolute;
   top: 50%;
@@ -19,16 +10,15 @@
   border-radius: 8px;
   background-color: #181d26;
   padding: 24px 19px 32px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px $tj-color-white-aplha-10;
 
   > .header {
-    display: flex;
-    justify-content: space-between;
+    @include Flex(row, space-between, center, 0);
     margin-bottom: 24px;
 
     > h2 {
       font: 600 18px/21.48px Pretendard;
-      color: #f7f7f8;
+      color: $tj-color-white;
     }
 
     > button {
@@ -44,27 +34,28 @@
 
   > .main {
     > .card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include Flex(row, space-between, center, 0);
       margin-bottom: 8px;
       padding: 15px 20px;
-      border: 1px solid #f7f7f8;
+      border: 1px solid $tj-color-white;
       border-radius: 8px;
       background-color: #02000e;
       cursor: pointer;
 
       &:has(input[type='radio']:checked) {
-        border: 1px solid #f96d69;
+        border: 1px solid $tj-color-orange;
 
         > div > span {
-          color: #ffffff;
+          color: $tj-color-white;
         }
       }
 
+      &:hover {
+        box-shadow: 0px 0px 7px $tj-color-orange;
+      }
+
       > div {
-        display: flex;
-        align-items: center;
+        @include Flex(row, flex-start, center, 0);
 
         > .credit-img {
           width: 28px;
@@ -73,7 +64,7 @@
 
         > span {
           font: 700 20px/26px Pretendard;
-          color: #828282;
+          color: $tj-color-gray-500;
         }
       }
 
@@ -93,9 +84,7 @@
   }
 
   > .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include Flex(row, center, center, 0);
     margin-top: 24px;
     position: relative;
 
@@ -112,12 +101,12 @@
       width: 295px;
       height: 42px;
       border-radius: 3px;
-      background: linear-gradient(90deg, #f86f65, #fe5493);
+      background: $tj-gradient-orange-to-pink;
       font: 700 14px/26px Pretendard;
-      color: #ffffff;
+      color: $tj-color-white;
 
       &:hover {
-        background: linear-gradient(270deg, #f86f65, #fe5493);
+        background: $tj-gradient-orange-to-pink-reverse;
       }
     }
   }

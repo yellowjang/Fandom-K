@@ -3,18 +3,20 @@
 // .selcet-idol {
 //   width: 1314px;
 // }
-.seltct-idol-title {
+.select-idol-title {
   width: 314px;
   height: 26px;
-  font-family: 'Pretendard';
-  font-size: 24px;
-  font-weight: 700px;
-  line-height: 26px;
-  color: #f6f6f8;
   margin: 40px 0px 0px 41px;
+
+  h3 {
+    font-family: 'Pretendard';
+    font-size: 24px;
+    font-weight: 700;
+    color: #f6f6f8;
+  }
 }
 
-.selct-idol-wrapper {
+.select-idol-wrapper {
   // width: 1314px;
   display: flex;
   align-items: center;

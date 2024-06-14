@@ -5,12 +5,12 @@ import arrowRight from '@/assets/buttons/pagination_arrow_right.png';
 
 function SelectIdolList({ idols }) {
   return (
-    <div className={styles['selcet-idol']}>
-      <div className={styles['seltct-idol-title']}>
+    <div className={styles['select-idol']}>
+      <div className={styles['select-idol-title']}>
         <h3>관심있는 아이돌을 추가해보세요.</h3>
       </div>
 
-      <div className={styles['selct-idol-wrapper']}>
+      <div className={styles['select-idol-wrapper']}>
         <button className={styles['arrow-btn']}>
           <img
             className={styles['arrow-img']}
@@ -40,3 +40,6 @@ function SelectIdolList({ idols }) {
 }
 
 export default SelectIdolList;
+
+
+

@@ -1,5 +1,5 @@
 // import { Outlet } from 'react-router-dom';
-import Mypage from "./pages/Mypage";
+import Landing from '@/pages/Landing';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       {/* <div>
         <Outlet />
       </div> */}
-      <Mypage />
+      <Landing/>
       {/* <Footer /> */}
     </>
   );

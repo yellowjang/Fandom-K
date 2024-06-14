@@ -1,14 +1,13 @@
-// import { Outlet } from 'react-router-dom';
-import Mypage from "./pages/Mypage";
+import { Outlet } from 'react-router-dom';
+import Header from '../src/components/Header';
 
 function App() {
   return (
     <>
-      {/* <Header /> */}
-      {/* <div>
+      <Header />
+      <div>
         <Outlet />
-      </div> */}
-      <Mypage />
+      </div>
       {/* <Footer /> */}
     </>
   );

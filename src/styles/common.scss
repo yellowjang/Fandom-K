@@ -12,6 +12,8 @@ $width-max-mobile: 767px;
   display: flex;
   flex-direction: $col;
   justify-content: $justifyContent;
-  align-items:$alignItems;
+  align-items: $alignItems;
   gap: $gap;
 }
+
+$color-test: aquamarine;

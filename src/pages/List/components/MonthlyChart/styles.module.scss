@@ -1,11 +1,12 @@
-@import 'src/styles/import.scss';
+@import '@/styles/import.scss';
 
 .montyly-chart {
-  color: $tj-color-white;
+  color: $color-white;
   display: flex;
   flex-direction: column;
   gap: 24px;
   font-family: 'Pretendard';
+  font-weight: 300;
 }
 
 .header {
@@ -27,13 +28,13 @@
     gap: 4px;
     width: 128px;
     height: 32px;
-    color: $tj-color-white;
-    background: $tj-gradient-orange-to-pink;
+    color: $color-white;
+    background: $gradient-orange-to-pink;
     border-radius: 3px;
     cursor: pointer;
 
     &:hover {
-      color: $tj-color-white-aplha-60;
+      color: $color-white-aplha-60;
     }
   }
 }
@@ -46,23 +47,30 @@
 }
 .gender-tab {
   * {
-    color: $tj-color-gray-500;
+    color: $color-gray-500;
     height: 42px;
+    font-size: 14px;
+    font-weight: 300;
     cursor: pointer;
+    font-family: 'Pretendard';
+    // font-size: 14px;
     // border: 1px solid white;
   }
 
   .focus {
-    color: $tj-color-white;
-    background-color: $tj-color-white-aplha-10;
+    color: $color-white;
+    background-color: $color-white-aplha-10;
     border-bottom: 1px solid white;
   }
 }
 
 .more-btn {
-  color: $tj-color-white;
-  background-color: $tj-color-white-aplha-10;
-  border: 1px solid $tj-color-white-aplha-80;
+  font-family: 'Pretendard';
+  font-size: 14px;
+  font-weight: bold;
+  color: $color-white;
+  background-color: $color-white-aplha-10;
+  border: 1px solid $color-white-aplha-80;
   border-radius: 3px;
   width: 326px;
   height: 42px;

@@ -1,6 +1,9 @@
-@import 'src/styles/import.scss';
+@import '@/styles/import.scss';
 
-.Button {
+.btn {
+}
+
+button {
   background-color: transparent;
   border: none;
   padding: 0;

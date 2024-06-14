@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
-import idolImg from '@/assets/images/image.png';
+import idolImg from '@/assets/images/asmrz_danaka.png';
+import chartIcon from '@/assets/icons/ic_chart.svg';
+import checkIcon from '@/assets/icons/ic_check.svg';
 
 function VoteModal() {
   const [modal, setModal] = useState(false);
@@ -19,7 +21,8 @@ function VoteModal() {
   return (
     <>
       <button onClick={toggleModal} className={styles['btn-modal']}>
-        차트 투표하기
+        <img src={chartIcon} alt='그래프 이미지' />
+        <p>차트 투표하기</p>
       </button>
 
       {modal && (
@@ -50,7 +53,7 @@ function VoteModal() {
                     <h2>204,000표</h2>
                   </div>
                 </div>
-                <input type='radio' name='credit' value='100' />
+                <input type='radio' />
               </label>
             </main>
             <footer>

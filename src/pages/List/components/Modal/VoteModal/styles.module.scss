@@ -1,17 +1,23 @@
-@import '../../../../styles/import.scss';
+@import 'src/styles/import.scss';
 
 body.active-modal {
   overflow-y: hidden;
 }
 
 .btn-modal {
-  cursor: pointer;
+  font-family: 'Pretendard';
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   width: 128px;
   height: 32px;
+  color: $tj-color-white;
+  background: $tj-gradient-orange-to-pink;
   border-radius: 3px;
-  background: linear-gradient(90deg, #f86f65, #fe5493);
-  font: 700 14px/26px Pretendard;
-  color: #ffffff;
+  cursor: pointer;
 
   &:hover {
     background: linear-gradient(270deg, #f86f65, #fe5493);
@@ -38,7 +44,7 @@ body.active-modal {
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: $color-background-black;
+  background: #181d26;
   padding: 24px 24px 0 24px;
   border-radius: 12px;
   width: 525px;
@@ -101,7 +107,7 @@ main {
 .idol-img {
   width: 70px;
   height: 70px;
-  border-radius: 40px;
+  border-radius: 50%;
   border: solid 1px #f96d69;
   padding: 5px;
 }

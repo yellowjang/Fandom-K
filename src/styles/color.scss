@@ -5,12 +5,19 @@ $color-gray-300: #67666e;
 $tj-color-white: #f7f7f8;
 $tj-color-orange: #f96d69;
 $tj-color-white-aplha-10: rgba(255, 255, 255, 0.1);
+$tj-color-white-aplha-40: rgba(255, 255, 255, 0.4);
 $tj-color-white-aplha-60: rgba(255, 255, 255, 0.6);
 $tj-color-white-aplha-80: rgba(255, 255, 255, 0.8);
 $tj-color-gray-500: #828282;
 
 $tj-gradient-orange-to-pink: linear-gradient(
   90deg,
+  rgba(248, 111, 101, 1) 0%,
+  rgba(254, 84, 147, 1) 100%
+);
+
+$tj-gradient-orange-to-pink-reverse: linear-gradient(
+  270deg,
   rgba(248, 111, 101, 1) 0%,
   rgba(254, 84, 147, 1) 100%
 );

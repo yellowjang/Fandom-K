@@ -5,6 +5,7 @@ import NotFound from '@/pages/NotFound';
 import DonationList from '@/pages/List/components/DonationList';
 import TestPage from '@/pages/TestPage';
 import Landing from '@/pages/Landing';
+import MyCredit from '@/pages/List/components/MyCredit';
 
 function Main() {
   return (
@@ -14,7 +15,8 @@ function Main() {
           <Route path='landing' element={<Landing />} />
           {/* <Route index element={<List />} /> */}
           <Route path='mypage' element={<Mypage />} />
-          <Route path='/list' element={<DonationList />} />
+          {/* <Route path='/list' element={<DonationList />} /> */}
+          <Route path='/list' element={<MyCredit />} />
           {/* <Route path='mypage' element={<MyPage />} /> */}
           <Route path='test' element={<TestPage />} />
           <Route path='*' element={<NotFound />} />

@@ -27,20 +27,18 @@ function DonationElement({ donation }) {
           <p className={styles['title']}>{donation.title}</p>
         </div>
         <div className={styles['current-credit-box']}>
-          <div>
-            <div className={styles['credit-line']}>
-              <div className={styles['current-credit']}>
-                <img
-                  className={styles['credit-img']}
-                  src={creditImg}
-                  alt='크레딧 이미지'
-                />
-                <p>{donation.receivedDonations.toLocaleString()}</p>
-              </div>
-              <p className={styles['date-left']}>
-                {calculateDaysLeft(donation.deadline)}
-              </p>
+          <div className={styles['credit-line']}>
+            <div className={styles['current-credit']}>
+              <img
+                className={styles['credit-img']}
+                src={creditImg}
+                alt='크레딧 이미지'
+              />
+              <p>{donation.receivedDonations.toLocaleString()}</p>
             </div>
+            <p className={styles['date-left']}>
+              {calculateDaysLeft(donation.deadline)}
+            </p>
           </div>
           <div className={styles['progress-bar']}>progress-bar</div>
         </div>

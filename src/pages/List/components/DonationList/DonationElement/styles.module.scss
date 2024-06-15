@@ -120,3 +120,14 @@
   color: #ffffff;
   font-size: 4px;
 }
+
+.slide {
+  display: flex;
+  transition: transform 0.5s ease;
+  &.active {
+    transform: translateX(0);
+  }
+  &:not(.active) {
+    transform: translateX(100%);
+  }
+}

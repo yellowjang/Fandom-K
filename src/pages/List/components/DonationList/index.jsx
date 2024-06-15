@@ -7,6 +7,27 @@ import { getDonations } from '@/services/api/donations';
 
 function DonationList() {
   const [donations, setDonations] = useState([]);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const SLIDE_COUNT = 4;
+
+  const nextSlide = () => {
+    setCurrentSlideIndex(
+      (prevIndex) => (prevIndex + 1) % (donations.length - SLIDE_COUNT + 1)
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlideIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + (donations.length - SLIDE_COUNT + 1)) %
+        (donations.length - SLIDE_COUNT + 1)
+    );
+  };
+
+  const currentDonations = donations.slice(
+    currentSlideIndex,
+    currentSlideIndex + SLIDE_COUNT
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,36 +38,41 @@ function DonationList() {
     fetchData();
   }, []);
 
-  return (
-    <>
-      <div className={styles['donation-list']}>
-        <div className={styles['components-container']}>
-          <button className={styles['arrow-button']}>
-            <img
-              className={styles['arrow-img']}
-              src={arrowLeft}
-              alt='왼쪽 화살표'
-            />
-          </button>
-          <div className={styles['donnation-contents']}>
-            <p className={styles['list-title']}>후원을 기다리는 조공</p>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000);
 
-            <div className={styles['components-wrapper']}>
-              {donations.reverse().map((donation) => (
-                <DonationElement key={donation.id} donation={donation} />
-              ))}
-            </div>
+    return () => clearInterval(interval);
+  }, [currentSlideIndex, donations.length]);
+
+  return (
+    <div className={styles['donation-list']}>
+      <div className={styles['components-container']}>
+        <button className={styles['arrow-button']} onClick={prevSlide}>
+          <img
+            className={styles['arrow-img']}
+            src={arrowLeft}
+            alt='왼쪽 화살표'
+          />
+        </button>
+        <div className={styles['donation-contents']}>
+          <p className={styles['list-title']}>후원을 기다리는 조공</p>
+          <div className={styles['components-wrapper']}>
+            {currentDonations.map((donation) => (
+              <DonationElement key={donation.id} donation={donation} />
+            ))}
           </div>
-          <button className={styles['arrow-button']}>
-            <img
-              className={styles['arrow-img']}
-              src={arrowRight}
-              alt='오른쪽 화살표'
-            />
-          </button>
         </div>
+        <button className={styles['arrow-button']} onClick={nextSlide}>
+          <img
+            className={styles['arrow-img']}
+            src={arrowRight}
+            alt='오른쪽 화살표'
+          />
+        </button>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,22 @@
+@import '@/styles/import.scss';
+
+.list-page {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* Tablet */
+@media (max-width: $width-max-tablet) {
+  .list-page {
+    width: auto;
+    margin: 0 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: $width-max-mobile) {
+  .list-page {
+    width: auto;
+    margin: 0 24px;
+  }
+}

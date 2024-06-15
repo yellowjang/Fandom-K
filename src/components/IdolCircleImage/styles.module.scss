@@ -1,7 +1,7 @@
-@import 'src/styles/import.scss';
+@import '@/styles/import.scss';
 
 .idol-circle-image {
-  color: $tj-color-white;
+  color: $color-white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@
   border-radius: 50%;
   overflow: hidden;
   border: 5px solid rgba(255, 255, 255, 0);
-  outline: 1px solid $tj-color-orange;
+  outline: 1px solid $color-orange;
 }
 
 .image {

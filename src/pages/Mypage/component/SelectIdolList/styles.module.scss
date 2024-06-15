@@ -1,3 +1,39 @@
-selct-idol {
-    
+@import 'src/styles/import.scss';
+
+.seltct-idol-title {
+  font-size: 24px;
+  font-weight: 700px;
+  line-height: 26px;
+  color: #f6f6f8;
+  margin-top: 40px;
+}
+
+.idol-list-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.add-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 48px;
+}
+
+.plus-text {
+  position: absolute;
+  padding: 79px;
+  font-size: 24px;
+}
+
+.add-btn-text {
+  border-radius: 25px;
+  width: 255px;
+  height: 48px;
+  background: $gradient-orange-to-pink;
+  font-size: 16px;
+  color: $color-white;
 }

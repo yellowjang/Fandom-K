@@ -1,7 +1,8 @@
-@import '../../styles/import.scss';
+@import '@/styles/import.scss';
 
 .mypage {
-  background-color: #02000E;
+  background-color: #02000e;
+  width: 1920px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,8 +11,7 @@
   gap: 10px;
 }
 
-
 .mypage-wrapper {
-  width: 1200px; 
+  width: 1200px;
   margin: 0 auto;
-} 
+}

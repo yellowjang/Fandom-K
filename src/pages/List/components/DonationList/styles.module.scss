@@ -10,16 +10,23 @@
 }
 .donnation-contents {
   display: flex;
+  width: 1200px;
+
   flex-direction: column;
   gap: 32px;
 }
 .components-wrapper {
   display: flex;
+  overflow: scroll;
+  // scrollbar: hidden
   gap: 24px;
 }
-
+.components-wrapper::-webkit-scrollbar {
+  display: none;
+}
 .components-container {
   display: flex;
+
   gap: 40px;
   align-items: center;
 

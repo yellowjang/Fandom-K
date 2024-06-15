@@ -2,22 +2,30 @@ import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditImg from '@/assets/images/img_diamond.png';
 import creditWhiteImg from '@/assets/images/img_diamond_white.png';
-import { useRef } from 'react';
+import ModalBackground from '../components/ModalBackground';
 
-const CreditChargeModal = ({ isModalOpen, closeModal }) => {
-  const modalBackgroundRef = useRef();
+const CreditCard = ({ value }) => {
   return (
     <>
-      <div
-        style={{ display: isModalOpen ? 'block' : 'none' }}
-        className={style['modal-background']}
-        ref={modalBackgroundRef}
-        onClick={(e) => {
-          if (e.target === modalBackgroundRef.current) {
-            closeModal();
-          }
-        }}
-      >
+      <label className={style['card']}>
+        <div>
+          <img
+            className={style['credit-img']}
+            src={creditImg}
+            alt='크레딧 이미지'
+          />
+          <span>{value}</span>
+        </div>
+        <input type='radio' name='credit' value='100' />
+      </label>
+    </>
+  );
+};
+
+const CreditChargeModal = ({ isModalOpen, closeModal }) => {
+  return (
+    <>
+      <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
         <div
           style={{ display: isModalOpen ? 'block' : 'none' }}
           className={style['container']}
@@ -29,46 +37,16 @@ const CreditChargeModal = ({ isModalOpen, closeModal }) => {
             </button>
           </div>
           <div className={style['main']}>
-            <label className={style['card']}>
-              <div>
-                <img
-                  className={style['credit-img']}
-                  src={creditImg}
-                  alt='크레딧 이미지'
-                />
-                <span>100</span>
-              </div>
-              <input type='radio' name='credit' value='100' />
-            </label>
-            <label className={style['card']}>
-              <div>
-                <img
-                  className={style['credit-img']}
-                  src={creditImg}
-                  alt='크레딧 이미지'
-                />
-                <span>500</span>
-              </div>
-              <input type='radio' name='credit' value='500' />
-            </label>
-            <label className={style['card']}>
-              <div>
-                <img
-                  className={style['credit-img']}
-                  src={creditImg}
-                  alt='크레딧 이미지'
-                />
-                <span>1000</span>
-              </div>
-              <input type='radio' name='credit' value='1000' />
-            </label>
+            <CreditCard value='100' />
+            <CreditCard value='500' />
+            <CreditCard value='1000' />
           </div>
           <div className={style['footer']}>
             <img src={creditWhiteImg} alt='크레딧 이미지' />
             <button>충전하기</button>
           </div>
         </div>
-      </div>
+      </ModalBackground>
     </>
   );
 };

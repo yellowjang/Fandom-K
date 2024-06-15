@@ -10,7 +10,7 @@ function Header() {
       <div className={styles['container']}>
         <header className={styles['header']}>
           <div></div>
-          <Link to='/list'>
+          <Link to='/'>
             <img className={styles['logo']} src={logo} alt='팬덤 케이' />
           </Link>
           <Link to='/mypage'>

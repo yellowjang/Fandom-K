@@ -1,11 +1,16 @@
+import { useState, useEffect } from 'react';
 import style from './styles.module.scss';
 import creditImg from '@/assets/images/img_diamond.png';
-import { useState } from 'react';
 import CreditChargeModal from '../Modal/CreditChargeModal';
 
 const MyCredit = () => {
   const [credit, setCredit] = useState('0');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const currentCredits = localStorage.getItem('credits') || '0';
+    setCredit(currentCredits);
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -13,6 +18,10 @@ const MyCredit = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const updateCredit = (newCredit) => {
+    setCredit(newCredit);
   };
 
   return (
@@ -27,7 +36,11 @@ const MyCredit = () => {
         </div>
         <button onClick={openModal}>충전하기</button>
       </section>
-      <CreditChargeModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      <CreditChargeModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        updateCredit={updateCredit}
+      />
     </>
   );
 };

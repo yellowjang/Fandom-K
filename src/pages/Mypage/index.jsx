@@ -9,7 +9,7 @@ function Mypage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { list } = await getIdols({pageSize:100});
+      const { list } = await getIdols({ pageSize: 100 });
       setIdols(list);
     };
 
@@ -18,7 +18,6 @@ function Mypage() {
 
   return (
     <div className={styles['mypage']}>
-      {/* <Header /> */}
       <div className={styles['mypage-wrapper']}>
         <FavoriteIdol />
         <SelectIdolList ket={idols.id} idols={idols} />

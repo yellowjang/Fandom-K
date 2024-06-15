@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import Picture from '../../../../assets/images/asmrz_danaka.png';
+
 
 function IdolCard({ item }) {
   return (
@@ -15,6 +15,7 @@ function IdolCard({ item }) {
         <h3 className={styles['group']}>{item.group}</h3>
         <h3 className={styles['name']}>{item.name}</h3>
       </div>
+      
     </div>
   );
 }

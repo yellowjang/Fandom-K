@@ -32,6 +32,20 @@ $colors: (
   background-repeat: $repeat;
   background-position: $position;
 }
+::-webkit-scrollbar {
+  width: 7px;
+  background-color: map-get($colors, primary)
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, #7ce2ff);
+  border-radius: 6px;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(transparent, #9e62ba, transparent);
+}
 
 .container {
   max-height: 4680px;

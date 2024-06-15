@@ -1,4 +1,6 @@
-@import '@/styles/import.scss';
+@import 'src/styles/import.scss';
+
+
 
 .idol-card {
   width: 128px;
@@ -14,14 +16,16 @@
   border-radius: 50%;
   overflow: hidden;
   border: 5px solid rgba(255, 255, 255, 0);
-  outline: 1px solid $color-orange;
+  outline: 1px solid $tj-color-orange;
+
 }
 
-.idol-image {
+.idol-image{
   object-fit: cover;
   transform: scale(1.5);
   border: 1px solid rgba(0, 0, 0, 0);
 }
+
 
 .idol-info-container {
   display: flex;
@@ -43,3 +47,4 @@
   line-height: 16.71px;
   color: rgba($color: #ffffff, $alpha: 0.6);
 }
+

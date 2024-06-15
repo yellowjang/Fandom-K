@@ -2,7 +2,6 @@
 
 .favorite-idol-title {
   margin: 76px 0px 0px 41px;
-  
 
   h3 {
     font-size: 24px;
@@ -10,7 +9,6 @@
     font-weight: 700;
   }
 }
-
 
 .favorite-add-info {
   height: 172px;
@@ -26,11 +24,11 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: $tj-color-white;
+  color: $color-white;
 }
 
 .bottom-line {
-  border-bottom: 1px solid $tj-color-white;
+  border-bottom: 1px solid $color-white;
   max-width: 90%;
   margin-inline: auto;
   margin-block: 40px;

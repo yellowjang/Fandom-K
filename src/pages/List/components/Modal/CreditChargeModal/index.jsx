@@ -7,7 +7,7 @@ import ModalBackground from '../components/ModalBackground';
 
 const CreditCard = ({ value, onClick }) => {
   return (
-    <label className={style['card']} >
+    <label className={style['card']}>
       <div>
         <img
           className={style['credit-img']}
@@ -16,7 +16,12 @@ const CreditCard = ({ value, onClick }) => {
         />
         <span>{value}</span>
       </div>
-      <input type='radio' name='credit' value={value} onClick={() => onClick(value)} /> 
+      <input
+        type='radio'
+        name='credit'
+        value={value}
+        onClick={() => onClick(value)}
+      />
     </label>
   );
 };

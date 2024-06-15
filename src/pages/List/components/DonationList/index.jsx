@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import DonationElement from './DonationElement';
 import styles from './styles.module.scss';
-import arrowLeft from '@/assets/buttons/pagination_arrow_left.png';
-import arrowRight from '@/assets/buttons/pagination_arrow_right.png';
+import arrowLeft from '@/assets/icons/ic_arrow_left.png';
+import arrowRight from '@/assets/icons/ic_arrow_right.png';
 import { getDonations } from '@/services/api/donations';
 
 function DonationList() {

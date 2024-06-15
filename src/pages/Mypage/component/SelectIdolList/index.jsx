@@ -1,7 +1,7 @@
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
-import arrowLeft from '@/assets/buttons/pagination_arrow_left.png';
-import arrowRight from '@/assets/buttons/pagination_arrow_right.png';
+import arrowLeft from '@/assets/icons/ic_arrow_left.png';
+import arrowRight from '@/assets/icons/ic_arrow_right.png';
 
 function SelectIdolList({ idols }) {
   return (
@@ -16,7 +16,7 @@ function SelectIdolList({ idols }) {
             className={styles['arrow-img']}
             src={arrowLeft}
             alt='왼쪽 화살표'
-          />  
+          />
         </button>
         <div className={styles['idol-list-container']}>
           {idols?.map((item) => {
@@ -40,6 +40,3 @@ function SelectIdolList({ idols }) {
 }
 
 export default SelectIdolList;
-
-
-

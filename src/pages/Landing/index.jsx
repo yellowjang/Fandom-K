@@ -3,14 +3,6 @@ import logoImage from '../../assets/images/logo/logo.png';
 import Description from './components/Description';
 import { Link } from 'react-router-dom';
 
-const StartButton = () => (
-  <div className={styles['start-button']}>
-    <Link to='/list'>
-      <button>지금 시작하기</button>
-    </Link>
-  </div>
-);
-
 function Landing() {
   return (
     <div className={styles['container']}>
@@ -23,7 +15,11 @@ function Landing() {
           <Link to='/list'>
             <img src={logoImage} alt='팬덤 케이' width={509} height={97} />
           </Link>
-          <StartButton />
+          <div className={styles['start-button']}>
+            <Link to='/list'>
+              <button>지금 시작하기</button>
+            </Link>
+          </div>
         </div>
       </div>
       <Description />

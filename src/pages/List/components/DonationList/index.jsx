@@ -4,30 +4,39 @@ import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 import { getDonations } from '@/services/api/donations';
+import { SLIDE_COUNT } from '@/constants/SlideCount.js';
 
 function DonationList() {
   const [donations, setDonations] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const SLIDE_COUNT = 4;
 
   const nextSlide = () => {
-    setCurrentSlideIndex(
-      (prevIndex) => (prevIndex + 1) % (donations.length - SLIDE_COUNT + 1)
-    );
+    setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % donations.length);
   };
 
   const prevSlide = () => {
     setCurrentSlideIndex(
-      (prevIndex) =>
-        (prevIndex - 1 + (donations.length - SLIDE_COUNT + 1)) %
-        (donations.length - SLIDE_COUNT + 1)
+      (prevIndex) => (prevIndex - 1 + donations.length) % donations.length
     );
   };
 
-  const currentDonations = donations.slice(
-    currentSlideIndex,
-    currentSlideIndex + SLIDE_COUNT
-  );
+  const currentDonations = () => {
+    if (donations.length <= SLIDE_COUNT) {
+      return donations;
+    }
+
+    if (currentSlideIndex + SLIDE_COUNT > donations.length) {
+      return [
+        ...donations.slice(currentSlideIndex, donations.length),
+        ...donations.slice(
+          0,
+          currentSlideIndex + SLIDE_COUNT - donations.length
+        ),
+      ];
+    }
+
+    return donations.slice(currentSlideIndex, currentSlideIndex + SLIDE_COUNT);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +50,7 @@ function DonationList() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [currentSlideIndex, donations.length]);
@@ -59,7 +68,7 @@ function DonationList() {
         <div className={styles['donation-contents']}>
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
-            {currentDonations.map((donation) => (
+            {currentDonations().map((donation) => (
               <DonationElement key={donation.id} donation={donation} />
             ))}
           </div>

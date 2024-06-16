@@ -3,28 +3,46 @@ import styles from './styles.module.scss';
 import logo from '../../assets/images/logo/logo.png';
 import profileImage from '../../assets/images/header/profile_img.svg';
 
-function Header() {
+const Logo = () => (
+  <Link to='/'>
+    <img className={styles['logo']} src={logo} alt='팬덤 케이' />
+  </Link>
+);
+
+const ProfileImage = () => (
+  <Link to='/mypage'>
+    <img
+      className={styles['profile']}
+      src={profileImage}
+      alt='프로필 이미지'
+      width={32}
+      height={32}
+    />
+  </Link>
+);
+
+const useIsVisibleHeader = () => {
   const location = useLocation();
+  return location.pathname !== '/';
+};
+
+function Header({
+  leftComponent = null,
+  rightComponent = <ProfileImage />,
+  logoComponent = <Logo />,
+}) {
+  const isVisible = useIsVisibleHeader();
+
+  if (!isVisible) return null;
+
   return (
-    location.pathname !== '/' && (
-      <div className={styles['container']}>
-        <header className={styles['header']}>
-          <div></div>
-          <Link to='/'>
-            <img className={styles['logo']} src={logo} alt='팬덤 케이' />
-          </Link>
-          <Link to='/mypage'>
-            <img
-              className={styles['profile']}
-              src={profileImage}
-              alt='프로필 이미지'
-              width={32}
-              height={32}
-            />
-          </Link>
-        </header>
-      </div>
-    )
+    <div className={styles['container']}>
+      <header className={styles['header']}>
+        <div>{leftComponent}</div>
+        {logoComponent}
+        <div>{rightComponent}</div>
+      </header>
+    </div>
   );
 }
 

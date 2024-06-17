@@ -131,3 +131,62 @@
     transform: translateX(100%);
   }
 }
+
+@media (max-width: $width-max-mobile) {
+ 
+  .list-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .donation-element {
+    width: 158px;
+    height: 303px;
+  }
+
+  .image-box {
+    width: 158px;
+    height: 206px;
+
+    button {
+      position: absolute;
+      cursor: pointer;
+      bottom: 8px;
+      right: 8px;
+      width: 142px;
+      height: 31px;
+      border-radius: 3px;
+      padding: 2px 48px 3px 48px;
+      font-family: Pretendard;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
+      z-index: 3;
+    }
+  }
+
+  .subtitle {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .current-credit {
+    width: 154px;
+  }
+
+  .date-left {
+    width: 100px;
+  }
+
+  .progress-bar {
+    width: 154px;
+    height: 1px;
+  }
+}

@@ -17,26 +17,6 @@
     font-size: 20px;
     font-weight: bold;
   }
-
-  .vote-btn {
-    font-family: 'Pretendard';
-    font-size: 13px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    width: 128px;
-    height: 32px;
-    color: $color-white;
-    background: $gradient-orange-to-pink;
-    border-radius: 3px;
-    cursor: pointer;
-
-    &:hover {
-      color: $color-white-aplha-60;
-    }
-  }
 }
 
 .gender-tab {

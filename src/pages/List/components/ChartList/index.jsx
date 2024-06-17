@@ -1,5 +1,4 @@
 import styles from './styles.module.scss';
-import testItem from './mock.json';
 import IdolCircleImage from '@/components/IdolCircleImage';
 
 function ChartListItem({ item, isLastLine }) {

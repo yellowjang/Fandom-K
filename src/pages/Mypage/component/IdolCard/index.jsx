@@ -11,13 +11,6 @@ function IdolCard({ item }) {
 
   return (
     <div className={styles['idol-card']}>
-      {/* <div className={styles['idol-image-container']}>
-        <img
-          src={item.profilePicture}
-          className={styles['idol-image']}
-          alt='아이돌사진'
-        />
-      </div> */}
       <button className={styles['idol-click-container']} onClick={selectClick}>
         <IdolCircleImage
           imgUrl={item.profilePicture}
@@ -37,3 +30,4 @@ function IdolCard({ item }) {
 }
 
 export default IdolCard;
+

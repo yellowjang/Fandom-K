@@ -1,25 +1,12 @@
-import{ useState } from 'react';
+import { useState } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 
-function SelectIdolList({ idols}) {
+function SelectIdolList({ idols }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const SLIDE_COUNT = 16;
-
-  const handleSelectIdol = (id) => {
-    setSelectedIdols((prevSelected) => {
-      const newSelected = new Set(prevSelected);
-      if (newSelected.has(id)) {
-        newSelected.delete(id);
-      } else {
-        newSelected.add(id);
-      }
-      return newSelected;
-    });
-  };
-
 
   const nextSlide = () => {
     setCurrentSlideIndex(
@@ -34,9 +21,6 @@ function SelectIdolList({ idols}) {
         (idols.length - SLIDE_COUNT + 1)
     );
   };
-
-
-  
 
   const currentIdos = idols.slice(
     currentSlideIndex,
@@ -79,3 +63,4 @@ function SelectIdolList({ idols}) {
 }
 
 export default SelectIdolList;
+

@@ -1,30 +1,29 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styles from './styles.module.scss';
-import logo from '../../assets/images/logo/logo.png';
-import profileImage from '../../assets/images/header/profile_img.svg';
+import { Logo, ProfileImage } from './components';
 
-function Header() {
+const useIsVisibleHeader = () => {
   const location = useLocation();
+  return location.pathname !== '/';
+};
+
+function Header({
+  EmptyItemComponent = null,
+  profileImageComponent = <ProfileImage />,
+  logoComponent = <Logo />,
+}) {
+  const isVisible = useIsVisibleHeader();
+
+  if (!isVisible) return null;
+
   return (
-    location.pathname !== '/' && (
-      <div className={styles['container']}>
-        <header className={styles['header']}>
-          <div></div>
-          <Link to='/'>
-            <img className={styles['logo']} src={logo} alt='팬덤 케이' />
-          </Link>
-          <Link to='/mypage'>
-            <img
-              className={styles['profile']}
-              src={profileImage}
-              alt='프로필 이미지'
-              width={32}
-              height={32}
-            />
-          </Link>
-        </header>
-      </div>
-    )
+    <div className={styles['container']}>
+      <header className={styles['header']}>
+        <div>{EmptyItemComponent}</div>
+        {logoComponent}
+        <div>{profileImageComponent}</div>
+      </header>
+    </div>
   );
 }
 

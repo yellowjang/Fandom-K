@@ -1,17 +1,23 @@
-@import '@/styles/import.scss';
+@import 'src/styles/import.scss';
 
 body.active-modal {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .btn-modal {
-  cursor: pointer;
+  font-family: 'Pretendard';
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   width: 128px;
   height: 32px;
+  color: $color-white;
+  background: $gradient-orange-to-pink;
   border-radius: 3px;
-  background: linear-gradient(90deg, #f86f65, #fe5493);
-  font: 700 14px/26px Pretendard;
-  color: #ffffff;
+  cursor: pointer;
 
   &:hover {
     background: linear-gradient(270deg, #f86f65, #fe5493);
@@ -29,16 +35,20 @@ body.active-modal {
   position: fixed;
 }
 
+.modal {
+  z-index: 3;
+}
+
 .overlay {
   background: rgba(0, 0, 0, 0.4);
 }
 .modal-content {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  background: $color-background-black;
+  background: #181d26;
   padding: 24px 24px 0 24px;
   border-radius: 12px;
   width: 525px;
@@ -65,61 +75,9 @@ main {
   margin: 20px 0;
 }
 
-.list {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  > input[type='radio'] {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 3px solid white;
-    border-radius: 50%;
-    outline: none;
-    cursor: pointer;
-    background-color: gray;
-    box-shadow: 0 0 0 1px gray;
-  }
-  > input[type='radio']:checked {
-    background-color: #f96d69;
-    box-shadow: 0 0 0 1px #f96d69;
-  }
-}
-
-.list-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 167px;
-  height: 70px;
-
-  > h1 {
-    color: #f96d69;
-  }
-}
-
-.idol-img {
-  width: 70px;
-  height: 70px;
-  border-radius: 40px;
-  border: solid 1px #f96d69;
-  padding: 5px;
-}
-
-.text-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 66px;
-  height: 38px;
-  white-space: nowrap;
-
-  > h1 {
-    color: white;
-  }
-  > h2 {
-    color: gray;
-  }
+.list-container {
+  height: 514px;
+  overflow-y: auto;
 }
 
 footer {

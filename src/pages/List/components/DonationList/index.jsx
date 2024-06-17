@@ -50,7 +50,7 @@ function DonationList() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [currentSlideIndex, donations.length]);

@@ -2,10 +2,15 @@ import ChartList from '../ChartList';
 import styles from './styles.module.scss';
 import Button from '@/components/Button';
 import VoteModal from '../../../List/components/Modal/VoteModal';
+import chartImg from '@/assets/icons/ic_chart.svg';
+import useAsync from '@/hooks/useAsync';
 import { useEffect, useState } from 'react';
 import { getCharts } from '@/services/api/charts';
+import Loading from '@/components/Loading';
 
 function MonthlyChart() {
+  const [isLoadingChart, isErrorLoadChart, handleLoadChart] =
+    useAsync(getCharts);
   const [isGirlChart, setIsGirlChart] = useState(true);
   const [chartIdols, setChartIdols] = useState([]);
 
@@ -20,7 +25,7 @@ function MonthlyChart() {
   };
 
   const handleLoadData = async (gender, pageSize) => {
-    const { idols } = await getCharts(gender, pageSize);
+    const { idols } = await handleLoadChart(gender, pageSize);
     setChartIdols(idols);
   };
 
@@ -50,7 +55,8 @@ function MonthlyChart() {
           이달의 남자 아이돌
         </Button>
       </div>
-      <ChartList items={chartIdols} />
+      {isLoadingChart ? <Loading /> : <ChartList items={chartIdols} />}
+      {isErrorLoadChart && <div>{isErrorLoadChart.message}</div>}
       <Button className={styles['more-btn']}>더 보기</Button>
     </div>
   );

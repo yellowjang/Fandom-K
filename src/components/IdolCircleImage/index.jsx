@@ -1,7 +1,13 @@
 import styles from './styles.module.scss';
 import checkIcon from '@/assets/icons/ic_idol_check.png';
 
-function IdolCircleImage({ imgUrl, idolName, size = 70, selected }) {
+function IdolCircleImage({
+  imgUrl,
+  idolName,
+  size = 70,
+  selected,
+  outlineWidth = ' 1px',
+}) {
   //   return (
 
   //     <div className={styles['idol-circle-image']}>
@@ -23,13 +29,13 @@ function IdolCircleImage({ imgUrl, idolName, size = 70, selected }) {
     <div className={styles['idol-circle-image']}>
       <div
         className={styles['image-container']}
-        style={{ width: size, height: size }}
+        style={{
+          width: size,
+          height: size,
+          outline: `${outlineWidth} solid #f96d69`,
+        }}
       >
-        <img
-          src={imgUrl}
-          alt={idolName}
-          className={styles['image']}
-        />
+        <img src={imgUrl} alt={idolName} className={styles['image']} />
         {selected && (
           <>
             <div className={styles['check-box']}></div>
@@ -39,7 +45,7 @@ function IdolCircleImage({ imgUrl, idolName, size = 70, selected }) {
                 alt='체크 아이콘'
                 className={styles['check-icon']}
               />
-           </div>
+            </div>
           </>
         )}
       </div>

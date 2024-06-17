@@ -18,17 +18,14 @@ function IdolCard({ item }) {
           alt='아이돌사진'
         />
       </div> */}
-      <button
-        className={styles['idol-click-container']}
-        onClick={selectClick}
-      >
+      <button className={styles['idol-click-container']} onClick={selectClick}>
         <IdolCircleImage
           imgUrl={item.profilePicture}
           idolName={item.name}
           size={128}
           selected={isSelected}
+          outlineWidth='2px'
         />
-        
       </button>
 
       <div className={styles['idol-info-container']}>

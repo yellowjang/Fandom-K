@@ -8,6 +8,19 @@ function SelectIdolList({ idols}) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const SLIDE_COUNT = 16;
 
+  const handleSelectIdol = (id) => {
+    setSelectedIdols((prevSelected) => {
+      const newSelected = new Set(prevSelected);
+      if (newSelected.has(id)) {
+        newSelected.delete(id);
+      } else {
+        newSelected.add(id);
+      }
+      return newSelected;
+    });
+  };
+
+
   const nextSlide = () => {
     setCurrentSlideIndex(
       (prevIndex) => (prevIndex + 16) % (idols.length - SLIDE_COUNT + 1)

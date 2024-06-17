@@ -1,4 +1,4 @@
-import{ useEffect, useState } from 'react';
+import{ useState } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
@@ -10,17 +10,20 @@ function SelectIdolList({ idols}) {
 
   const nextSlide = () => {
     setCurrentSlideIndex(
-      (prevIndex) => (prevIndex + 1) % (idols.length - SLIDE_COUNT + 1)
+      (prevIndex) => (prevIndex + 16) % (idols.length - SLIDE_COUNT + 1)
     );
   };
 
   const prevSlide = () => {
     setCurrentSlideIndex(
       (prevIndex) =>
-        (prevIndex - 1 + (idols.length - SLIDE_COUNT + 1)) %
+        (prevIndex - 16 + (idols.length - SLIDE_COUNT + 1)) %
         (idols.length - SLIDE_COUNT + 1)
     );
   };
+
+
+  
 
   const currentIdos = idols.slice(
     currentSlideIndex,

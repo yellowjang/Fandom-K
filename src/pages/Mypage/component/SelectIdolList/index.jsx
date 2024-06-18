@@ -1,9 +1,32 @@
+import { useState } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 
 function SelectIdolList({ idols }) {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const SLIDE_COUNT = 16;
+
+  const nextSlide = () => {
+    setCurrentSlideIndex(
+      (prevIndex) => (prevIndex + 16) % (idols.length - SLIDE_COUNT + 1)
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlideIndex(
+      (prevIndex) =>
+        (prevIndex - 16 + (idols.length - SLIDE_COUNT + 1)) %
+        (idols.length - SLIDE_COUNT + 1)
+    );
+  };
+
+  const currentIdos = idols.slice(
+    currentSlideIndex,
+    currentSlideIndex + SLIDE_COUNT
+  );
+
   return (
     <div className={styles['select-idol']}>
       <div className={styles['select-idol-title']}>
@@ -11,7 +34,7 @@ function SelectIdolList({ idols }) {
       </div>
 
       <div className={styles['select-idol-wrapper']}>
-        <button className={styles['arrow-btn']}>
+        <button className={styles['arrow-btn']} onClick={prevSlide}>
           <img
             className={styles['arrow-img']}
             src={arrowLeft}
@@ -19,11 +42,11 @@ function SelectIdolList({ idols }) {
           />
         </button>
         <div className={styles['idol-list-container']}>
-          {idols?.map((item) => {
+          {currentIdos?.map((item) => {
             return <IdolCard key={item.id} item={item} />;
           })}
         </div>
-        <button className={styles['arrow-btn']}>
+        <button className={styles['arrow-btn']} onClick={nextSlide}>
           <img
             className={styles['arrow-img']}
             src={arrowRight}
@@ -40,3 +63,4 @@ function SelectIdolList({ idols }) {
 }
 
 export default SelectIdolList;
+

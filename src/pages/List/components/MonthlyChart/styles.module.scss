@@ -7,6 +7,7 @@
   gap: 24px;
   font-family: 'Pretendard';
   font-weight: 300;
+  margin-top: 80px;
 }
 
 .header {
@@ -64,6 +65,10 @@
 
 /* Tablet */
 @media (max-width: $width-max-tablet) {
+  .montyly-chart {
+    margin-top: 60px;
+  }
+
   .more-btn {
     margin: 3px auto 0;
   }
@@ -72,6 +77,7 @@
 /* Mobile */
 @media (max-width: $width-max-mobile) {
   .montyly-chart {
+    margin-top: 40px;
     gap: 16px;
   }
   .more-btn {

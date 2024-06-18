@@ -3,23 +3,28 @@ import styles from './styles.module.scss';
 import Button from '@/components/Button';
 import VoteModal from '../../../List/components/Modal/VoteModal';
 import chartImg from '@/assets/icons/ic_chart.svg';
-import useAsync from '@/hooks/useAsync';
+import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import { useEffect, useState } from 'react';
 import { getCharts } from '@/services/api/charts';
 import Loading from '@/components/Loading';
 
+const CHART_IDOL_NUM = 10;
+
 function MonthlyChart() {
-  const [isLoadingChart, isErrorLoadChart, handleLoadChart] =
-    useAsync(getCharts);
+  const [isLoadingChart, loadChartError, handleLoadChart] = useAsyncWithRetry(
+    getCharts,
+    5
+  );
+  // const [isLoadingChart, loadChartError, handleLoadChart] = useAsync(getCharts);
   const [isGirlChart, setIsGirlChart] = useState(true);
   const [chartIdols, setChartIdols] = useState([]);
 
   const handleGender = (e) => {
     if (e.target.name === 'mail-btn') {
-      handleLoadData('male', 10);
+      handleLoadData('male', CHART_IDOL_NUM);
       setIsGirlChart(false);
     } else {
-      handleLoadData('female', 10);
+      handleLoadData('female', CHART_IDOL_NUM);
       setIsGirlChart(true);
     }
   };
@@ -30,7 +35,7 @@ function MonthlyChart() {
   };
 
   useEffect(() => {
-    handleLoadData('female', 10);
+    handleLoadData('female', CHART_IDOL_NUM);
   }, []);
 
   return (
@@ -56,7 +61,7 @@ function MonthlyChart() {
         </Button>
       </div>
       {isLoadingChart ? <Loading /> : <ChartList items={chartIdols} />}
-      {isErrorLoadChart && <div>{isErrorLoadChart.message}</div>}
+      {loadChartError && <div>{loadChartError.message}</div>}
       <Button className={styles['more-btn']}>더 보기</Button>
     </div>
   );

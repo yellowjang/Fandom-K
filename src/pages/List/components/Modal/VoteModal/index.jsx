@@ -1,15 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import chartIcon from '@/assets/icons/ic_chart.svg';
-import checkIcon from '@/assets/icons/ic_check.svg';
 import ChartList from './ChartList';
+import { postVotes } from '@/services/api/votes';
+import useAsync from '@/hooks/useAsync';
+import Toast from '@/components/Toast';
 
-function VoteModal({ items }) {
+function VoteModal({ items, setItems }) {
   const [modal, setModal] = useState(false);
+  const [selectedIdol, setSelectedIdol] = useState(null);
+  const [isLoadingVote, isErrorVote, asyncVote] = useAsync(postVotes);
+  const [toastMessage, setToastMessage] = useState('');
 
   const toggleModal = () => {
     setModal(!modal);
+  };
+
+  const handleVote = async () => {
+    if (selectedIdol) {
+      await asyncVote(selectedIdol);
+      setToastMessage('투표가 완료되었습니다!');
+      toggleModal();
+    }
+  };
+
+  const handleSelectIdol = (idolId) => {
+    setSelectedIdol(idolId);
+  };
+
+  const closeToast = () => {
+    setToastMessage('');
   };
 
   if (modal) {
@@ -41,11 +62,13 @@ function VoteModal({ items }) {
             </header>
             <main>
               <div className={styles['list-container']}>
-                <ChartList items={items} />
+                <ChartList items={items} onSelectIdol={handleSelectIdol} />
               </div>
             </main>
             <footer>
-              <button>투표하기</button>
+              <button onClick={handleVote} disabled={!selectedIdol}>
+                투표하기
+              </button>
               <span>
                 투표하는 데 <span>1000 크레딧</span>이 소모됩니다.
               </span>
@@ -53,6 +76,8 @@ function VoteModal({ items }) {
           </div>
         </div>
       )}
+
+      {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </>
   );
 }

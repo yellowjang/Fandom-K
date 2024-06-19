@@ -1,5 +1,8 @@
 @import '@/styles/import.scss';
 
+.monthly-chart{
+  
+}
 .chart-list-item {
   color: $color-white;
   display: flex;
@@ -9,6 +12,10 @@
   font-family: 'Pretendard';
   font-size: 14px;
   z-index: -1;
+
+  &:not(:nth-last-child(-n + 2):nth-last-child(n + 1)) {
+    border-bottom: 1px solid $color-white-aplha-10;
+  }
 }
 
 .list-container {
@@ -20,7 +27,7 @@
 }
 
 .middle-item {
-  border-bottom: 1px solid $color-white-aplha-10;
+  // border-bottom: 1px solid $color-white-aplha-10;
 }
 
 .info {
@@ -47,6 +54,12 @@
     grid-template:
       repeat(5, 1fr) /
       repeat(1, 1fr);
+  }
+
+  .chart-list-item {
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-white-aplha-10;
+    }
   }
 }
 

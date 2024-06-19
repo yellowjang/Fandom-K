@@ -5,9 +5,19 @@ import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 import { getDonations } from '@/services/api/donations';
 import { SLIDE_COUNT } from '@/constants/SlideCount.js';
+
+import IdolDonationModal from '../Modal/IdolDonationModal';
+import ModalPortal from '../Modal/components/ModalPortal';
+
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 
-function DonationList() {
+
+function DonationList({
+  isModalOpen,
+  closeModal,
+  openModal,
+  selectedDonation,
+}) {
   const [donations, setDonations] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
@@ -72,7 +82,11 @@ function DonationList() {
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
             {currentDonations().map((donation) => (
-              <DonationElement key={donation.id} donation={donation} />
+              <DonationElement
+                key={donation.id}
+                donation={donation}
+                openModal={() => openModal(donation)}
+              />
             ))}
           </div>
         </div>
@@ -84,6 +98,17 @@ function DonationList() {
           />
         </button>
       </div>
+      {selectedDonation && (
+        <ModalPortal>
+          <IdolDonationModal
+            donationImg={selectedDonation.idol.profilePicture}
+            donationSubTitle={selectedDonation.subtitle}
+            donationTitle={selectedDonation.title}
+            isModalOpen={isModalOpen}
+            closeModal={closeModal}
+          />
+        </ModalPortal>
+      )}
     </div>
   );
 }

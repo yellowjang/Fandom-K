@@ -1,17 +1,19 @@
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
-import idolImg from '@/assets/images/img_idol.png';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
 
-const IdolDonationModal = ({ isModalOpen, closeModal }) => {
+const IdolDonationModal = ({
+  donationImg,
+  donationSubTitle,
+  donationTitle,
+  isModalOpen,
+  closeModal,
+}) => {
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
-        <div
-          style={{ display: isModalOpen ? 'block' : 'none' }}
-          className={style['container']}
-        >
+        <div className={style['container']}>
           <div className={style['header']}>
             <h2>후원하기</h2>
             <button onClick={closeModal}>
@@ -20,10 +22,10 @@ const IdolDonationModal = ({ isModalOpen, closeModal }) => {
           </div>
           <div className={style['main']}>
             <div className={style['card']}>
-              <img src={idolImg} alt='아이돌 이미지' />
+              <img src={donationImg} alt='아이돌 이미지' />
               <div className={style['text-wrapper']}>
-                <span>강남역 광고</span>
-                <p>민지 2023 첫 광고</p>
+                <span>{donationSubTitle}</span>
+                <p>{donationTitle}</p>
               </div>
             </div>
             <div className={style['input-wrapper']}>

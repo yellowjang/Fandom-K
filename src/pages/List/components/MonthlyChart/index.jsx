@@ -20,17 +20,15 @@ function MonthlyChart() {
   // const [isLoadingChart, loadChartError, handleLoadChart] = useAsync(getCharts);
   const [isGirlChart, setIsGirlChart] = useState(true);
   const [chartIdols, setChartIdols] = useState([]);
+  const [currentGender, setCurrentGender] = useState('female');
   const [cursor, setCusor] = useState(null);
 
   const handleGender = (e) => {
     setChartIdols([]);
-    if (e.target.name === 'mail-btn') {
-      handleLoadData('male', CHART_IDOL_NUM);
-      setIsGirlChart(false);
-    } else {
-      handleLoadData('female', CHART_IDOL_NUM);
-      setIsGirlChart(true);
-    }
+    const selectedGender = e.target.name === 'male-btn' ? 'male' : 'female';
+    handleLoadData(selectedGender, CHART_IDOL_NUM);
+    setIsGirlChart(selectedGender === 'female');
+    setCurrentGender(selectedGender);
   };
 
   const handleMore = () => {
@@ -62,18 +60,22 @@ function MonthlyChart() {
     <div className={styles['montyly-chart']}>
       <div className={styles['header']}>
         <h1>이달의 차트</h1>
-        <VoteModal items={chartIdols} />
+        {isLoadingChart ? (
+          <Loading />
+        ) : (
+          <VoteModal items={chartIdols} gender={currentGender} />
+        )}
       </div>
       <div className={styles['gender-tab']}>
         <Button
-          name='femail-btn'
+          name='female-btn'
           className={`${styles['girl-btn']} ${isGirlChart && styles['focus']}`}
           onClick={handleGender}
         >
           이달의 여자 아이돌
         </Button>
         <Button
-          name='mail-btn'
+          name='male-btn'
           className={`${styles['boy-btn']} ${!isGirlChart && styles['focus']}`}
           onClick={handleGender}
         >

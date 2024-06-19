@@ -23,16 +23,22 @@ function ChartListItem({ item, onSelectIdol }) {
   );
 }
 
-function ChartList({ items, onSelectIdol }) {
+function ModalChart({ items, onSelectIdol }) {
   return (
     <div className={styles['chart-item']}>
       <div className={styles['list-container']}>
         {items?.map((item) => {
-          return <ChartListItem key={item.id} item={item} onSelectIdol={onSelectIdol} />;
+          return (
+            <ChartListItem
+              key={item.id}
+              item={item}
+              onSelectIdol={onSelectIdol}
+            />
+          );
         })}
       </div>
     </div>
   );
 }
 
-export default ChartList;
+export default ModalChart;

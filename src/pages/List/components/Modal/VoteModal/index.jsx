@@ -3,20 +3,26 @@ import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import chartIcon from '@/assets/icons/ic_chart.svg';
 import checkIcon from '@/assets/icons/ic_check.svg';
-import ChartList from './ChartList';
+import ModalChart from './ModalChart';
+import { disableScroll, activateScroll } from '../components/ModalScroll';
 
-function VoteModal({ items }) {
+function VoteModal({ items, gender }) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
   };
 
-  if (modal) {
-    document.documentElement.style.overflow = 'hidden';
-  } else {
-    document.documentElement.style.overflow = '';
-  }
+  const genderCheck = gender === 'female' ? '여자' : '남자';
+
+  useEffect(() => {
+    if (modal) {
+      const currentScrollY = disableScroll();
+      return () => {
+        activateScroll(currentScrollY);
+      };
+    }
+  }, [modal]);
 
   return (
     <>
@@ -34,14 +40,14 @@ function VoteModal({ items }) {
           ></div>
           <div className={styles['modal-content']}>
             <header>
-              <h2>이달의 여자 아이돌</h2>
+              <h2>이달의 {genderCheck} 아이돌</h2>
               <button onClick={toggleModal}>
                 <img src={closeIcon} alt='닫기 아이콘' />
               </button>
             </header>
             <main>
               <div className={styles['list-container']}>
-                <ChartList items={items} />
+                <ModalChart items={items} />
               </div>
             </main>
             <footer>

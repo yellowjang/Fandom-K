@@ -1,9 +1,5 @@
 @import 'src/styles/import.scss';
 
-body.active-modal {
-  overflow: hidden;
-}
-
 .btn-modal {
   font-family: 'Pretendard';
   font-size: 13px;
@@ -109,5 +105,13 @@ footer {
     > span {
       color: #f96d69;
     }
+  }
+}
+
+@media (max-width: $width-max-mobile) {
+  .modal-content {
+    background: #02000ecc;
+    height: 100%;
+    width: 100%;
   }
 }

@@ -19,7 +19,7 @@ function ChartListItem({ item }) {
   );
 }
 
-function ChartList({ items }) {
+function ModalChart({ items }) {
   return (
     <div className={styles['chart-item']}>
       <div className={styles['list-container']}>
@@ -31,4 +31,4 @@ function ChartList({ items }) {
   );
 }
 
-export default ChartList;
+export default ModalChart;

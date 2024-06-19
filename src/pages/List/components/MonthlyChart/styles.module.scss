@@ -61,6 +61,13 @@
   &:hover {
     background-color: transparent;
   }
+
+  &:disabled {
+    cursor: default;
+    background-color: transparent;
+    color: $color-white-aplha-40;
+    border: 1px solid $color-white-aplha-40;
+  }
 }
 
 /* Tablet */

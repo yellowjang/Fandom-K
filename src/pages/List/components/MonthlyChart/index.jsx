@@ -9,17 +9,21 @@ import { getCharts } from '@/services/api/charts';
 import Loading from '@/components/Loading';
 
 const CHART_IDOL_NUM = 10;
+const GENDER = {
+  M: 'male',
+  F: 'female',
+};
 
 function MonthlyChart() {
-  const [isLoadingChart, loadChartError, handleLoadChart] = useAsyncWithRetry(
-    getCharts,
-    5
-  );
+  const [isLoadingChart, loadChartError, handleLoadChart] =
+    useAsyncWithRetry(getCharts);
   // const [isLoadingChart, loadChartError, handleLoadChart] = useAsync(getCharts);
   const [isGirlChart, setIsGirlChart] = useState(true);
   const [chartIdols, setChartIdols] = useState([]);
+  const [cursor, setCusor] = useState(null);
 
   const handleGender = (e) => {
+    setChartIdols([]);
     if (e.target.name === 'mail-btn') {
       handleLoadData('male', CHART_IDOL_NUM);
       setIsGirlChart(false);
@@ -29,13 +33,29 @@ function MonthlyChart() {
     }
   };
 
+  const handleMore = () => {
+    const gender = isGirlChart ? GENDER.F : GENDER.M;
+    handleLoadMore(gender, CHART_IDOL_NUM);
+  };
+
   const handleLoadData = async (gender, pageSize) => {
-    const { idols } = await handleLoadChart(gender, pageSize);
+    const { idols, nextCursor } = await handleLoadChart(gender, pageSize);
     setChartIdols(idols);
+    setCusor(nextCursor);
+  };
+
+  const handleLoadMore = async (gender, pageSize) => {
+    const { idols, nextCursor } = await handleLoadChart(
+      gender,
+      pageSize,
+      cursor
+    );
+    setChartIdols((prev) => [...prev, ...idols]);
+    setCusor(nextCursor);
   };
 
   useEffect(() => {
-    handleLoadData('female', CHART_IDOL_NUM);
+    handleLoadData(GENDER.F, CHART_IDOL_NUM);
   }, []);
 
   return (
@@ -62,7 +82,13 @@ function MonthlyChart() {
       </div>
       {isLoadingChart ? <Loading /> : <ChartList items={chartIdols} />}
       {loadChartError && <div>{loadChartError.message}</div>}
-      <Button className={styles['more-btn']}>더 보기</Button>
+      <Button
+        className={styles['more-btn']}
+        onClick={handleMore}
+        disabled={!cursor ? true : false}
+      >
+        더 보기
+      </Button>
     </div>
   );
 }

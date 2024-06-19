@@ -17,12 +17,6 @@
   outline: 1px solid $color-orange;
 }
 
-.idol-image {
-  object-fit: cover;
-  transform: scale(1.5);
-  border: 1px solid rgba(0, 0, 0, 0);
-}
-
 .idol-info-container {
   display: flex;
   flex-direction: column;
@@ -35,11 +29,12 @@
   font-size: 16px;
   line-height: 27.73px;
   font-weight: 700;
+  color: #fff;
 }
 
 .name {
   font-size: 14px;
   font-weight: 400;
   line-height: 16.71px;
-  color: rgba($color: #fff, $alpha: 0.6);
+  color: rgba($color: #ffffff, $alpha: 0.6);
 }

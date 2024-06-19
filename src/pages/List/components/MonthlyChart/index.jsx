@@ -3,32 +3,57 @@ import styles from './styles.module.scss';
 import Button from '@/components/Button';
 import VoteModal from '../../../List/components/Modal/VoteModal';
 import chartImg from '@/assets/icons/ic_chart.svg';
-import useAsync from '@/hooks/useAsync';
+import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import { useEffect, useState } from 'react';
 import { getCharts } from '@/services/api/charts';
 import Loading from '@/components/Loading';
 
+const CHART_IDOL_NUM = 10;
+const GENDER = {
+  M: 'male',
+  F: 'female',
+};
+
 function MonthlyChart() {
-  const [isLoadingChart, isErrorLoadChart, handleLoadChart] =
-    useAsync(getCharts);
+  const [isLoadingChart, loadChartError, handleLoadChart] =
+    useAsyncWithRetry(getCharts);
+  // const [isLoadingChart, loadChartError, handleLoadChart] = useAsync(getCharts);
   const [isGirlChart, setIsGirlChart] = useState(true);
   const [chartIdols, setChartIdols] = useState([]);
   const [currentGender, setCurrentGender] = useState('female');
+  const [cursor, setCusor] = useState(null);
 
   const handleGender = (e) => {
+    setChartIdols([]);
     const selectedGender = e.target.name === 'male-btn' ? 'male' : 'female';
-    handleLoadData(selectedGender, 10);
+    handleLoadData(selectedGender, CHART_IDOL_NUM);
     setIsGirlChart(selectedGender === 'female');
     setCurrentGender(selectedGender);
   };
 
+  const handleMore = () => {
+    const gender = isGirlChart ? GENDER.F : GENDER.M;
+    handleLoadMore(gender, CHART_IDOL_NUM);
+  };
+
   const handleLoadData = async (gender, pageSize) => {
-    const { idols } = await handleLoadChart(gender, pageSize);
+    const { idols, nextCursor } = await handleLoadChart(gender, pageSize);
     setChartIdols(idols);
+    setCusor(nextCursor);
+  };
+
+  const handleLoadMore = async (gender, pageSize) => {
+    const { idols, nextCursor } = await handleLoadChart(
+      gender,
+      pageSize,
+      cursor
+    );
+    setChartIdols((prev) => [...prev, ...idols]);
+    setCusor(nextCursor);
   };
 
   useEffect(() => {
-    handleLoadData('female', 10);
+    handleLoadData(GENDER.F, CHART_IDOL_NUM);
   }, []);
 
   return (
@@ -58,8 +83,14 @@ function MonthlyChart() {
         </Button>
       </div>
       {isLoadingChart ? <Loading /> : <ChartList items={chartIdols} />}
-      {isErrorLoadChart && <div>{isErrorLoadChart.message}</div>}
-      <Button className={styles['more-btn']}>더 보기</Button>
+      {loadChartError && <div>{loadChartError.message}</div>}
+      <Button
+        className={styles['more-btn']}
+        onClick={handleMore}
+        disabled={!cursor ? true : false}
+      >
+        더 보기
+      </Button>
     </div>
   );
 }

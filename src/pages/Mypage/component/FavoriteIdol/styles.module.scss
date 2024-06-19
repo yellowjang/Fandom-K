@@ -7,7 +7,14 @@
     font-size: 24px;
     line-height: 26px;
     font-weight: 700;
+    color: #f6f6f8;
   }
+}
+
+.favorite-card-container {
+  display: flex;
+  margin: 32px auto;
+  gap: 24px;
 }
 
 .favorite-add-info {

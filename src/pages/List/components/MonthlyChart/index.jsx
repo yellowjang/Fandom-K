@@ -2,7 +2,6 @@ import ChartList from '../ChartList';
 import styles from './styles.module.scss';
 import Button from '@/components/Button';
 import VoteModal from '../../../List/components/Modal/VoteModal';
-import chartImg from '@/assets/icons/ic_chart.svg';
 import useAsync from '@/hooks/useAsync';
 import { useEffect, useState } from 'react';
 import { getCharts } from '@/services/api/charts';

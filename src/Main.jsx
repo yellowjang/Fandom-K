@@ -6,8 +6,6 @@ import Mypage from '@/pages/Mypage';
 import NotFound from '@/pages/NotFound';
 import TestPage from '@/pages/TestPage';
 
-// import MyCredit from '@/pages/List/components/MyCredit';
-
 function Main() {
   return (
     <BrowserRouter>

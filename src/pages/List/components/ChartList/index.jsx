@@ -1,10 +1,9 @@
 import styles from './styles.module.scss';
 import IdolCircleImage from '@/components/IdolCircleImage';
 
-function ChartListItem({ item, isLastLine }) {
-  const bottomLineStyle = isLastLine ? undefined : styles['middle-item'];
+function ChartListItem({ item }) {
   return (
-    <div className={`${styles['chart-list-item']} ${bottomLineStyle}`}>
+    <div className={styles['chart-list-item']}>
       <div className={styles['info']}>
         <IdolCircleImage imgUrl={item.profilePicture} idolName={item.name} />
         <p className={styles['rank']}>{item.rank}</p>
@@ -18,18 +17,11 @@ function ChartListItem({ item, isLastLine }) {
 }
 
 function ChartList({ items }) {
-  // items = testItem;
   return (
     <div className={styles['chart-item']}>
       <div className={styles['list-container']}>
-        {items?.map((item, index) => {
-          return (
-            <ChartListItem
-              key={item.id}
-              item={item}
-              isLastLine={index >= items.length - 2 ? true : false}
-            />
-          );
+        {items?.map((item) => {
+          return <ChartListItem key={item.id} item={item} />;
         })}
       </div>
     </div>

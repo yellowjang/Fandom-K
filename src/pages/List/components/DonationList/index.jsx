@@ -5,8 +5,12 @@ import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 import { getDonations } from '@/services/api/donations';
 import { SLIDE_COUNT } from '@/constants/SlideCount.js';
+
 import IdolDonationModal from '../Modal/IdolDonationModal';
 import ModalPortal from '../Modal/components/ModalPortal';
+
+import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
+
 
 function DonationList({
   isModalOpen,
@@ -16,6 +20,8 @@ function DonationList({
 }) {
   const [donations, setDonations] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
+    useAsyncWithRetry(getDonations);
 
   const nextSlide = () => {
     setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % donations.length);
@@ -47,7 +53,7 @@ function DonationList({
 
   useEffect(() => {
     const fetchData = async () => {
-      const { list } = await getDonations();
+      const { list } = await handleLoadDonations();
       setDonations(list);
     };
 

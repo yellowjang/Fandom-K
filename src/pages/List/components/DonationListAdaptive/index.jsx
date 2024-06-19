@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import DonationElement from './DonationElementAdaptive';
 import styles from './styles.module.scss';
 import { getDonations } from '@/services/api/donations';
+
 import IdolDonationModal from '../Modal/IdolDonationModal';
 import ModalPortal from '../Modal/components/ModalPortal';
+
+import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
+
 
 function DonationListAdaptive({
   isModalOpen,
@@ -12,10 +16,12 @@ function DonationListAdaptive({
   selectedDonation,
 }) {
   const [donations, setDonations] = useState([]);
+  const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
+    useAsyncWithRetry(getDonations, 5);
 
   useEffect(() => {
     const fetchData = async () => {
-      const { list } = await getDonations();
+      const { list } = await handleLoadDonations();
       setDonations(list);
     };
 

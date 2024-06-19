@@ -9,8 +9,10 @@
   gap: 32px;
 }
 .donnation-contents {
+  margin: 0 auto;
   display: flex;
   width: 1200px;
+
 
   flex-direction: column;
   gap: 32px;
@@ -20,28 +22,30 @@
   overflow: scroll;
   gap: 24px;
 }
+
 .components-wrapper::-webkit-scrollbar {
   display: none;
 }
+
 .components-container {
   display: flex;
   padding-top: 50px;
   gap: 40px;
   align-items: center;
+}
 
-  .arrow-button {
-    border: none;
-    background: none;
-    width: 40px;
-    height: 78px;
-    border-radius: 6.67px;
-    background-color: #1b1b1bcc;
-  }
+.arrow-button {
+  border: none;
+  background: none;
+  width: 40px;
+  height: 78px;
+  border-radius: 6.67px;
+  background-color: #1b1b1bcc;
+}
 
-  .arrow-img {
-    width: 10px;
-    height: 20px;
-  }
+.arrow-img {
+  width: 10px;
+  height: 20px;
 }
 
 .list-title {

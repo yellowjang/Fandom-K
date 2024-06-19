@@ -1,10 +1,10 @@
 import styles from './styles.module.scss';
 import { useEffect } from 'react';
 import { postVotes } from '@/services/api/votes';
-import useAsync from '@/hooks/useAsync';
+import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 
 function TestPage() {
-  const [isLoadingVote, errorVote, asyncVote] = useAsync(postVotes);
+  const [isLoadingVote, errorVote, asyncVote] = useAsyncWithRetry(postVotes);
 
   const handleVote = async (idolId) => {
     const result = await asyncVote(idolId);

@@ -1,22 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import chartIcon from '@/assets/icons/ic_chart.svg';
 import checkIcon from '@/assets/icons/ic_check.svg';
-import ChartList from './ChartList';
+import ModalChart from './ModalChart';
+import { disableScroll, activateScroll } from '../components/ModalScroll';
+import { postVotes } from '@/services/api/votes';
+import useAsync from '@/hooks/useAsync';
+import Toast from '@/components/Toast';
 
-function VoteModal({ items }) {
+function VoteModal({ items, gender, setItems }) {
   const [modal, setModal] = useState(false);
+  const [selectedIdol, setSelectedIdol] = useState(null);
+  const [isLoadingVote, isErrorVote, asyncVote] = useAsync(postVotes);
+  const [toastMessage, setToastMessage] = useState('');
 
   const toggleModal = () => {
     setModal(!modal);
   };
 
-  if (modal) {
-    document.documentElement.style.overflow = 'hidden';
-  } else {
-    document.documentElement.style.overflow = '';
-  }
+  const genderCheck = gender === 'female' ? '여자' : '남자';
+
+  useEffect(() => {
+    if (modal) {
+      const currentScrollY = disableScroll();
+      return () => {
+        activateScroll(currentScrollY);
+      };
+    }
+  }, [modal]);
+
+  const handleVote = async () => {
+    if (selectedIdol) {
+      await asyncVote(selectedIdol);
+      setToastMessage('투표가 완료되었습니다!');
+      toggleModal();
+    }
+  };
+
+  const handleSelectIdol = (idolId) => {
+    setSelectedIdol(idolId);
+  };
+
+  const closeToast = () => {
+    setToastMessage('');
+  };
 
   return (
     <>
@@ -34,18 +62,20 @@ function VoteModal({ items }) {
           ></div>
           <div className={styles['modal-content']}>
             <header>
-              <h2>이달의 여자 아이돌</h2>
+              <h2>이달의 {genderCheck} 아이돌</h2>
               <button onClick={toggleModal}>
                 <img src={closeIcon} alt='닫기 아이콘' />
               </button>
             </header>
             <main>
               <div className={styles['list-container']}>
-                <ChartList items={items} />
+                <ModalChart items={items} onSelectIdol={handleSelectIdol} />
               </div>
             </main>
             <footer>
-              <button>투표하기</button>
+              <button onClick={handleVote} disabled={!selectedIdol}>
+                투표하기
+              </button>
               <span>
                 투표하는 데 <span>1000 크레딧</span>이 소모됩니다.
               </span>
@@ -53,6 +83,8 @@ function VoteModal({ items }) {
           </div>
         </div>
       )}
+
+      {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </>
   );
 }

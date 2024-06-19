@@ -22,9 +22,9 @@
   // overflow: scroll;
   gap: 24px;
 }
-// .components-container::-webkit-scrollbar {
-//   display: none;
-// }
+.components-container::-webkit-scrollbar {
+  display: none;
+}
 .components-container {
   max-width: 878px;
   overflow: scroll;

@@ -1,0 +1,68 @@
+@import 'src/styles/import.scss';
+
+.favorite-card {
+  width: 98px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.idol-circle-cantainer{
+  position: relative;
+}
+
+.delete-icon-container{
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background-color: #fff;
+  outline: 2.87px solid black;
+  position: absolute;
+  top: 20%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.delete-icon-img{
+  width: 12px;
+  height: 12px;
+}
+
+.favorite-card-info-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 8px;
+
+
+  h3 {
+    font-family: 'Pretendard';
+  }
+}
+
+
+.group {
+  width: 98px;
+  height: 17px;
+  font-size: 14px;
+  line-height: 16.71px;
+  font-weight: 400;
+  color: rgba($color: #ffffff, $alpha: 0.6);
+  
+}
+
+.name {
+  width: 98px;
+  height: 26px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16.71px;
+  color: #F4EFEF;
+  text-align: center;
+}

@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import IdolCircleImage from '@/components/IdolCircleImage';
 
-function ChartListItem({ item }) {
+function ChartListItem({ item, onSelectIdol }) {
   return (
     <>
       <label className={styles['list']}>
@@ -13,22 +13,32 @@ function ChartListItem({ item }) {
             <h2>{Number(item.totalVotes).toLocaleString('ko-KR')}표</h2>
           </div>
         </div>
-        <input type='radio' />
+        <input
+          type='radio'
+          name='idol'
+          onChange={() => onSelectIdol(item.id)}
+        />
       </label>
     </>
   );
 }
 
-function ChartList({ items }) {
+function ModalChart({ items, onSelectIdol }) {
   return (
     <div className={styles['chart-item']}>
       <div className={styles['list-container']}>
         {items?.map((item) => {
-          return <ChartListItem key={item.id} item={item} />;
+          return (
+            <ChartListItem
+              key={item.id}
+              item={item}
+              onSelectIdol={onSelectIdol}
+            />
+          );
         })}
       </div>
     </div>
   );
 }
 
-export default ChartList;
+export default ModalChart;

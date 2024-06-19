@@ -1,9 +1,12 @@
+
+
 @import 'src/styles/import.scss';
 
-.selcet-idol {
+.select-idol {
   width: 100%;
   height: 100%;
 }
+
 .select-idol-title {
   width: 314px;
   height: 26px;
@@ -18,7 +21,6 @@
 }
 
 .select-idol-wrapper {
-  // width: 1314px;
   display: flex;
   align-items: center;
 }
@@ -30,6 +32,9 @@
   height: 78px;
   border-radius: 6.67px;
   background-color: #1b1b1bcc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .arrow-img {
@@ -46,9 +51,10 @@
   grid-template-columns: repeat(8, 1fr);
   gap: 31px 22px;
   margin-top: 32px;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   grid-auto-flow: column;
+  scroll-behavior: smooth;
 }
 
 .add-btn {

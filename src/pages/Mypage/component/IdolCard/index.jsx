@@ -1,17 +1,19 @@
+
 import { useState } from 'react';
 import styles from './styles.module.scss';
 import IdolCircleImage from '../../../../components/IdolCircleImage';
 
-function IdolCard({ item }) {
+function IdolCard({ item, onSelect }) {
   const [isSelected, setIsSelected] = useState(false);
 
-  const selectClick = () => {
+  const handleToggleSelect = () => {
     setIsSelected(!isSelected);
+    onSelect(item, !isSelected); 
   };
 
   return (
     <div className={styles['idol-card']}>
-      <button className={styles['idol-click-container']} onClick={selectClick}>
+      <button className={styles['idol-click-container']} onClick={handleToggleSelect}>
         <IdolCircleImage
           imgUrl={item.profilePicture}
           idolName={item.name}
@@ -30,4 +32,3 @@ function IdolCard({ item }) {
 }
 
 export default IdolCard;
-

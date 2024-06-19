@@ -11,6 +11,12 @@
   }
 }
 
+.favorite-card-container {
+  display: flex;
+  margin: 32px auto;
+  gap: 24px;
+}
+
 .favorite-add-info {
   height: 172px;
   display: flex;

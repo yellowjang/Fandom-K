@@ -5,9 +5,9 @@ import creditImg from '@/assets/images/img_diamond.png';
 import creditWhiteImg from '@/assets/images/img_diamond_white.png';
 import ModalBackground from '../components/ModalBackground';
 
-const CreditCard = ({ value, onClick }) => {
+const ChargeAmout = ({ value, onClick }) => {
   return (
-    <label className={style['card']}>
+    <label className={style['charge-amount']}>
       <div>
         <img
           className={style['credit-img']}
@@ -29,7 +29,7 @@ const CreditCard = ({ value, onClick }) => {
 const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const handleCreditCardClick = (value) => {
+  const handleChargeAmoutClick = (value) => {
     setSelectedValue(value);
   };
 
@@ -48,10 +48,7 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
 
   return (
     <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
-      <div
-        style={{ display: isModalOpen ? 'block' : 'none' }}
-        className={style['container']}
-      >
+      <div className={style['container']}>
         <div className={style['header']}>
           <h2>크레딧 충전하기</h2>
           <button onClick={closeModal}>
@@ -59,9 +56,9 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
           </button>
         </div>
         <div className={style['main']}>
-          <CreditCard value='100' onClick={handleCreditCardClick} />
-          <CreditCard value='500' onClick={handleCreditCardClick} />
-          <CreditCard value='1000' onClick={handleCreditCardClick} />
+          <ChargeAmout value='100' onClick={handleChargeAmoutClick} />
+          <ChargeAmout value='500' onClick={handleChargeAmoutClick} />
+          <ChargeAmout value='1000' onClick={handleChargeAmoutClick} />
         </div>
         <div className={style['footer']}>
           <img src={creditWhiteImg} alt='크레딧 이미지' />

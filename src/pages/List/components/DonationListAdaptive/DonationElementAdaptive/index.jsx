@@ -1,7 +1,7 @@
 import styles from './styles.module.scss';
 import creditImg from '@/assets/images/img_diamond.png';
 
-function DonationElementAdaptive({ donation }) {
+function DonationElementAdaptive({ donation, openModal }) {
   const calculateDaysLeft = (deadline) => {
     const deadlineDate = new Date(deadline);
     const today = new Date();
@@ -19,7 +19,7 @@ function DonationElementAdaptive({ donation }) {
           src={donation.idol.profilePicture}
           alt='후원광고사진'
         />
-        <button>후원하기</button>
+        <button onClick={openModal}>후원하기</button>
       </div>
       <div className={styles['donation-contents']}>
         <div className={styles['title-wrapper']}>

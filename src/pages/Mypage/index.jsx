@@ -39,6 +39,7 @@ import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 
 function Mypage() {
   const [idols, setIdols] = useState([]);
+  const [favoriteIdols, setFavoriteIdols] = useState([]);
 
   const [isLoadingIdols, loadIdolsError, handleLoadIdols] =
     useAsyncWithRetry(getIdols);

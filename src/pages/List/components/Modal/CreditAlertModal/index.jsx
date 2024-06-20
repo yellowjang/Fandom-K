@@ -7,10 +7,7 @@ const CreditAlertModal = ({ isModalOpen, closeModal }) => {
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
-        <div
-          style={{ display: isModalOpen ? 'block' : 'none' }}
-          className={style['container']}
-        >
+        <div className={style['container']}>
           <div className={style['header']}>
             <button onClick={closeModal}>
               <img src={closeIcon} alt='닫기 아이콘' />

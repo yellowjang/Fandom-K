@@ -5,7 +5,7 @@ import creditImg from '@/assets/images/img_diamond.png';
 import creditWhiteImg from '@/assets/images/img_diamond_white.png';
 import ModalBackground from '../components/ModalBackground';
 
-const ChargeAmout = ({ value, onClick }) => {
+const ChargeAmount = ({ value, onClick }) => {
   return (
     <label className={style['charge-amount']}>
       <div>
@@ -29,7 +29,7 @@ const ChargeAmout = ({ value, onClick }) => {
 const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const handleChargeAmoutClick = (value) => {
+  const handleChargeAmountClick = (value) => {
     setSelectedValue(value);
   };
 
@@ -56,9 +56,9 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
           </button>
         </div>
         <div className={style['main']}>
-          <ChargeAmout value='100' onClick={handleChargeAmoutClick} />
-          <ChargeAmout value='500' onClick={handleChargeAmoutClick} />
-          <ChargeAmout value='1000' onClick={handleChargeAmoutClick} />
+          <ChargeAmount value='100' onClick={handleChargeAmountClick} />
+          <ChargeAmount value='500' onClick={handleChargeAmountClick} />
+          <ChargeAmount value='1000' onClick={handleChargeAmountClick} />
         </div>
         <div className={style['footer']}>
           <img src={creditWhiteImg} alt='크레딧 이미지' />

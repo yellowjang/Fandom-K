@@ -10,6 +10,7 @@ import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 function Mypage() {
   const [idols, setIdols] = useState([]);
   const [favoriteIdols, setFavoriteIdols] = useState([]);
+  
 
   const [isLoadingIdols, loadIdolsError, handleLoadIdols] =
     useAsyncWithRetry(getIdols);
@@ -26,6 +27,8 @@ function Mypage() {
     fetchData();
   }, []);
 
+
+
   const handleSelect = (idol, isSelected) => {
     const updatedIdols = isSelected
       ? [...favoriteIdols, idol]
@@ -38,7 +41,8 @@ function Mypage() {
     <div className={styles['mypage']}>
       <div className={styles['mypage-wrapper']}>
         <FavoriteIdol favoriteIdols={favoriteIdols} setFavoriteIdols={setFavoriteIdols} onSelect={handleSelect} />
-        <SelectIdolList idols={idols} favoriteIdols={favoriteIdols} onSelect={handleSelect} />
+        {/* <SelectIdolList idols={idols} favoriteIdols={favoriteIdols} /> */}
+        <SelectIdolList idols={idols} favoriteIdols={favoriteIdols} setFavoriteIdols={setFavoriteIdols}/>
       </div>
     </div>
   );

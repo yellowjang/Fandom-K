@@ -34,7 +34,7 @@ const IdolDonationModal = ({
             </div>
           </div>
           <div className={style['footer']}>
-            <button>충전하기</button>
+            <button>후원하기</button>
           </div>
         </div>
       </ModalBackground>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DonationElement from './DonationElementAdaptive';
 import styles from './styles.module.scss';
 import { getDonations, creditDonation } from '@/services/api/donations';
@@ -6,15 +6,15 @@ import IdolDonationModal from '../Modal/IdolDonationModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 import CreditAlertModal from '../Modal/CreditAlertModal';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
+import Loading from '@/components/Loading';
 
-function DonationListAdaptive({}) {
+function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [credits, setCredits] = useState(0);
-  const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
-    useAsyncWithRetry(getDonations, 5);
+  const [isLoadingDonations, loadDonationsError, handleLoadDonations] = useAsyncWithRetry(getDonations);
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
@@ -88,13 +88,17 @@ function DonationListAdaptive({}) {
       <div className={styles['components-container']}>
         <div className={styles['donation-contents']}>
           <div className={styles['components-wrapper']}>
-            {donations.map((donation) => (
-              <DonationElement
-                key={donation.id}
-                donation={donation}
-                openModal={() => openModal(donation)}
-              />
-            ))}
+            {isLoadingDonations ? (
+              <Loading size={300} />
+            ) : (
+              donations.map((donation) => (
+                <DonationElement
+                  key={donation.id}
+                  donation={donation}
+                  openModal={() => openModal(donation)}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

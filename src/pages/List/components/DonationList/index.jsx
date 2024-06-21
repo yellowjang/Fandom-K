@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import DonationElement from './DonationElement';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
@@ -85,9 +85,7 @@ function DonationList() {
   };
 
   const prevSlide = () => {
-    setCurrentSlideIndex(
-      (prevIndex) => (prevIndex - 1 + donations.length) % donations.length
-    );
+    setCurrentSlideIndex((prevIndex) => (prevIndex - 1 + donations.length) % donations.length);
   };
 
   const currentDonations = () => {
@@ -98,10 +96,7 @@ function DonationList() {
     if (currentSlideIndex + SLIDE_COUNT > donations.length) {
       return [
         ...donations.slice(currentSlideIndex, donations.length),
-        ...donations.slice(
-          0,
-          currentSlideIndex + SLIDE_COUNT - donations.length
-        ),
+        ...donations.slice(0, currentSlideIndex + SLIDE_COUNT - donations.length),
       ];
     }
 
@@ -120,11 +115,7 @@ function DonationList() {
     <div className={styles['donation-list']}>
       <div className={styles['components-container']}>
         <button className={styles['arrow-button']} onClick={prevSlide}>
-          <img
-            className={styles['arrow-img']}
-            src={arrowLeft}
-            alt='왼쪽 화살표'
-          />
+          <img className={styles['arrow-img']} src={arrowLeft} alt='왼쪽 화살표' />
         </button>
         <div className={styles['donation-contents']}>
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
@@ -133,21 +124,13 @@ function DonationList() {
               <DonationElementSkeleton />
             ) : (
               currentDonations().map((donation) => (
-                <DonationElement
-                  key={donation.id}
-                  donation={donation}
-                  openModal={() => openModal(donation)}
-                />
+                <DonationElement key={donation.id} donation={donation} openModal={() => openModal(donation)} />
               ))
             )}
           </div>
         </div>
         <button className={styles['arrow-button']} onClick={nextSlide}>
-          <img
-            className={styles['arrow-img']}
-            src={arrowRight}
-            alt='오른쪽 화살표'
-          />
+          <img className={styles['arrow-img']} src={arrowRight} alt='오른쪽 화살표' />
         </button>
       </div>
 

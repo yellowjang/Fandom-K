@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DonationElement from './DonationElementAdaptive';
 import styles from './styles.module.scss';
 import { getDonations, creditDonation } from '@/services/api/donations';
@@ -6,20 +6,22 @@ import IdolDonationModal from '../Modal/IdolDonationModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 import CreditAlertModal from '../Modal/CreditAlertModal';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
-import Loading from '@/components/Loading';
+import { useCredit } from '@/contexts/CreditContext';
+import DonationElementAdaptiveSkeleton from './DonationElementAdaptive/DonationElementAdaptiveSkeleton';
 
 function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [selectedDonation, setSelectedDonation] = useState(null);
-  const [credits, setCredits] = useState(0);
-  const [isLoadingDonations, loadDonationsError, handleLoadDonations] = useAsyncWithRetry(getDonations);
+  const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
+    useAsyncWithRetry(getDonations);
+  const { credits, updateCredits } = useCredit();
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
-    setCredits(initialCredits);
-  }, []);
+    updateCredits(initialCredits);
+  }, [updateCredits]);
 
   const openModal = (donation) => {
     setSelectedDonation(donation);
@@ -46,30 +48,22 @@ function DonationListAdaptive() {
     }
 
     try {
-      const updatedDonation = await creditDonation({
+      await creditDonation({
         id: selectedDonation.id,
         data: { amount: donationAmount },
       });
 
-      setDonations((prevDonations) =>
-        prevDonations.map((donation) =>
-          donation.id === selectedDonation.id
-            ? {
-                ...donation,
-                receivedDonations: updatedDonation.receivedDonations,
-              }
-            : donation
-        )
-      );
-
       const newCredits = credits - donationAmount;
-      setCredits(newCredits);
+      updateCredits(newCredits);
 
       localStorage.setItem('credits', newCredits.toString());
 
       closeModal();
+
+      const { list } = await handleLoadDonations();
+      setDonations(list);
     } catch (error) {
-      console.error('Failed to donate:', error);
+      console.error('후원 실패!:', error);
     }
   };
 
@@ -89,7 +83,7 @@ function DonationListAdaptive() {
         <div className={styles['donation-contents']}>
           <div className={styles['components-wrapper']}>
             {isLoadingDonations ? (
-              <Loading size={300} />
+              <DonationElementAdaptiveSkeleton />
             ) : (
               donations.map((donation) => (
                 <DonationElement

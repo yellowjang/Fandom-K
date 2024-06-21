@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DonationElement from './DonationElement';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
@@ -8,22 +8,33 @@ import { SLIDE_COUNT } from '@/constants/SlideCount.js';
 import IdolDonationModal from '../Modal/IdolDonationModal';
 import CreditAlertModal from '../Modal/CreditAlertModal';
 import ModalPortal from '../Modal/components/ModalPortal';
+import { useCredit } from '@/contexts/CreditContext';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
-import Loading from '@/components/Loading';
+import DonationElementSkeleton from './DonationElement/DonationElementSkeleton';
 
 function DonationList() {
+  const { credits, updateCredits } = useCredit();
   const [donations, setDonations] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [credits, setCredits] = useState(0);
-  const [isLoadingDonations, loadDonationsError, handleLoadDonations] = useAsyncWithRetry(getDonations);
+  const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
+    useAsyncWithRetry(getDonations);
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
-    setCredits(initialCredits);
-  }, []);
+    updateCredits(initialCredits);
+  }, [updateCredits]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { list } = await handleLoadDonations();
+      setDonations(list);
+    };
+
+    fetchData();
+  }, [handleLoadDonations]);
 
   const openModal = (donation) => {
     setSelectedDonation(donation);
@@ -50,30 +61,22 @@ function DonationList() {
     }
 
     try {
-      const updatedDonation = await creditDonation({
+      await creditDonation({
         id: selectedDonation.id,
         data: { amount: donationAmount },
       });
 
-      setDonations((prevDonations) =>
-        prevDonations.map((donation) =>
-          donation.id === selectedDonation.id
-            ? {
-                ...donation,
-                receivedDonations: updatedDonation.receivedDonations,
-              }
-            : donation
-        )
-      );
-
       const newCredits = credits - donationAmount;
-      setCredits(newCredits);
+      updateCredits(newCredits);
 
       localStorage.setItem('credits', newCredits.toString());
 
       closeModal();
+
+      const { list } = await handleLoadDonations();
+      setDonations(list);
     } catch (error) {
-      console.error('Failed to donate:', error);
+      console.error('후원 실패!:', error);
     }
   };
 
@@ -82,7 +85,9 @@ function DonationList() {
   };
 
   const prevSlide = () => {
-    setCurrentSlideIndex((prevIndex) => (prevIndex - 1 + donations.length) % donations.length);
+    setCurrentSlideIndex(
+      (prevIndex) => (prevIndex - 1 + donations.length) % donations.length
+    );
   };
 
   const currentDonations = () => {
@@ -93,21 +98,15 @@ function DonationList() {
     if (currentSlideIndex + SLIDE_COUNT > donations.length) {
       return [
         ...donations.slice(currentSlideIndex, donations.length),
-        ...donations.slice(0, currentSlideIndex + SLIDE_COUNT - donations.length),
+        ...donations.slice(
+          0,
+          currentSlideIndex + SLIDE_COUNT - donations.length
+        ),
       ];
     }
 
     return donations.slice(currentSlideIndex, currentSlideIndex + SLIDE_COUNT);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { list } = await handleLoadDonations();
-      setDonations(list);
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -121,22 +120,34 @@ function DonationList() {
     <div className={styles['donation-list']}>
       <div className={styles['components-container']}>
         <button className={styles['arrow-button']} onClick={prevSlide}>
-          <img className={styles['arrow-img']} src={arrowLeft} alt='왼쪽 화살표' />
+          <img
+            className={styles['arrow-img']}
+            src={arrowLeft}
+            alt='왼쪽 화살표'
+          />
         </button>
         <div className={styles['donation-contents']}>
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
             {isLoadingDonations ? (
-              <Loading size={300} />
+              <DonationElementSkeleton />
             ) : (
               currentDonations().map((donation) => (
-                <DonationElement key={donation.id} donation={donation} openModal={() => openModal(donation)} />
+                <DonationElement
+                  key={donation.id}
+                  donation={donation}
+                  openModal={() => openModal(donation)}
+                />
               ))
             )}
           </div>
         </div>
         <button className={styles['arrow-button']} onClick={nextSlide}>
-          <img className={styles['arrow-img']} src={arrowRight} alt='오른쪽 화살표' />
+          <img
+            className={styles['arrow-img']}
+            src={arrowRight}
+            alt='오른쪽 화살표'
+          />
         </button>
       </div>
 

@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import chartIcon from '@/assets/icons/ic_chart.svg';
 import checkIcon from '@/assets/icons/ic_check.svg';
+import backIcon from '@/assets/icons/icj_arrow_left.svg';
 import ModalChart from './ModalChart';
 import { disableScroll, activateScroll } from '../components/ModalScroll';
 import { postVotes } from '@/services/api/votes';
@@ -17,6 +18,7 @@ function VoteModal({ items, gender, setItems }) {
 
   const toggleModal = () => {
     setModal(!modal);
+    setCredit(localStorage.getItem('credits'));
   };
 
   const genderCheck = gender === 'female' ? '여자' : '남자';
@@ -30,11 +32,27 @@ function VoteModal({ items, gender, setItems }) {
     }
   }, [modal]);
 
+  const [credit, setCredit] = useState('0');
+
+  useEffect(() => {
+    const currentCredits = localStorage.getItem('credits') || '0';
+    setCredit(currentCredits);
+  }, [credit]);
+
   const handleVote = async () => {
     if (selectedIdol) {
-      await asyncVote(selectedIdol);
-      setToastMessage('투표가 완료되었습니다!');
-      toggleModal();
+      if (credit >= 1000) {
+        await asyncVote(selectedIdol);
+        const updatedCredits = credit - 1000;
+        localStorage.setItem('credits', updatedCredits);
+        setCredit(updatedCredits);
+        setToastMessage('투표가 완료되었습니다!');
+        setSelectedIdol(null);
+        toggleModal();
+        window.location.reload();
+      } else {
+        alert('크레딧 부족');
+      }
     }
   };
 
@@ -45,6 +63,18 @@ function VoteModal({ items, gender, setItems }) {
   const closeToast = () => {
     setToastMessage('');
   };
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const widthMaxMobile = 767;
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <>
@@ -64,7 +94,10 @@ function VoteModal({ items, gender, setItems }) {
             <header>
               <h2>이달의 {genderCheck} 아이돌</h2>
               <button onClick={toggleModal}>
-                <img src={closeIcon} alt='닫기 아이콘' />
+                <img
+                  src={windowWidth > widthMaxMobile ? closeIcon : backIcon}
+                  alt='닫기 아이콘'
+                />
               </button>
             </header>
             <main>

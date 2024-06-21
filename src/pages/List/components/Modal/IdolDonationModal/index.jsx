@@ -3,6 +3,7 @@ import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
 import { useState } from 'react';
+import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
 
 const IdolDonationModal = ({
   donationImg,
@@ -10,10 +11,13 @@ const IdolDonationModal = ({
   donationTitle,
   isModalOpen,
   closeModal,
+  handleDonate,
 }) => {
   const [creditValue, setCreditValue] = useState('');
   const [creditValueError, setCreditValueError] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const [inputCredit, setInputCredit] = useState('');
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
   const validate = (value) => {
     if (value === '') {
@@ -29,10 +33,21 @@ const IdolDonationModal = ({
     setIsValid(true);
   };
 
-  const handleCreditValueChange = (e) => {
+  const handleInputChange = (e) => {
     const { value } = e.target;
+    setInputCredit(value);
     validate(value);
     setCreditValue(value);
+  };
+
+  const handleSubmit = () => {
+    handleDonate(parseInt(inputCredit, 10));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
   };
 
   return (
@@ -56,9 +71,10 @@ const IdolDonationModal = ({
             <div className={style['input-wrapper']}>
               <input
                 type='number'
-                value={creditValue}
+                value={inputCredit}
                 placeholder='크레딧 입력'
-                onChange={handleCreditValueChange}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress} // Handle enter key press
                 className={
                   creditValue !== '' && !isValid && style['input-error']
                 }
@@ -69,6 +85,7 @@ const IdolDonationModal = ({
           </div>
           <div className={style['footer']}>
             <button
+              onClick={handleSubmit}
               disabled={!isValid}
               className={!isValid && style['button--disabled']}
             >
@@ -77,6 +94,11 @@ const IdolDonationModal = ({
           </div>
         </div>
       </ModalBackground>
+
+      <CreditAlertModal
+        isModalOpen={isAlertModalOpen}
+        closeModal={() => setIsAlertModalOpen(false)}
+      />
     </>
   );
 };

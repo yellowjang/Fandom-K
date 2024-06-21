@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditImg from '@/assets/images/img_diamond.png';
@@ -6,9 +6,11 @@ import creditWhiteImg from '@/assets/images/img_diamond_white.png';
 import ModalBackground from '../components/ModalBackground';
 import Toast from '@/components/Toast';
 
-const ChargeAmout = ({ value, onClick }) => {
+const ChargeAmount = ({ value, selected, onClick }) => {
   return (
-    <label className={style['charge-amount']}>
+    <label
+      className={`${style['charge-amount']} ${selected ? style['selected'] : ''}`}
+    >
       <div>
         <img
           className={style['credit-img']}
@@ -21,7 +23,8 @@ const ChargeAmout = ({ value, onClick }) => {
         type='radio'
         name='credit'
         value={value}
-        onClick={() => onClick(value)}
+        checked={selected}
+        onChange={() => onClick(value)}
       />
     </label>
   );
@@ -38,11 +41,18 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
   const handleCharge = () => {
     const currentCredits = parseInt(localStorage.getItem('credits')) || 0;
     const newCredits = currentCredits + parseInt(selectedValue);
-    localStorage.setItem('credits', newCredits);
+    localStorage.setItem('credits', newCredits.toString());
     updateCredit(newCredits);
     setToastMessage('충전이 완료되었습니다!');
     closeModal(setSelectedValue(null));
+    setSelectedValue(null); // 선택 초기화
   };
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setSelectedValue(null); // 모달이 닫힐 때 선택 초기화
+    }
+  }, [isModalOpen]);
 
   const closeToast = () => {
     setToastMessage('');
@@ -62,19 +72,22 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
             </button>
           </div>
           <div className={style['main']}>
-            <ChargeAmout
+            <ChargeAmount
               value='100'
               onClick={handleChargeAmountClick}
+              selected={selectedValue === '100'}
               selectedValue={selectedValue}
             />
-            <ChargeAmout
+            <ChargeAmount
               value='500'
               onClick={handleChargeAmountClick}
+              selected={selectedValue === '500'}
               selectedValue={selectedValue}
             />
-            <ChargeAmout
+            <ChargeAmount
               value='1000'
               onClick={handleChargeAmountClick}
+              selected={selectedValue === '1000'}
               selectedValue={selectedValue}
             />
           </div>
@@ -90,6 +103,7 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
           </div>
         </div>
       </ModalBackground>
+
       {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </>
   );

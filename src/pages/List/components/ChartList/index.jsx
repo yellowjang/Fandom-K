@@ -1,6 +1,8 @@
 import styles from './styles.module.scss';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import IdolCircleImage from '@/components/IdolCircleImage';
+import Loading from '@/components/Loading';
+import useCompleteLoading from '@/hooks/useCompleteLoading';
 
 function ChartListItem({ item, orderDelayTime, isMiddle }) {
   return (
@@ -15,7 +17,7 @@ function ChartListItem({ item, orderDelayTime, isMiddle }) {
       <div className={styles['info']}>
         <IdolCircleImage imgUrl={item.profilePicture} idolName={item.name} />
         <p className={styles['rank']}>{item.rank}</p>
-        <h1 className={styles['name']}>{item.name}</h1>
+        <h1 className={styles['name']}>{`${item.group} ${item.name}`}</h1>
       </div>
       <p className={styles['vote']}>
         {Number(item.totalVotes).toLocaleString('ko-KR')}표
@@ -24,27 +26,38 @@ function ChartListItem({ item, orderDelayTime, isMiddle }) {
   );
 }
 
-const ChartList = React.memo(({ items, isMiddle }) => {
-  const orderDelayArray = Array.from(new Array(items.length), (x, i) => i + 1);
-  orderDelayArray.sort(() => Math.random() - 0.5);
+const ChartList = React.memo(
+  ({ items, isMiddle, shouldRerender, isLoadingChart }) => {
+    const isRenderLoading = useCompleteLoading(isLoadingChart);
+    // const isCompleteLoading = useCompleteLoading(isLoadingChart);
+    const orderDelayArray = Array.from(
+      new Array(items.length),
+      (x, i) => i + 1
+    );
+    orderDelayArray.sort(() => Math.random() - 0.5);
 
-  return (
-    <div className={styles['chart-item']}>
-      <div className={styles['list-container']}>
-        {items?.map((item, index) => {
-          return (
-            <ChartListItem
-              key={item.id}
-              item={item}
-              orderDelayTime={orderDelayArray[index]}
-              isMiddle={isMiddle}
-            />
-          );
-        })}
+    if (isRenderLoading()) {
+      return <Loading size={350} />;
+    }
+
+    return (
+      <div className={styles['chart-item']}>
+        <div className={styles['list-container']}>
+          {items?.map((item, index) => {
+            return (
+              <ChartListItem
+                key={item.id}
+                item={item}
+                orderDelayTime={orderDelayArray[index]}
+                isMiddle={isMiddle}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 ChartList.displayName = 'ChartList';
 

@@ -6,8 +6,8 @@ import IdolDonationModal from '../Modal/IdolDonationModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 import CreditAlertModal from '../Modal/CreditAlertModal';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
-import Loading from '@/components/Loading';
 import { useCredit } from '@/contexts/CreditContext';
+import DonationElementAdaptiveSkeleton from './DonationElementAdaptive/DonationElementAdaptiveSkeleton';
 
 function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
@@ -83,7 +83,7 @@ function DonationListAdaptive() {
         <div className={styles['donation-contents']}>
           <div className={styles['components-wrapper']}>
             {isLoadingDonations ? (
-              <Loading size={300} />
+              <DonationElementAdaptiveSkeleton />
             ) : (
               donations.map((donation) => (
                 <DonationElement

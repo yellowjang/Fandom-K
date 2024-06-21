@@ -39,11 +39,13 @@ const IdolDonationModal = ({
   };
 
   const handleSubmit = () => {
-    handleDonate(parseInt(inputCredit, 10));
+    if (isValid) {
+      handleDonate(parseInt(inputCredit, 10));
+    }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && isValid) {
       handleSubmit();
     }
   };
@@ -72,7 +74,7 @@ const IdolDonationModal = ({
                 placeholder='크레딧 입력'
                 value={inputCredit}
                 onChange={handleInputChange}
-                onKeyPress={handleKeyPress} // Handle enter key press
+                onKeyPress={handleKeyPress}
                 className={
                   inputCredit !== '' && !isValid && style['input-error']
                 }

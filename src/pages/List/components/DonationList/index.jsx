@@ -1,27 +1,93 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import DonationElement from './DonationElement';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
-import { getDonations } from '@/services/api/donations';
+import { getDonations, creditDonation } from '@/services/api/donations';
 import { SLIDE_COUNT } from '@/constants/SlideCount.js';
-
 import IdolDonationModal from '../Modal/IdolDonationModal';
+import CreditAlertModal from '../Modal/CreditAlertModal';
 import ModalPortal from '../Modal/components/ModalPortal';
-
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
+import Loading from '@/components/Loading';
 
 
-function DonationList({
-  isModalOpen,
-  closeModal,
-  openModal,
-  selectedDonation,
-}) {
+function DonationList() {
+
+
+
+// function DonationList({
+//   isModalOpen,
+//   closeModal,
+//   openModal,
+//   selectedDonation,
+// }) {
+
   const [donations, setDonations] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [selectedDonation, setSelectedDonation] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [credits, setCredits] = useState(0);
   const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
     useAsyncWithRetry(getDonations);
+
+  useEffect(() => {
+    const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
+    setCredits(initialCredits);
+  }, []);
+
+  const openModal = (donation) => {
+    setSelectedDonation(donation);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedDonation(null);
+    setIsModalOpen(false);
+  };
+
+  const openAlert = () => {
+    setIsAlertOpen(true);
+  };
+
+  const closeAlert = () => {
+    setIsAlertOpen(false);
+  };
+
+  const handleDonate = async (donationAmount) => {
+    if (donationAmount > credits) {
+      openAlert();
+      return;
+    }
+
+    try {
+      const updatedDonation = await creditDonation({
+        id: selectedDonation.id,
+        data: { amount: donationAmount },
+      });
+
+      setDonations((prevDonations) =>
+        prevDonations.map((donation) =>
+          donation.id === selectedDonation.id
+            ? {
+                ...donation,
+                receivedDonations: updatedDonation.receivedDonations,
+              }
+            : donation
+        )
+      );
+
+      const newCredits = credits - donationAmount;
+      setCredits(newCredits);
+
+      localStorage.setItem('credits', newCredits.toString());
+
+      closeModal();
+    } catch (error) {
+      console.error('Failed to donate:', error);
+    }
+  };
 
   const nextSlide = () => {
     setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % donations.length);
@@ -68,6 +134,10 @@ function DonationList({
     return () => clearInterval(interval);
   }, [currentSlideIndex, donations.length]);
 
+  // if (isLoadingDonations) {
+  //   return <Loading size={300} />;
+  // }
+
   return (
     <div className={styles['donation-list']}>
       <div className={styles['components-container']}>
@@ -81,13 +151,17 @@ function DonationList({
         <div className={styles['donation-contents']}>
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
-            {currentDonations().map((donation) => (
-              <DonationElement
-                key={donation.id}
-                donation={donation}
-                openModal={() => openModal(donation)}
-              />
-            ))}
+            {isLoadingDonations ? (
+              <Loading size={300} />
+            ) : (
+              currentDonations().map((donation) => (
+                <DonationElement
+                  key={donation.id}
+                  donation={donation}
+                  openModal={() => openModal(donation)}
+                />
+              ))
+            )}
           </div>
         </div>
         <button className={styles['arrow-button']} onClick={nextSlide}>
@@ -98,6 +172,7 @@ function DonationList({
           />
         </button>
       </div>
+
       {selectedDonation && (
         <ModalPortal>
           <IdolDonationModal
@@ -106,7 +181,13 @@ function DonationList({
             donationTitle={selectedDonation.title}
             isModalOpen={isModalOpen}
             closeModal={closeModal}
+            handleDonate={handleDonate}
           />
+        </ModalPortal>
+      )}
+      {isAlertOpen && (
+        <ModalPortal>
+          <CreditAlertModal isModalOpen={isAlertOpen} closeModal={closeAlert} />
         </ModalPortal>
       )}
     </div>

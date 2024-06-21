@@ -2,17 +2,13 @@
 
 .mypage {
   background-color: #02000e;
-  width: 1200px;
+  width: 1280px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  // align-items: center;
   @include font-default;
   gap: 10px;
   margin: 0 auto;
 }
 
-// .mypage-wrapper {
-//   width: 1400px;
-//   margin: 0 auto;
-// }

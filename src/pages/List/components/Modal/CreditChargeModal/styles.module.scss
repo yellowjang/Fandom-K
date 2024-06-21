@@ -11,6 +11,7 @@
   background-color: #181d26;
   padding: 24px 19px 32px;
   box-shadow: 0px 4px 4px $color-white-aplha-10;
+  animation: fadeIn 0.3s ease-in-out;
 
   > .header {
     @include Flex(row, space-between, center, 0);
@@ -81,10 +82,6 @@
         background: url('@/assets/icons/ic_ellipse_checked.svg') no-repeat;
       }
     }
-
-    > label.charge-amount--reset {
-      border: 1px solid $color-white;
-    }
   }
 
   > .footer {
@@ -112,6 +109,21 @@
       &:hover {
         background: $gradient-orange-to-pink-reverse;
       }
+    }
+    > .button--disabled {
+      background: #828282;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      margin-top: -40px;
+    }
+    to {
+      opacity: 1;
     }
   }
 }

@@ -21,7 +21,7 @@ const CreditAlertModal = ({ isModalOpen, closeModal }) => {
             </span>
           </div>
           <div className={style['footer']}>
-            <button>확인</button>
+            <button onClick={closeModal}>확인</button>
           </div>
         </div>
       </ModalBackground>

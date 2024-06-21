@@ -10,6 +10,7 @@
   background-color: #181d26;
   border-radius: 12px;
   box-shadow: 0px 4px 4px $color-white-aplha-10;
+  animation: fadeIn 0.3s ease-in-out;
 
   > .header {
     text-align: right;
@@ -62,6 +63,16 @@
       &:hover {
         background: $gradient-orange-to-pink-reverse;
       }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      margin-top: -40px;
+    }
+    to {
+      opacity: 1;
     }
   }
 }

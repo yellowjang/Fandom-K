@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
+import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
 
 const IdolDonationModal = ({
   donationImg,
@@ -9,7 +11,43 @@ const IdolDonationModal = ({
   donationTitle,
   isModalOpen,
   closeModal,
+  handleDonate,
 }) => {
+  const [inputCredit, setInputCredit] = useState('');
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [creditValueError, setCreditValueError] = useState('');
+  const [isValid, setIsValid] = useState(false);
+
+  const validate = (value) => {
+    if (value === '') {
+      setIsValid(false);
+      return;
+    }
+    if (+value > +localStorage.getItem('credits')) {
+      setCreditValueError('갖고 있는 크레딧보다 더 많이 후원할 수 없어요');
+      setIsValid(false);
+      return;
+    }
+    setCreditValueError('');
+    setIsValid(true);
+  };
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    validate(value);
+    setInputCredit(value);
+  };
+
+  const handleSubmit = () => {
+    handleDonate(parseInt(inputCredit, 10));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
@@ -29,15 +67,36 @@ const IdolDonationModal = ({
               </div>
             </div>
             <div className={style['input-wrapper']}>
-              <input type='number' placeholder='크레딧 입력' />
+              <input
+                type='number'
+                placeholder='크레딧 입력'
+                value={inputCredit}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress} // Handle enter key press
+                className={
+                  inputCredit !== '' && !isValid && style['input-error']
+                }
+              />
               <img src={creditIcon} alt='크레딧 아이콘' />
             </div>
+            <span className={style['error-message']}>{creditValueError}</span>
           </div>
           <div className={style['footer']}>
-            <button>충전하기</button>
+            <button
+              disabled={!isValid}
+              className={!isValid && style['button--disabled']}
+              onClick={handleSubmit}
+            >
+              후원하기
+            </button>
           </div>
         </div>
       </ModalBackground>
+
+      <CreditAlertModal
+        isModalOpen={isAlertModalOpen}
+        closeModal={() => setIsAlertModalOpen(false)}
+      />
     </>
   );
 };

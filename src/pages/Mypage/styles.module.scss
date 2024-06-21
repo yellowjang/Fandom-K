@@ -2,7 +2,8 @@
 
 .mypage {
   background-color: #02000e;
-  width: 1280px;
+
+  // width: 1200px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,3 +13,16 @@
   margin: 0 auto;
 }
 
+
+.mypage-wrapper {
+  // width: 1400px;
+  // margin: 0 auto;
+}
+
+/* Tablet */
+@media (max-width: $width-max-tablet) {
+}
+
+/* Mobile */
+@media (max-width: $width-max-mobile) {
+}

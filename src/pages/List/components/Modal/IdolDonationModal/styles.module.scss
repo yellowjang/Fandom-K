@@ -11,6 +11,7 @@
   background-color: #181d26;
   padding: 24px 19px 32px;
   box-shadow: 0px 4px 4px $color-white-aplha-10;
+  animation: fadeIn 0.3s ease-in-out;
 
   > .header {
     @include Flex(row, space-between, stretch, 0);
@@ -129,5 +130,15 @@
     background: #828282;
     pointer-events: none;
     cursor: default;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      margin-top: -40px;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }

@@ -114,4 +114,17 @@ footer {
     height: 100%;
     width: 100%;
   }
+  header {
+    justify-content: start;
+    flex-direction: row-reverse;
+    > h2 {
+      position: absolute;
+      left: 40%;
+    }
+  }
+  footer {
+    > button {
+      width: 100%;
+    }
+  }
 }

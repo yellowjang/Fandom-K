@@ -13,13 +13,11 @@
 
 .favorite-card-container {
   width: 1200px;
-  height: 265px;
+  height: 200px;
   padding: 0 4px;
   display: flex;
-  margin-top: 32px;
   overflow-x: auto;
   overflow-y: hidden;
-
   scroll-behavior: smooth;
   margin: 32px auto;
   gap: 24px;

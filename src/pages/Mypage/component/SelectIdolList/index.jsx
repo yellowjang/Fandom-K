@@ -4,6 +4,7 @@ import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
+import plusIcon from '@/assets/icons/Ic_plus.svg';
 
 function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols}) {
   // const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -69,7 +70,12 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols}) {
         </button>
       </div>
       <div className={styles['add-btn']}>
-        <button className={styles['add-btn-text']} onClick={handleAddToLocalStorage}>추가하기</button>
+
+        <button className={styles['add-btn-text']} onClick={handleAddToLocalStorage}>
+         <img className={styles['plus-icon']} src={plusIcon} alt='플러스 아이콘'/>
+         <p>추가하기</p>
+        </button>
+        
       </div>
     </div>
   );

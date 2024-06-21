@@ -12,7 +12,7 @@ function ProgressBar({ targetDonation, receivedDonations }) {
           width: `${progress}%`,
         }}
       />
-      <p className={styles['progress-text']}>{`${progress.toFixed(0)}%`}</p>
+      {/* <p className={styles['progress-text']}>{`${progress.toFixed(0)}%`}</p> */}
     </div>
   );
 }

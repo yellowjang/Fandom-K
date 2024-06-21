@@ -2,13 +2,13 @@
 
 .progress-container {
   position: relative; /* relative position을 사용하여 absolute positioned 자식 요소를 포함 */
-  height: 20px; /* 높이를 늘려서 더 넓게 만듭니다 */
+  height: 4px; /* 높이를 늘려서 더 넓게 만듭니다 */
   z-index: 1;
-  margin-top: 20px;
+  margin-top: 7px;
   width: 100%;
   background-color: #e0e0e0; /* 배경색을 약간 더 어둡게 변경 */
   opacity: 80%;
-  border-radius: 7px; /* 모서리를 둥글게 만듭니다 */
+  border-radius: 0 0 5px 5px; /* 모서리를 둥글게 만듭니다 */
   overflow: hidden;
   display: flex; /* 플렉스 컨테이너로 설정 */
   align-items: center; /* 수직 중앙 정렬 */

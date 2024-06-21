@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
-import { useState } from 'react';
 import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
 
 const IdolDonationModal = ({
@@ -13,11 +13,10 @@ const IdolDonationModal = ({
   closeModal,
   handleDonate,
 }) => {
-  const [creditValue, setCreditValue] = useState('');
-  const [creditValueError, setCreditValueError] = useState('');
-  const [isValid, setIsValid] = useState(false);
   const [inputCredit, setInputCredit] = useState('');
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [creditValueError, setCreditValueError] = useState('');
+  const [isValid, setIsValid] = useState(false);
 
   const validate = (value) => {
     if (value === '') {
@@ -35,9 +34,8 @@ const IdolDonationModal = ({
 
   const handleInputChange = (e) => {
     const { value } = e.target;
-    setInputCredit(value);
     validate(value);
-    setCreditValue(value);
+    setInputCredit(value);
   };
 
   const handleSubmit = () => {
@@ -71,12 +69,12 @@ const IdolDonationModal = ({
             <div className={style['input-wrapper']}>
               <input
                 type='number'
-                value={inputCredit}
                 placeholder='크레딧 입력'
+                value={inputCredit}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress} // Handle enter key press
                 className={
-                  creditValue !== '' && !isValid && style['input-error']
+                  inputCredit !== '' && !isValid && style['input-error']
                 }
               />
               <img src={creditIcon} alt='크레딧 아이콘' />
@@ -85,9 +83,9 @@ const IdolDonationModal = ({
           </div>
           <div className={style['footer']}>
             <button
-              onClick={handleSubmit}
               disabled={!isValid}
               className={!isValid && style['button--disabled']}
+              onClick={handleSubmit}
             >
               후원하기
             </button>

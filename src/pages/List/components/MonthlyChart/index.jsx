@@ -99,7 +99,7 @@ function MonthlyChart() {
     }
     const selectedGender = isGirlChart ? GENDER.F : GENDER.M;
     setChartIdolsList([]);
-    handleLoadData(selectedGender, CHART_IDOL_NUM, null, chartIdolsList);
+    handleLoadData(selectedGender, CHART_IDOL_NUM, null, []);
     handleLoadAllIdols(selectedGender, 99999);
   }, [shouldRerender]);
 

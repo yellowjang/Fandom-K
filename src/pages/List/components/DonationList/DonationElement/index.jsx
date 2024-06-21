@@ -20,7 +20,7 @@ function DonationElement({ donation, openModal }) {
           alt='후원광고사진'
         />
         <button onClick={() => openModal(donation)}>후원하기</button>
-        </div>
+      </div>
       <div className={styles['donation-contents']}>
         <div className={styles['title-wrapper']}>
           <p className={styles['subtitle']}>{donation.subtitle}</p>

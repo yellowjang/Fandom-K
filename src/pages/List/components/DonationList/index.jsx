@@ -8,34 +8,33 @@ import { SLIDE_COUNT } from '@/constants/SlideCount.js';
 import IdolDonationModal from '../Modal/IdolDonationModal';
 import CreditAlertModal from '../Modal/CreditAlertModal';
 import ModalPortal from '../Modal/components/ModalPortal';
+import { useCredit } from '@/contexts/CreditContext';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
-import Loading from '@/components/Loading';
-
+import DonationElementSkeleton from './DonationElement/DonationElementSkeleton';
 
 function DonationList() {
-
-
-
-// function DonationList({
-//   isModalOpen,
-//   closeModal,
-//   openModal,
-//   selectedDonation,
-// }) {
-
+  const { credits, updateCredits } = useCredit();
   const [donations, setDonations] = useState([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [credits, setCredits] = useState(0);
   const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
     useAsyncWithRetry(getDonations);
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
-    setCredits(initialCredits);
-  }, []);
+    updateCredits(initialCredits);
+  }, [updateCredits]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { list } = await handleLoadDonations();
+      setDonations(list);
+    };
+
+    fetchData();
+  }, [handleLoadDonations]);
 
   const openModal = (donation) => {
     setSelectedDonation(donation);
@@ -62,30 +61,22 @@ function DonationList() {
     }
 
     try {
-      const updatedDonation = await creditDonation({
+      await creditDonation({
         id: selectedDonation.id,
         data: { amount: donationAmount },
       });
 
-      setDonations((prevDonations) =>
-        prevDonations.map((donation) =>
-          donation.id === selectedDonation.id
-            ? {
-                ...donation,
-                receivedDonations: updatedDonation.receivedDonations,
-              }
-            : donation
-        )
-      );
-
       const newCredits = credits - donationAmount;
-      setCredits(newCredits);
+      updateCredits(newCredits);
 
       localStorage.setItem('credits', newCredits.toString());
 
       closeModal();
+
+      const { list } = await handleLoadDonations();
+      setDonations(list);
     } catch (error) {
-      console.error('Failed to donate:', error);
+      console.error('후원 실패!:', error);
     }
   };
 
@@ -118,25 +109,12 @@ function DonationList() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { list } = await handleLoadDonations();
-      setDonations(list);
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
     }, 3000);
 
     return () => clearInterval(interval);
   }, [currentSlideIndex, donations.length]);
-
-  // if (isLoadingDonations) {
-  //   return <Loading size={300} />;
-  // }
 
   return (
     <div className={styles['donation-list']}>
@@ -152,7 +130,7 @@ function DonationList() {
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
             {isLoadingDonations ? (
-              <Loading size={300} />
+              <DonationElementSkeleton />
             ) : (
               currentDonations().map((donation) => (
                 <DonationElement

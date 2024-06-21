@@ -18,7 +18,6 @@ function DonationElementSkeleton() {
             <div className={styles['current-credit-box']}>
               <div className={styles['credit-line']}>
                 <div className={styles['current-credit']}>
-                  <div className={`${styles['credit-img']} ${styles['skeleton']} `} />
                   <div className={`${styles['skeleton-text']} ${styles['skeleton-text-small']} ${styles['credit-amount']}`} />
                 </div>
                 <div className={`${styles['date-left']} ${styles['skeleton-text-small']} ${styles['skeleton']} ${styles['date']}`} />

@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import chartIcon from '@/assets/icons/ic_chart.svg';
-import checkIcon from '@/assets/icons/ic_check.svg';
 import ModalChart from './ModalChart';
 import { disableScroll, activateScroll } from '../components/ModalScroll';
 import { postVotes } from '@/services/api/votes';
 import useAsync from '@/hooks/useAsync';
 import Toast from '@/components/Toast';
+import { useCredit } from '@/contexts/CreditContext';
 
 function VoteModal({ items, gender, setItems, setShouldRerender }) {
+  const { deductCredits } = useCredit();
   const [modal, setModal] = useState(false);
   const [selectedIdol, setSelectedIdol] = useState(null);
   const [isLoadingVote, isErrorVote, asyncVote] = useAsync(postVotes);
@@ -32,10 +33,15 @@ function VoteModal({ items, gender, setItems, setShouldRerender }) {
 
   const handleVote = async () => {
     if (selectedIdol) {
-      await asyncVote(selectedIdol);
-      setToastMessage('투표가 완료되었습니다!');
-      toggleModal();
-      setShouldRerender((prev) => !prev);
+      const success = deductCredits(1000);
+      if (success) {
+        await asyncVote(selectedIdol);
+        setToastMessage('투표가 완료되었습니다!');
+        toggleModal();
+        setShouldRerender((prev) => !prev);
+      } else {
+        setToastMessage('크레딧이 부족합니다.');
+      }
     }
   };
 

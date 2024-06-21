@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
@@ -25,6 +24,12 @@ const IdolDonationModal = ({
     handleDonate(parseInt(inputCredit, 10));
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
@@ -49,6 +54,7 @@ const IdolDonationModal = ({
                 placeholder='크레딧 입력'
                 value={inputCredit}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress} // Handle enter key press
               />
               <img src={creditIcon} alt='크레딧 아이콘' />
             </div>

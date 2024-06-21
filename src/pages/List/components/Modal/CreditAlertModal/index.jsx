@@ -1,9 +1,26 @@
+import React, { useEffect } from 'react';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditImg from '@/assets/images/img_diamond.png';
 import style from './styles.module.scss';
 import ModalBackground from '../components/ModalBackground';
 
 const CreditAlertModal = ({ isModalOpen, closeModal }) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        closeModal();
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isModalOpen, closeModal]);
+
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>

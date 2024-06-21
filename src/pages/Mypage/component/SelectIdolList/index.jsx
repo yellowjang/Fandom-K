@@ -1,5 +1,3 @@
-
-
 import { useState, useRef, useEffect } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
@@ -14,8 +12,25 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
 
+  const updateArrowVisibility = () => {
+    const container = containerRef.current;
+    if (container) {
+      const containerWidth = container.clientWidth;
+      const scrollLeft = container.scrollLeft;
+      const scrollWidth = container.scrollWidth;
+      const isScrollable = scrollWidth > containerWidth;
+
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(
+        isScrollable && scrollLeft + containerWidth < scrollWidth
+      );
+    }
+  };
+
   useEffect(() => {
-    const available = idols.filter(idol => !favoriteIdols.some(favIdol => favIdol.id === idol.id));
+    const available = idols.filter(
+      (idol) => !favoriteIdols.some((favIdol) => favIdol.id === idol.id)
+    );
     setAvailableIdols(available);
   }, [idols, favoriteIdols]);
 
@@ -26,27 +41,22 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
 
   useEffect(() => {
     // 스크롤 위치가 변경될 때마다 화살표 표시 여부 업데이트
-    containerRef.current.addEventListener('scroll', updateArrowVisibility);
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', updateArrowVisibility);
+    }
     return () => {
-      containerRef.current.removeEventListener('scroll', updateArrowVisibility);
+      if (container) {
+        container.removeEventListener('scroll', updateArrowVisibility);
+      }
     };
-  }, [availableIdols]); // availableIdols가 변경될 때마다 업데이트
-
-  const updateArrowVisibility = () => {
-    const containerWidth = containerRef.current.clientWidth;
-    const scrollLeft = containerRef.current.scrollLeft;
-    const scrollWidth = containerRef.current.scrollWidth;
-    const isScrollable = scrollWidth > containerWidth;
-
-    setShowLeftArrow(scrollLeft > 0); // 스크롤이 왼쪽에 있을 때만 왼쪽 화살표 표시
-    setShowRightArrow(isScrollable && scrollLeft + containerWidth < scrollWidth); // 스크롤이 오른쪽에 있을 때만 오른쪽 화살표 표시
-  };
+  }, [availableIdols]);
 
   const handleSelect = (idol, isSelected) => {
     if (isSelected) {
-      setSelectedIdols(prev => [...prev, idol]);
+      setSelectedIdols((prev) => [...prev, idol]);
     } else {
-      setSelectedIdols(prev => prev.filter(item => item.id !== idol.id));
+      setSelectedIdols((prev) => prev.filter((item) => item.id !== idol.id));
     }
   };
 
@@ -56,18 +66,26 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
     localStorage.setItem('selectedIdols', JSON.stringify(updatedIdols));
     setFavoriteIdols(updatedIdols);
 
-    const remainingIdols = availableIdols.filter(idol => !selectedIdols.includes(idol));
+    const remainingIdols = availableIdols.filter(
+      (idol) => !selectedIdols.includes(idol)
+    );
     setAvailableIdols(remainingIdols);
 
     setSelectedIdols([]);
   };
 
   const scrollLeft = () => {
-    containerRef.current.scrollBy({ left: -containerRef.current.clientWidth, behavior: 'smooth' });
+    const container = containerRef.current;
+    if (container) {
+      container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+    }
   };
 
   const scrollRight = () => {
-    containerRef.current.scrollBy({ left: containerRef.current.clientWidth, behavior: 'smooth' });
+    const container = containerRef.current;
+    if (container) {
+      container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -78,7 +96,12 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
       <div className={styles['select-idol-wrapper']}>
         {showLeftArrow && (
           <button className={styles['arrow-btn']} onClick={scrollLeft}>
-            <img className={styles['arrow-img']} src={arrowLeft} alt='왼쪽 화살표' draggable='false'/>
+            <img
+              className={styles['arrow-img']}
+              src={arrowLeft}
+              alt='왼쪽 화살표'
+              draggable='false'
+            />
           </button>
         )}
         <div className={styles['idol-list-container']} ref={containerRef}>
@@ -88,13 +111,25 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
         </div>
         {showRightArrow && (
           <button className={styles['arrow-btn']} onClick={scrollRight}>
-            <img className={styles['arrow-img']} src={arrowRight} alt='오른쪽 화살표' draggable='false' />
+            <img
+              className={styles['arrow-img']}
+              src={arrowRight}
+              alt='오른쪽 화살표'
+              draggable='false'
+            />
           </button>
         )}
       </div>
       <div className={styles['add-btn']}>
-        <button className={styles['add-btn-text']} onClick={handleAddToLocalStorage}>
-          <img className={styles['plus-icon']} src={plusIcon} alt='플러스 아이콘'/>
+        <button
+          className={styles['add-btn-text']}
+          onClick={handleAddToLocalStorage}
+        >
+          <img
+            className={styles['plus-icon']}
+            src={plusIcon}
+            alt='플러스 아이콘'
+          />
           <p>추가하기</p>
         </button>
       </div>

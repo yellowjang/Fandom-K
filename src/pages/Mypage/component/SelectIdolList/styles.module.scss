@@ -74,19 +74,22 @@
   margin: 48px;
 }
 
-.plus-text {
-  position: absolute;
-  padding: 79px;
-  font-size: 24px;
-}
 
 .add-btn-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   border-radius: 25px;
   width: 255px;
   height: 48px;
   background: $gradient-orange-to-pink;
   font-size: 16px;
   color: $color-white;
+  cursor: pointer;
+  &:hover {
+    background: $gradient-orange-to-pink-reverse;
+  }
 }
 
 /* Tablet */

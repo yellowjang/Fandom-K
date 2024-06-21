@@ -9,7 +9,7 @@ import { postVotes } from '@/services/api/votes';
 import useAsync from '@/hooks/useAsync';
 import Toast from '@/components/Toast';
 
-function VoteModal({ items, gender, setItems }) {
+function VoteModal({ items, gender, setItems, setShouldRerender }) {
   const [modal, setModal] = useState(false);
   const [selectedIdol, setSelectedIdol] = useState(null);
   const [isLoadingVote, isErrorVote, asyncVote] = useAsync(postVotes);
@@ -35,6 +35,7 @@ function VoteModal({ items, gender, setItems }) {
       await asyncVote(selectedIdol);
       setToastMessage('투표가 완료되었습니다!');
       toggleModal();
+      setShouldRerender((prev) => !prev);
     }
   };
 

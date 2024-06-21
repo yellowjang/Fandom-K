@@ -10,7 +10,7 @@ import IdolDonationModal from '../Modal/IdolDonationModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
-
+import Loading from '@/components/Loading';
 
 function DonationList({
   isModalOpen,
@@ -68,6 +68,10 @@ function DonationList({
     return () => clearInterval(interval);
   }, [currentSlideIndex, donations.length]);
 
+  // if (isLoadingDonations) {
+  //   return <Loading size={300} />;
+  // }
+
   return (
     <div className={styles['donation-list']}>
       <div className={styles['components-container']}>
@@ -81,13 +85,17 @@ function DonationList({
         <div className={styles['donation-contents']}>
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
-            {currentDonations().map((donation) => (
-              <DonationElement
-                key={donation.id}
-                donation={donation}
-                openModal={() => openModal(donation)}
-              />
-            ))}
+            {isLoadingDonations ? (
+              <Loading size={300} />
+            ) : (
+              currentDonations().map((donation) => (
+                <DonationElement
+                  key={donation.id}
+                  donation={donation}
+                  openModal={() => openModal(donation)}
+                />
+              ))
+            )}
           </div>
         </div>
         <button className={styles['arrow-button']} onClick={nextSlide}>
@@ -98,6 +106,7 @@ function DonationList({
           />
         </button>
       </div>
+
       {selectedDonation && (
         <ModalPortal>
           <IdolDonationModal

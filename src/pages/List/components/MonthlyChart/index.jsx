@@ -19,9 +19,13 @@ function MonthlyChart() {
 
   const [isGirlChart, setIsGirlChart] = useState(true);
   const [chartIdolsList, setChartIdolsList] = useState([]);
+  const [allChartIdols, setAllChartIdols] = useState([]);
   const [currentGender, setCurrentGender] = useState('female');
   const [cursor, setCusor] = useState(null);
   const endOfListRef = useRef(null);
+  const [shouldRerender, setShouldRerender] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const isMount = useRef(false);
 
   const handleGender = (e) => {
     setChartIdolsList([]);
@@ -29,9 +33,11 @@ function MonthlyChart() {
     if (e.target.name === 'male-btn') {
       setIsGirlChart(false);
       handleLoadData(GENDER.M, CHART_IDOL_NUM, null, []);
+      handleLoadAllIdols(GENDER.M, 99999);
     } else {
       setIsGirlChart(true);
       handleLoadData(GENDER.F, CHART_IDOL_NUM, null, []);
+      handleLoadAllIdols(GENDER.F, 99999);
     }
     const selectedGender = e.target.name === 'male-btn' ? GENDER.M : GENDER.F;
     setCurrentGender(selectedGender);
@@ -39,6 +45,7 @@ function MonthlyChart() {
 
   const handleMore = () => {
     const gender = isGirlChart ? GENDER.F : GENDER.M;
+    setIsInitialLoad(false);
     handleLoadData(gender, CHART_IDOL_NUM, cursor, chartIdolsList);
   };
 
@@ -52,6 +59,11 @@ function MonthlyChart() {
     setChartIdolsList((prev) => [...prev, idols]);
     setCusor(() => nextCursor);
     checkHasNextCusor(gender, pageSize, nextCursor);
+  };
+
+  const handleLoadAllIdols = async (gender, pageSize) => {
+    const { idols } = await handleLoadChart(gender, pageSize);
+    setAllChartIdols(idols);
   };
 
   const corretRank = (currentIdols, chartIdolsList) => {
@@ -77,10 +89,22 @@ function MonthlyChart() {
 
   useEffect(() => {
     handleLoadData(GENDER.F, CHART_IDOL_NUM, null, chartIdolsList);
+    handleLoadAllIdols(GENDER.F, 99999);
   }, []);
 
   useEffect(() => {
-    if (!isLoadingChart && endOfListRef.current) {
+    if (!isMount.current) {
+      isMount.current = true;
+      return;
+    }
+    const selectedGender = isGirlChart ? GENDER.F : GENDER.M;
+    setChartIdolsList([]);
+    handleLoadData(selectedGender, CHART_IDOL_NUM, null, chartIdolsList);
+    handleLoadAllIdols(selectedGender, 99999);
+  }, [shouldRerender]);
+
+  useEffect(() => {
+    if (!isInitialLoad && !isLoadingChart && endOfListRef.current) {
       endOfListRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [isLoadingChart]);
@@ -89,7 +113,11 @@ function MonthlyChart() {
     <div className={styles['montyly-chart']}>
       <div className={styles['header']}>
         <h1>이달의 차트</h1>
-        <VoteModal items={chartIdolsList.flat()} gender={currentGender} />
+        <VoteModal
+          items={allChartIdols}
+          gender={currentGender}
+          setShouldRerender={setShouldRerender}
+        />
       </div>
       <div className={styles['gender-tab']}>
         <Button
@@ -113,10 +141,12 @@ function MonthlyChart() {
             items={element}
             key={index}
             isMiddle={index ? true : false}
+            shouldRerender={shouldRerender}
+            isLoadingChart={isLoadingChart}
           />
         ))}
       </div>
-      {isLoadingChart && <Loading />}
+      {/* {isLoadingChart && <Loading size={350} />} */}
       {loadChartError && <div>{loadChartError.message}</div>}
       <div ref={endOfListRef} />
       <Button

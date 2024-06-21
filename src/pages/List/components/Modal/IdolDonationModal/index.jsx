@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
+import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
 
 const IdolDonationModal = ({
   donationImg,
@@ -9,7 +11,25 @@ const IdolDonationModal = ({
   donationTitle,
   isModalOpen,
   closeModal,
+  handleDonate,
 }) => {
+  const [inputCredit, setInputCredit] = useState('');
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+
+  const handleInputChange = (e) => {
+    setInputCredit(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (parseInt(inputCredit, 10) <= 0 || isNaN(parseInt(inputCredit, 10))) {
+      alert('올바른 크레딧 금액을 입력하세요.');
+      return;
+    }
+
+    handleDonate(parseInt(inputCredit, 10));
+    setInputCredit('');
+  };
+
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
@@ -29,15 +49,25 @@ const IdolDonationModal = ({
               </div>
             </div>
             <div className={style['input-wrapper']}>
-              <input type='number' placeholder='크레딧 입력' />
+              <input
+                type='number'
+                placeholder='크레딧 입력'
+                value={inputCredit}
+                onChange={handleInputChange}
+              />
               <img src={creditIcon} alt='크레딧 아이콘' />
             </div>
           </div>
           <div className={style['footer']}>
-            <button>충전하기</button>
+            <button onClick={handleSubmit}>후원하기</button>
           </div>
         </div>
       </ModalBackground>
+
+      <CreditAlertModal
+        isModalOpen={isAlertModalOpen}
+        closeModal={() => setIsAlertModalOpen(false)}
+      />
     </>
   );
 };

@@ -25,9 +25,11 @@ function MonthlyChart() {
   const endOfListRef = useRef(null);
   const [shouldRerender, setShouldRerender] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [isMore, setIsMore] = useState(false);
   const isMount = useRef(false);
 
   const handleGender = (e) => {
+    setIsMore(false);
     setChartIdolsList([]);
     setCusor(null);
     if (e.target.name === 'male-btn') {
@@ -45,6 +47,7 @@ function MonthlyChart() {
 
   const handleMore = () => {
     const gender = isGirlChart ? GENDER.F : GENDER.M;
+    setIsMore(true);
     setIsInitialLoad(false);
     handleLoadData(gender, CHART_IDOL_NUM, cursor, chartIdolsList);
   };
@@ -136,17 +139,20 @@ function MonthlyChart() {
         </Button>
       </div>
       <div>
-        {chartIdolsList.map((element, index) => (
-          <ChartList
-            items={element}
-            key={index}
-            isMiddle={index ? true : false}
-            shouldRerender={shouldRerender}
-            isLoadingChart={isLoadingChart}
-          />
-        ))}
+        {chartIdolsList.map((element, index) => {
+          return (
+            <ChartList
+              items={element}
+              key={index}
+              isMiddle={index ? true : false}
+              shouldRerender={shouldRerender}
+            />
+          );
+        })}
       </div>
-      {/* {isLoadingChart && <Loading size={350} />} */}
+      {isLoadingChart && (chartIdolsList.length === 0 || isMore) && (
+        <Loading size={350} />
+      )}
       {loadChartError && <div>{loadChartError.message}</div>}
       <div ref={endOfListRef} />
       <Button

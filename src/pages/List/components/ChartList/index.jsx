@@ -2,7 +2,6 @@ import styles from './styles.module.scss';
 import React, { useEffect, useRef } from 'react';
 import IdolCircleImage from '@/components/IdolCircleImage';
 import Loading from '@/components/Loading';
-import useCompleteLoading from '@/hooks/useCompleteLoading';
 
 function ChartListItem({ item, orderDelayTime, isMiddle }) {
   return (
@@ -26,38 +25,26 @@ function ChartListItem({ item, orderDelayTime, isMiddle }) {
   );
 }
 
-const ChartList = React.memo(
-  ({ items, isMiddle, shouldRerender, isLoadingChart }) => {
-    const isRenderLoading = useCompleteLoading(isLoadingChart);
-    // const isCompleteLoading = useCompleteLoading(isLoadingChart);
-    const orderDelayArray = Array.from(
-      new Array(items.length),
-      (x, i) => i + 1
-    );
-    orderDelayArray.sort(() => Math.random() - 0.5);
-
-    if (isRenderLoading()) {
-      return <Loading size={350} />;
-    }
-
-    return (
-      <div className={styles['chart-item']}>
-        <div className={styles['list-container']}>
-          {items?.map((item, index) => {
-            return (
-              <ChartListItem
-                key={item.id}
-                item={item}
-                orderDelayTime={orderDelayArray[index]}
-                isMiddle={isMiddle}
-              />
-            );
-          })}
-        </div>
+const ChartList = React.memo(({ items, isMiddle, shouldRerender }) => {
+  const orderDelayArray = Array.from(new Array(items.length), (x, i) => i + 1);
+  orderDelayArray.sort(() => Math.random() - 0.5);
+  return (
+    <div className={styles['chart-item']}>
+      <div className={styles['list-container']}>
+        {items?.map((item, index) => {
+          return (
+            <ChartListItem
+              key={item.id}
+              item={item}
+              orderDelayTime={orderDelayArray[index]}
+              isMiddle={isMiddle}
+            />
+          );
+        })}
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 ChartList.displayName = 'ChartList';
 

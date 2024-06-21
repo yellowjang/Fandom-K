@@ -1,5 +1,7 @@
+import React from 'react';
 import styles from './styles.module.scss';
 import creditImg from '@/assets/images/img_diamond.png';
+import ProgressBar from './ProgressBar';
 
 function DonationElementAdaptive({ donation, openModal }) {
   const calculateDaysLeft = (deadline) => {
@@ -40,7 +42,10 @@ function DonationElementAdaptive({ donation, openModal }) {
               {calculateDaysLeft(donation.deadline)}
             </p>
           </div>
-          <div className={styles['progress-bar']}>progress-bar</div>
+          <ProgressBar
+            targetDonation={donation.targetDonation}
+            receivedDonations={donation.receivedDonations}
+          />
         </div>
       </div>
     </div>

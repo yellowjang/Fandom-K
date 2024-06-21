@@ -1,5 +1,7 @@
+import React from 'react';
 import styles from './styles.module.scss';
 import creditImg from '@/assets/images/img_diamond.png';
+import ProgressBar from './ProgressBar';
 
 function DonationElement({ donation, openModal }) {
   const calculateDaysLeft = (deadline) => {
@@ -19,7 +21,7 @@ function DonationElement({ donation, openModal }) {
           src={donation.idol.profilePicture}
           alt='후원광고사진'
         />
-        <button onClick={openModal}>후원하기</button>
+        <button onClick={() => openModal(donation)}>후원하기</button>
       </div>
       <div className={styles['donation-contents']}>
         <div className={styles['title-wrapper']}>
@@ -40,7 +42,10 @@ function DonationElement({ donation, openModal }) {
               {calculateDaysLeft(donation.deadline)}
             </p>
           </div>
-          <div className={styles['progress-bar']}>progress-bar</div>
+          <ProgressBar 
+            targetDonation={donation.targetDonation} 
+            receivedDonations={donation.receivedDonations} 
+          />
         </div>
       </div>
     </div>

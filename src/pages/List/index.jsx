@@ -8,6 +8,7 @@ import {
   disableScroll,
   activateScroll,
 } from './components/Modal/components/ModalScroll';
+import { CreditProvider } from '@/contexts/CreditContext';
 
 function List() {
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1200);
@@ -64,27 +65,29 @@ function List() {
     <div className={styles['list-page']}>
       <header />
       <main>
-        <MyCredit
-          isModalOpen={isChargeModalOpen}
-          closeModal={closeChargeModal}
-          openModal={openChargeModal}
-        />
-        {isWideScreen ? (
-          <DonationList
-            isModalOpen={isDonationModalOpen}
-            closeModal={closeDonationModal}
-            openModal={openDonationModal}
-            selectedDonation={selectedDonation}
+        <CreditProvider>
+          <MyCredit
+            isModalOpen={isChargeModalOpen}
+            closeModal={closeChargeModal}
+            openModal={openChargeModal}
           />
-        ) : (
-          <DonationListAdaptive
-            isModalOpen={isDonationModalOpen}
-            closeModal={closeDonationModal}
-            openModal={openDonationModal}
-            selectedDonation={selectedDonation}
-          />
-        )}
-        <MonthlyChart />
+          {isWideScreen ? (
+            <DonationList
+              isModalOpen={isDonationModalOpen}
+              closeModal={closeDonationModal}
+              openModal={openDonationModal}
+              selectedDonation={selectedDonation}
+            />
+          ) : (
+            <DonationListAdaptive
+              isModalOpen={isDonationModalOpen}
+              closeModal={closeDonationModal}
+              openModal={openDonationModal}
+              selectedDonation={selectedDonation}
+            />
+          )}
+          <MonthlyChart />
+        </CreditProvider>
       </main>
       <footer />
     </div>

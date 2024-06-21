@@ -17,6 +17,10 @@
   outline: 1px solid $color-orange;
 }
 
+.idol-click-container {
+  cursor: pointer;
+}
+
 .idol-info-container {
   display: flex;
   flex-direction: column;

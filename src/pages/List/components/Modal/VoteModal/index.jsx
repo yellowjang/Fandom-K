@@ -9,8 +9,10 @@ import { disableScroll, activateScroll } from '../components/ModalScroll';
 import { postVotes } from '@/services/api/votes';
 import useAsync from '@/hooks/useAsync';
 import Toast from '@/components/Toast';
+import { useCredit } from '@/contexts/CreditContext';
 
-function VoteModal({ items, gender, setItems }) {
+function VoteModal({ items, gender, setItems, setShouldRerender }) {
+  const { deductCredits } = useCredit();
   const [modal, setModal] = useState(false);
   const [selectedIdol, setSelectedIdol] = useState(null);
   const [isLoadingVote, isErrorVote, asyncVote] = useAsync(postVotes);
@@ -41,17 +43,14 @@ function VoteModal({ items, gender, setItems }) {
 
   const handleVote = async () => {
     if (selectedIdol) {
-      if (credit >= 1000) {
+      const success = deductCredits(1000);
+      if (success) {
         await asyncVote(selectedIdol);
-        const updatedCredits = credit - 1000;
-        localStorage.setItem('credits', updatedCredits);
-        setCredit(updatedCredits);
         setToastMessage('투표가 완료되었습니다!');
-        setSelectedIdol(null);
         toggleModal();
-        window.location.reload();
+        setShouldRerender((prev) => !prev);
       } else {
-        alert('크레딧 부족');
+        setToastMessage('크레딧이 부족합니다.');
       }
     }
   };

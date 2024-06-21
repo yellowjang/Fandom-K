@@ -8,7 +8,6 @@ function IdolCircleImage({
   selected,
   outlineWidth = ' 1px',
 }) {
-
   return (
     <div className={styles['idol-circle-image']}>
       <div
@@ -19,7 +18,12 @@ function IdolCircleImage({
           outline: `${outlineWidth} solid #f96d69`,
         }}
       >
-        <img src={imgUrl} alt={idolName} className={styles['image']} />
+        <img
+          src={imgUrl}
+          alt={idolName}
+          className={styles['image']}
+          draggable='false'
+        />
         {selected && (
           <>
             <div className={styles['check-box']}></div>
@@ -28,6 +32,7 @@ function IdolCircleImage({
                 src={checkIcon}
                 alt='체크 아이콘'
                 className={styles['check-icon']}
+                draggable='false'
               />
             </div>
           </>

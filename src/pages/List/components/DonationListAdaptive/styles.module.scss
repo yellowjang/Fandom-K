@@ -5,13 +5,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 32px;
+  margin: 0 auto;
+
 }
 .donnation-contents {
   display: flex;
-  // overflow: scroll;
-  // width: 100%;
+
 
   flex-direction: column;
   gap: 32px;
@@ -19,17 +18,14 @@
 .components-wrapper {
   width: 100%;
   display: flex;
-  // overflow: scroll;
   gap: 24px;
 }
 .components-container::-webkit-scrollbar {
   display: none;
 }
 .components-container {
-  max-width: 878px;
   overflow: scroll;
   display: flex;
-  padding-top: 50px;
   gap: 40px;
   align-items: center;
 }
@@ -39,10 +35,13 @@
   font-size: 24px;
   font-weight: 700;
   color: #f7f7f8;
-  margin-bottom: 32px;
+  margin-top: 64px;
+  margin-bottom: 24px;
+  text-align: left;
 }
 
 @media (max-width: $width-max-mobile) {
+
   .list-title {
     font-size: 16px;
     font-weight: 700;

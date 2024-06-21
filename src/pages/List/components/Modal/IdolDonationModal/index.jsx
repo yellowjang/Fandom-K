@@ -2,6 +2,7 @@ import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
+import { useState } from 'react';
 
 const IdolDonationModal = ({
   donationImg,
@@ -10,6 +11,30 @@ const IdolDonationModal = ({
   isModalOpen,
   closeModal,
 }) => {
+  const [creditValue, setCreditValue] = useState('');
+  const [creditValueError, setCreditValueError] = useState('');
+  const [isValid, setIsValid] = useState(false);
+
+  const validate = (value) => {
+    if (value === '') {
+      setIsValid(false);
+      return;
+    }
+    if (+value > +localStorage.getItem('credits')) {
+      setCreditValueError('갖고 있는 크레딧보다 더 많이 후원할 수 없어요');
+      setIsValid(false);
+      return;
+    }
+    setCreditValueError('');
+    setIsValid(true);
+  };
+
+  const handleCreditValueChange = (e) => {
+    const { value } = e.target;
+    validate(value);
+    setCreditValue(value);
+  };
+
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
@@ -29,12 +54,26 @@ const IdolDonationModal = ({
               </div>
             </div>
             <div className={style['input-wrapper']}>
-              <input type='number' placeholder='크레딧 입력' />
+              <input
+                type='number'
+                value={creditValue}
+                placeholder='크레딧 입력'
+                onChange={handleCreditValueChange}
+                className={
+                  creditValue !== '' && !isValid && style['input-error']
+                }
+              />
               <img src={creditIcon} alt='크레딧 아이콘' />
             </div>
+            <span className={style['error-message']}>{creditValueError}</span>
           </div>
           <div className={style['footer']}>
-            <button>후원하기</button>
+            <button
+              disabled={!isValid}
+              className={!isValid && style['button--disabled']}
+            >
+              후원하기
+            </button>
           </div>
         </div>
       </ModalBackground>

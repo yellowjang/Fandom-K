@@ -41,6 +41,7 @@
         border-radius: 8px;
         width: 158px;
         height: 206px;
+        object-fit: cover;
       }
 
       > .text-wrapper {
@@ -75,9 +76,17 @@
         padding: 16px;
       }
 
+      > input:focus {
+        outline: none;
+      }
+
       > input::-webkit-outer-spin-button,
       > input::-webkit-inner-spin-button {
         -webkit-appearance: none;
+      }
+
+      > .input-error {
+        border: 1px solid #ff3b3b;
       }
 
       > img {
@@ -88,12 +97,19 @@
         top: 10px;
       }
     }
+
+    > .error-message {
+      position: absolute;
+      top: 410px;
+      font: 500 12px/14.32px Pretendard;
+      color: #ff2626;
+    }
   }
 }
 
 .footer {
   @include Flex(row, center, center, 0);
-  margin-top: 24px;
+  margin-top: 35px;
 
   > button {
     cursor: pointer;
@@ -107,5 +123,11 @@
     &:hover {
       background: $gradient-orange-to-pink-reverse;
     }
+  }
+
+  > .button--disabled {
+    background: #828282;
+    pointer-events: none;
+    cursor: default;
   }
 }

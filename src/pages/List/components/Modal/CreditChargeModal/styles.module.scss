@@ -81,10 +81,6 @@
         background: url('@/assets/icons/ic_ellipse_checked.svg') no-repeat;
       }
     }
-
-    > label.charge-amount--reset {
-      border: 1px solid $color-white;
-    }
   }
 
   > .footer {
@@ -112,6 +108,11 @@
       &:hover {
         background: $gradient-orange-to-pink-reverse;
       }
+    }
+    > .button--disabled {
+      background: #828282;
+      pointer-events: none;
+      cursor: default;
     }
   }
 }

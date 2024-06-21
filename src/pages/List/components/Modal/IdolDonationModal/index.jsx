@@ -21,13 +21,7 @@ const IdolDonationModal = ({
   };
 
   const handleSubmit = () => {
-    if (parseInt(inputCredit, 10) <= 0 || isNaN(parseInt(inputCredit, 10))) {
-      alert('올바른 크레딧 금액을 입력하세요.');
-      return;
-    }
-
     handleDonate(parseInt(inputCredit, 10));
-    setInputCredit('');
   };
 
   return (

@@ -13,6 +13,9 @@
   z-index: 1000;
   font-size: 16px;
   animation: fadeInOut 3s ease-in-out;
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
 
   .progressBar {
     position: relative;
@@ -30,7 +33,17 @@
   }
 
   @keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    10%, 90% { opacity: 1; }
+    0%,
+    100% {
+      opacity: 0;
+    }
+    10%,
+    90% {
+      opacity: 1;
+    }
   }
+}
+
+.toast-closing {
+  transform: translate(-50%, 200%);
 }

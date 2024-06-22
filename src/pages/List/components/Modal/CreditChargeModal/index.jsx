@@ -44,7 +44,7 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
     localStorage.setItem('credits', newCredits.toString());
     updateCredit(newCredits);
     setToastMessage('충전이 완료되었습니다!');
-    closeModal(setSelectedValue(null));
+    closeModal();
     setSelectedValue(null); // 선택 초기화
   };
 
@@ -54,6 +54,24 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
     }
   }, [isModalOpen]);
 
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter' && selectedValue) {
+        handleCharge();
+      }
+    };
+
+    if (isModalOpen) {
+      window.addEventListener('keydown', handleKeyPress);
+    } else {
+      window.removeEventListener('keydown', handleKeyPress);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [isModalOpen, selectedValue]);
+
   const closeToast = () => {
     setToastMessage('');
   };
@@ -62,12 +80,12 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
     <>
       <ModalBackground
         isModalOpen={isModalOpen}
-        closeModal={() => closeModal(setSelectedValue(null))}
+        closeModal={() => closeModal()}
       >
         <div className={style['container']}>
           <div className={style['header']}>
             <h2>크레딧 충전하기</h2>
-            <button onClick={() => closeModal(setSelectedValue(null))}>
+            <button onClick={() => closeModal()}>
               <img src={closeIcon} alt='닫기 아이콘' />
             </button>
           </div>
@@ -76,19 +94,16 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
               value='100'
               onClick={handleChargeAmountClick}
               selected={selectedValue === '100'}
-              selectedValue={selectedValue}
             />
             <ChargeAmount
               value='500'
               onClick={handleChargeAmountClick}
               selected={selectedValue === '500'}
-              selectedValue={selectedValue}
             />
             <ChargeAmount
               value='1000'
               onClick={handleChargeAmountClick}
               selected={selectedValue === '1000'}
-              selectedValue={selectedValue}
             />
           </div>
           <div className={style['footer']}>

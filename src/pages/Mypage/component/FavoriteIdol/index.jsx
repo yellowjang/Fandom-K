@@ -7,7 +7,7 @@ function FavoriteIdol({ favoriteIdols, onSelect }) {
   return (
     <div className={styles['favorite-idol']}>
       <div className={styles['favorite-idol-title']}>
-        <h3>내가 관심있는 아이돌</h3>
+        <h3>내가 관심 있는 아이돌</h3>
       </div>
 
       <div className={styles['favorite-card-container']}>

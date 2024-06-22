@@ -90,7 +90,7 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   return (
     <div className={styles['select-idol']}>
       <div className={styles['select-idol-title']}>
-        <h3>관심있는 아이돌을 추가해보세요.</h3>
+        <h3>관심 있는 아이돌을 추가해보세요.</h3>
       </div>
       <div className={styles['select-idol-wrapper']}>
         <div className={styles['left-arrow-box']}>

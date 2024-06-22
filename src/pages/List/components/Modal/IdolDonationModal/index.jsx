@@ -76,7 +76,9 @@ const IdolDonationModal = ({
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 className={
-                  inputCredit !== '' && !isValid && style['input-error']
+                  inputCredit !== '' && !isValid
+                    ? style['input-error']
+                    : undefined
                 }
               />
               <img src={creditIcon} alt='크레딧 아이콘' />
@@ -86,7 +88,7 @@ const IdolDonationModal = ({
           <div className={style['footer']}>
             <button
               disabled={!isValid}
-              className={!isValid && style['button--disabled']}
+              className={!isValid ? style['button--disabled'] : undefined}
               onClick={handleSubmit}
             >
               후원하기

@@ -50,7 +50,7 @@ function VoteModal({ items, gender, setItems, setShouldRerender }) {
         toggleModal();
         setShouldRerender((prev) => !prev);
       } else {
-        setToastMessage('크레딧이 부족합니다.');
+        setToastMessage('크레딧이 부족합니다!');
       }
     }
   };

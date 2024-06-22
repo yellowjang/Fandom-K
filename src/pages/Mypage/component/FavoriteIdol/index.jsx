@@ -1,6 +1,6 @@
 
 import styles from './styles.module.scss';
-import logoImage from '@/assets/images/logo/logo.png';
+import logoImage from '@/assets/images/logo/fandom_k_logo.png';
 import FavoriteCard from '../FavoriteCard';
 
 function FavoriteIdol({ favoriteIdols, onSelect }) {

@@ -19,13 +19,18 @@
   height: 200px;
   padding: 0 4px;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  // scroll-behavior: smooth;
   margin: 32px auto 0;
   gap: 24px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  // overflow-x: auto;
+  // overflow-y: hidden;
+  overflow: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .favorite-card-container::-webkit-scrollbar {

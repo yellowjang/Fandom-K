@@ -58,7 +58,7 @@ function MonthlyChart() {
       pageSize,
       cursor
     );
-    corretRank(idols, chartIdolsList);
+    correctRank(idols, chartIdolsList);
     setChartIdolsList((prev) => [...prev, idols]);
     setCusor(() => nextCursor);
     checkHasNextCusor(gender, pageSize, nextCursor);
@@ -69,7 +69,7 @@ function MonthlyChart() {
     setAllChartIdols(idols);
   };
 
-  const corretRank = (currentIdols, chartIdolsList) => {
+  const correctRank = (currentIdols, chartIdolsList) => {
     if (chartIdolsList.length !== 0) {
       if (
         chartIdolsList.at(-1).at(-1).totalVotes === currentIdols[0].totalVotes

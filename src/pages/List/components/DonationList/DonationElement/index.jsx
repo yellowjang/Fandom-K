@@ -42,9 +42,9 @@ function DonationElement({ donation, openModal }) {
               {calculateDaysLeft(donation.deadline)}
             </p>
           </div>
-          <ProgressBar 
-            targetDonation={donation.targetDonation} 
-            receivedDonations={donation.receivedDonations} 
+          <ProgressBar
+            targetDonation={donation.targetDonation}
+            receivedDonations={donation.receivedDonations}
           />
         </div>
       </div>

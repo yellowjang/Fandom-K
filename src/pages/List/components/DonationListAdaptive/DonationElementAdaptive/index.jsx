@@ -9,19 +9,28 @@ function DonationElementAdaptive({ donation, openModal }) {
     const today = new Date();
     const timeDiff = deadlineDate - today;
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return daysLeft > 0 ? `${daysLeft}일 남음` : '기한 만료';
+    return daysLeft;
   };
+
+  const daysLeft = calculateDaysLeft(donation.deadline);
+  const isExpired = daysLeft <= 0;
 
   return (
     <div className={styles['donation-element']}>
       <div className={styles['image-box']}>
-        <div className={styles['gradation']}></div>
+        <div className={`${styles['gradation']} ${isExpired ? styles['expired'] : ''}`}></div>
         <img
-          className={styles['donation-img']}
+          className={`${styles['donation-img']} ${isExpired ? styles['darkened'] : ''}`}
           src={donation.idol.profilePicture}
           alt='후원광고사진'
         />
-        <button onClick={openModal}>후원하기</button>
+        <button
+          onClick={() => openModal(donation)}
+          disabled={isExpired}
+          className={isExpired ? styles['expired-button'] : ''}
+        >
+          {isExpired ? '기한 만료' : '후원하기'}
+        </button>
       </div>
       <div className={styles['donation-contents']}>
         <div className={styles['title-wrapper']}>
@@ -39,7 +48,7 @@ function DonationElementAdaptive({ donation, openModal }) {
               <p>{donation.receivedDonations.toLocaleString()}</p>
             </div>
             <p className={styles['date-left']}>
-              {calculateDaysLeft(donation.deadline)}
+              {daysLeft > 0 ? `${daysLeft}일 남음` : '기한 만료'}
             </p>
           </div>
           <ProgressBar

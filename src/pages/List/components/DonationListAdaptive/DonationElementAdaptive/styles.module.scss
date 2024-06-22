@@ -16,9 +16,8 @@
   height: 293px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 58.9%, #000000 100%);
+
   &::after {
     content: '';
     position: absolute;
@@ -47,12 +46,27 @@
     background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
     z-index: 3;
   }
+
+  button.expired-button {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+}
+
+.gradation.expired {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 58.9%, rgba(0, 0, 0, 1) 100%);
 }
 
 .donation-img {
   object-fit: cover;
   height: 293px;
   z-index: 1;
+  transition: filter 0.3s, opacity 0.3s;
+}
+
+.donation-img.darkened {
+  filter: brightness(0.5); 
+  opacity: 0.5;
 }
 
 .donation-contents {
@@ -61,11 +75,13 @@
   flex-direction: column;
   background-color: #02000e;
 }
+
 .title-wrapper {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .subtitle {
   font-family: 'Pretendard';
   font-size: 16px;
@@ -87,6 +103,7 @@
   flex-direction: column;
   margin-top: 24px;
 }
+
 .credit-line {
   display: flex;
   flex-direction: row;
@@ -96,6 +113,7 @@
 .current-credit {
   display: flex;
   align-items: center;
+
   p {
     font-family: 'Pretendard';
     font-size: 12px;
@@ -107,6 +125,7 @@
 .credit-img {
   width: 12px;
 }
+
 .date-left {
   text-align: right;
   font-family: 'Pretendard';
@@ -124,15 +143,18 @@
 .slide {
   display: flex;
   transition: transform 0.5s ease;
+
   &.active {
     transform: translateX(0);
   }
+
   &:not(.active) {
     transform: translateX(100%);
   }
 }
 
 @media (max-width: $width-max-mobile) {
+
   .list-title {
     font-size: 16px;
     font-weight: 700;
@@ -163,6 +185,11 @@
       color: #fff;
       background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
       z-index: 3;
+    }
+
+    button.expired-button {
+      background-color: gray;
+      cursor: not-allowed;
     }
   }
 

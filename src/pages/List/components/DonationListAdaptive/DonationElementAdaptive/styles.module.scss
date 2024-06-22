@@ -29,7 +29,26 @@
     z-index: 2;
   }
 
-  button {
+  .gradation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+    transition: background 0.3s;
+  }
+
+  .gradation.expired,
+  .gradation.goal-reached {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    );
+  }
+
+  .button {
     position: absolute;
     cursor: pointer;
     bottom: 20px;
@@ -47,26 +66,35 @@
     z-index: 3;
   }
 
-  button.expired-button {
+  .disabled-button {
     background-color: gray;
     cursor: not-allowed;
+    color: white;
   }
-}
-
-.gradation.expired {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 58.9%, rgba(0, 0, 0, 1) 100%);
 }
 
 .donation-img {
   object-fit: cover;
   height: 293px;
+  transition: opacity 0.3s;
   z-index: 1;
-  transition: filter 0.3s, opacity 0.3s;
 }
 
 .donation-img.darkened {
-  filter: brightness(0.5); 
-  opacity: 0.5;
+  filter: brightness(0.5);
+  opacity: 0.7;
+}
+
+.centered-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  z-index: 3;
 }
 
 .donation-contents {
@@ -113,7 +141,6 @@
 .current-credit {
   display: flex;
   align-items: center;
-
   p {
     font-family: 'Pretendard';
     font-size: 12px;
@@ -154,7 +181,6 @@
 }
 
 @media (max-width: $width-max-mobile) {
-
   .list-title {
     font-size: 16px;
     font-weight: 700;
@@ -170,7 +196,7 @@
     width: 158px;
     height: 206px;
 
-    button {
+    .button {
       position: absolute;
       cursor: pointer;
       bottom: 8px;
@@ -187,9 +213,10 @@
       z-index: 3;
     }
 
-    button.expired-button {
+    .disabled-button {
       background-color: gray;
       cursor: not-allowed;
+      color: white;
     }
   }
 

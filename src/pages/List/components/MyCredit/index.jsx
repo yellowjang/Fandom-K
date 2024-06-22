@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import style from './styles.module.scss';
-import creditImg from '@/assets/images/img_diamond.png';
+import creditImg from '@/assets/icons/img_diamond.png';
 import CreditChargeModal from '../Modal/CreditChargeModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 import { CreditContext } from '@/contexts/CreditContext';

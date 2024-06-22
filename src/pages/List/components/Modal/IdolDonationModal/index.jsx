@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
-import creditIcon from '@/assets/images/img_diamond.png';
+import creditIcon from '@/assets/icons/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
-// import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
 import Toast from '@/components/Toast';
 
 const IdolDonationModal = ({
@@ -15,7 +14,6 @@ const IdolDonationModal = ({
   handleDonate,
 }) => {
   const [inputCredit, setInputCredit] = useState('');
-  // const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [creditValueError, setCreditValueError] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
@@ -105,11 +103,6 @@ const IdolDonationModal = ({
       </ModalBackground>
 
       {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
-
-      {/* <CreditAlertModal
-        isModalOpen={isAlertModalOpen}
-        closeModal={() => setIsAlertModalOpen(false)}
-      /> */}
     </>
   );
 };

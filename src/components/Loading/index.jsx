@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
-import loadingImg from '@/assets/images/img_loading.png';
-import loadingTextImg from '@/assets/images/img_loading_text.png';
+import loadingImg from '@/assets/images/loading/img_loading.png';
+import loadingTextImg from '@/assets/images/loading/img_loading_text.png';
 
 function Loading({ size }) {
   return (
@@ -19,7 +19,6 @@ function Loading({ size }) {
         width={size}
         height={size}
       />
-      {/* <p className={styles['loading-text']}>Loading...</p> */}
     </div>
   );
 }

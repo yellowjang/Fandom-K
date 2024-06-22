@@ -48,7 +48,7 @@
     );
   }
 
-  .button {
+  button {
     position: absolute;
     cursor: pointer;
     bottom: 20px;
@@ -66,8 +66,8 @@
     z-index: 3;
   }
 
-  .disabled-button {
-    background-color: gray;
+  button.disabled-button {
+    background: gray;
     cursor: not-allowed;
     color: white;
   }
@@ -196,17 +196,17 @@
     width: 158px;
     height: 206px;
 
-    .button {
+    button {
       position: absolute;
       cursor: pointer;
-      bottom: 8px;
+      bottom: 12px;
       right: 8px;
       width: 142px;
-      height: 31px;
+      height: 26px;
       border-radius: 3px;
       padding: 2px 48px 3px 48px;
       font-family: Pretendard;
-      font-size: 13px;
+      font-size: 10px;
       font-weight: 700;
       color: #fff;
       background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
@@ -219,7 +219,9 @@
       color: white;
     }
   }
-
+  .centered-message {
+    font-size: 12px;
+  }
   .subtitle {
     font-size: 12px;
     font-weight: 400;

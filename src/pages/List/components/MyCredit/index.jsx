@@ -16,7 +16,7 @@ const MyCredit = ({ isModalOpen, closeModal, openModal }) => {
           <p>내 크레딧</p>
           <div className={style['credit-money']}>
             <img src={creditImg} alt='크레딧 이미지' />
-            <p>
+            <div className={style['credit-number']}>
               <AnimatedNumbers
                 includeComma
                 transitions={(index) => ({
@@ -25,7 +25,7 @@ const MyCredit = ({ isModalOpen, closeModal, openModal }) => {
                 })}
                 animateToNumber={credits}
               />
-            </p>
+            </div>
             {/* <p>{credits}</p> */}
           </div>
         </div>

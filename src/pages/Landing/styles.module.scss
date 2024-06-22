@@ -38,7 +38,7 @@ $colors: (
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(transparent, #7ce2ff);
+  background: linear-gradient(transparent, $color-orange);
   border-radius: 6px;
   border-radius: 20px;
 }

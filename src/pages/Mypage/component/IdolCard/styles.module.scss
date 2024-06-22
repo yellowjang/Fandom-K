@@ -29,20 +29,20 @@
   gap: 2px;
 }
 
-.group {
-  font-size: 16px;
-  line-height: 27.73px;
-  font-weight: 700;
-  color: #fff;
-}
 
-.name {
+.group {
   font-size: 14px;
   font-weight: 400;
   line-height: 16.71px;
   color: rgba($color: #ffffff, $alpha: 0.6);
-}
-
+  }
+  
+  .name {
+    font-size: 16px;
+    line-height: 27.73px;
+    font-weight: 700;
+    color: #fff;
+  }
 
 
 /* Tablet */

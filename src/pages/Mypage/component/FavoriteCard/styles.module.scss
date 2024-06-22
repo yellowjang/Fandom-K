@@ -47,7 +47,6 @@
   }
 }
 
-
 .group {
   width: 98px;
   height: 17px;
@@ -68,4 +67,17 @@
   text-align: center;
 }
 
+@media (max-width: $width-max-mobile) {
 
+  .delete-icon-container{
+    width: 22px;
+    height: 22px;
+  }
+  .delete-icon-img{
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+  }
+  
+
+}

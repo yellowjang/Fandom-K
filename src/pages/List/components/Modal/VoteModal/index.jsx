@@ -7,7 +7,7 @@ import backIcon from '@/assets/icons/icj_arrow_left.svg';
 import ModalChart from './ModalChart';
 import { disableScroll, activateScroll } from '../components/ModalScroll';
 import { postVotes } from '@/services/api/votes';
-import useAsync from '@/hooks/useAsync';
+import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import Toast from '@/components/Toast';
 import { useCredit } from '@/contexts/CreditContext';
 
@@ -15,7 +15,7 @@ function VoteModal({ items, gender, setItems, setShouldRerender }) {
   const { deductCredits } = useCredit();
   const [modal, setModal] = useState(false);
   const [selectedIdol, setSelectedIdol] = useState(null);
-  const [isLoadingVote, isErrorVote, asyncVote] = useAsync(postVotes);
+  const [isLoadingVote, isErrorVote, asyncVote] = useAsyncWithRetry(postVotes);
   const [toastMessage, setToastMessage] = useState('');
 
   const toggleModal = () => {
@@ -50,7 +50,7 @@ function VoteModal({ items, gender, setItems, setShouldRerender }) {
         toggleModal();
         setShouldRerender((prev) => !prev);
       } else {
-        setToastMessage('크레딧이 부족합니다.');
+        setToastMessage('크레딧이 부족합니다!');
       }
     }
   };

@@ -1,4 +1,4 @@
-import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './styles.module.scss';
 
 function ProgressBar({ targetDonation, receivedDonations }) {
@@ -6,13 +6,12 @@ function ProgressBar({ targetDonation, receivedDonations }) {
 
   return (
     <div className={styles['progress-container']}>
-      <div
+      <motion.div
         className={styles['progress-bar']}
-        style={{
-          width: `${progress}%`,
-        }}
+        initial={{ width: 0 }}
+        animate={{ width: `${progress}%` }}
+        transition={{ duration: 0.5 }}
       />
-      {/* <p className={styles['progress-text']}>{`${progress.toFixed(0)}%`}</p> */}
     </div>
   );
 }

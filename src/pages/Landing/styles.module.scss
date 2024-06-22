@@ -73,9 +73,13 @@ $colors: (
   @include flex-center(column, center, flex-start);
   position: relative;
 
+  img {
+    margin-top: -50px;
+    margin-right: 5px
+  }
+
   p {
     @include text-style(map-get($colors, white), 26px);
-    padding-bottom: 30px;
     text-align: center;
 
     span {
@@ -85,7 +89,7 @@ $colors: (
 }
 
 .start-button {
-  padding-top: 570px;
+  padding-top: 450px;
 
   button {
     @include text-style(map-get($colors, white), 14px);
@@ -107,16 +111,17 @@ $colors: (
 
     p {
       font-size: 20px;
+      padding-bottom: 20px;
     }
 
     img {
-      width: 325px;
-      height: 62px;
+      width: 630px;
+      height: 234px;
     }
   }
 
   .start-button {
-    padding-top: 700px;
+    padding-top: 500px;
   }
 }
 
@@ -129,16 +134,17 @@ $colors: (
   .description {
     p {
       font-size: 20px;
+      padding-bottom: 20px;
     }
 
     img {
-      width: 236px;
-      height: 45px;
+      width: 520px;
+      height: 180px;
     }
   }
 
   .start-button {
-    padding-top: 450px;
+    padding-top: 300px;
 
     button {
       width: 230px;

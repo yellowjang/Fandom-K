@@ -1,7 +1,7 @@
-import React from 'react';
 import styles from './styles.module.scss';
 import creditImg from '@/assets/images/img_diamond.png';
 import ProgressBar from './ProgressBar';
+import { motion } from 'framer-motion';
 
 function DonationElement({ donation, openModal }) {
   const calculateDaysLeft = (deadline) => {
@@ -9,19 +9,46 @@ function DonationElement({ donation, openModal }) {
     const today = new Date();
     const timeDiff = deadlineDate - today;
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return daysLeft > 0 ? `${daysLeft}일 남음` : '기한 만료';
+    return daysLeft;
+  };
+
+  const daysLeft = calculateDaysLeft(donation.deadline);
+  const isExpired = daysLeft <= 0;
+  const isGoalReached = donation.receivedDonations >= donation.targetDonation;
+
+  const elementVariants = {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
-    <div className={styles['donation-element']}>
+    <motion.div
+      className={styles['donation-element']}
+      variants={elementVariants}
+      initial="initial"
+      animate="animate"
+    >
       <div className={styles['image-box']}>
-        <div className={styles['gradation']}></div>
-        <img
-          className={styles['donation-img']}
+        <div className={`${styles['gradation']} ${(isExpired || isGoalReached) ? styles['expired'] : ''}`}></div>
+        <motion.img
+          className={`${styles['donation-img']} ${(isExpired || isGoalReached) ? styles['darkened'] : ''}`}
           src={donation.idol.profilePicture}
           alt='후원광고사진'
+          whileHover={{ scale: 1.1 }}
         />
-        <button onClick={() => openModal(donation)}>후원하기</button>
+        {(isExpired || isGoalReached) && (
+          <div className={styles['centered-message']}>
+            {isExpired ? '기간 만료' : '🎉 목표 달성 🎉'}
+          </div>
+        )}
+        <motion.button
+          onClick={() => openModal(donation)}
+          disabled={isExpired || isGoalReached}
+          className={(isExpired || isGoalReached) ? styles['expired-button'] : ''}
+          whileHover={{ scale: 1.05 }}
+        >
+          {isExpired ? '기한 만료' : isGoalReached ? '목표 달성' : '후원하기'}
+        </motion.button>
       </div>
       <div className={styles['donation-contents']}>
         <div className={styles['title-wrapper']}>
@@ -39,16 +66,16 @@ function DonationElement({ donation, openModal }) {
               <p>{donation.receivedDonations.toLocaleString()}</p>
             </div>
             <p className={styles['date-left']}>
-              {calculateDaysLeft(donation.deadline)}
+              {daysLeft > 0 ? `${daysLeft}일 남음` : '기한 만료'}
             </p>
           </div>
-          <ProgressBar 
-            targetDonation={donation.targetDonation} 
-            receivedDonations={donation.receivedDonations} 
+          <ProgressBar
+            targetDonation={donation.targetDonation}
+            receivedDonations={donation.receivedDonations}
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

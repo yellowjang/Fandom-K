@@ -1,3 +1,5 @@
+
+
 import { useState, useRef, useEffect } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
@@ -21,9 +23,7 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
       const isScrollable = scrollWidth > containerWidth;
 
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(
-        isScrollable && scrollLeft + containerWidth < scrollWidth
-      );
+      setShowRightArrow(isScrollable && scrollLeft + containerWidth < scrollWidth);
     }
   };
 
@@ -35,21 +35,20 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   }, [idols, favoriteIdols]);
 
   useEffect(() => {
-    // 초기 로드 시 화살표 표시 여부 설정
-    updateArrowVisibility();
-  }, []);
-
-  useEffect(() => {
     // 스크롤 위치가 변경될 때마다 화살표 표시 여부 업데이트
     const container = containerRef.current;
     if (container) {
       container.addEventListener('scroll', updateArrowVisibility);
-    }
-    return () => {
-      if (container) {
+      // Clean up the event listener on unmount
+      return () => {
         container.removeEventListener('scroll', updateArrowVisibility);
-      }
-    };
+      };
+    }
+  }, [availableIdols]);
+
+  useEffect(() => {
+    // 초기 로드 시 화살표 표시 여부 설정
+    updateArrowVisibility();
   }, [availableIdols]);
 
   const handleSelect = (idol, isSelected) => {
@@ -94,31 +93,35 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
         <h3>관심있는 아이돌을 추가해보세요.</h3>
       </div>
       <div className={styles['select-idol-wrapper']}>
-        {showLeftArrow && (
-          <button className={styles['arrow-btn']} onClick={scrollLeft}>
-            <img
-              className={styles['arrow-img']}
-              src={arrowLeft}
-              alt='왼쪽 화살표'
-              draggable='false'
-            />
-          </button>
-        )}
+        <div className={styles['left-arrow-box']}>
+          {showLeftArrow && (
+            <button className={styles['left-arrow-btn']} onClick={scrollLeft}>
+              <img
+                className={styles['arrow-img']}
+                src={arrowLeft}
+                alt='왼쪽 화살표'
+                draggable='false'
+              />
+            </button>
+          )}
+        </div>
         <div className={styles['idol-list-container']} ref={containerRef}>
           {availableIdols.map((item) => (
             <IdolCard key={item.id} item={item} onSelect={handleSelect} />
           ))}
         </div>
-        {showRightArrow && (
-          <button className={styles['arrow-btn']} onClick={scrollRight}>
-            <img
-              className={styles['arrow-img']}
-              src={arrowRight}
-              alt='오른쪽 화살표'
-              draggable='false'
-            />
-          </button>
-        )}
+        <div className={styles['right-arrow-box']}>
+          {showRightArrow && (
+            <button className={styles['right-arrow-btn']} onClick={scrollRight}>
+              <img
+                className={styles['arrow-img']}
+                src={arrowRight}
+                alt='오른쪽 화살표'
+                draggable='false'
+              />
+            </button>
+          )}
+        </div>
       </div>
       <div className={styles['add-btn']}>
         <button

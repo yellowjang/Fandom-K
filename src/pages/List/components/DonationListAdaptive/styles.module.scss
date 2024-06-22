@@ -22,10 +22,15 @@
   display: none;
 }
 .components-container {
-  overflow: scroll;
+  // overflow: scroll;
+  overflow: auto;
   display: flex;
   gap: 40px;
   align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .list-title {

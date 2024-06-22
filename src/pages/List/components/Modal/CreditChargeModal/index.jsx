@@ -56,6 +56,24 @@ const CreditChargeModal = ({ isModalOpen, closeModal }) => {
     }
   }, [isModalOpen]);
 
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter' && selectedValue) {
+        handleCharge();
+      }
+    };
+
+    if (isModalOpen) {
+      window.addEventListener('keydown', handleKeyPress);
+    } else {
+      window.removeEventListener('keydown', handleKeyPress);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [isModalOpen, selectedValue]);
+
   const closeToast = () => {
     setToastMessage('');
   };
@@ -64,12 +82,12 @@ const CreditChargeModal = ({ isModalOpen, closeModal }) => {
     <>
       <ModalBackground
         isModalOpen={isModalOpen}
-        closeModal={() => closeModal(setSelectedValue(null))}
+        closeModal={() => closeModal()}
       >
         <div className={style['container']}>
           <div className={style['header']}>
             <h2>크레딧 충전하기</h2>
-            <button onClick={() => closeModal(setSelectedValue(null))}>
+            <button onClick={() => closeModal()}>
               <img src={closeIcon} alt='닫기 아이콘' />
             </button>
           </div>

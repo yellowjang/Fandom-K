@@ -1,5 +1,3 @@
-
-
 import { useState, useRef, useEffect } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
@@ -23,7 +21,9 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
       const isScrollable = scrollWidth > containerWidth;
 
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(isScrollable && scrollLeft + containerWidth < scrollWidth);
+      setShowRightArrow(
+        isScrollable && scrollLeft + containerWidth < scrollWidth
+      );
     }
   };
 
@@ -35,11 +35,9 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   }, [idols, favoriteIdols]);
 
   useEffect(() => {
-    // 스크롤 위치가 변경될 때마다 화살표 표시 여부 업데이트
     const container = containerRef.current;
     if (container) {
       container.addEventListener('scroll', updateArrowVisibility);
-      // Clean up the event listener on unmount
       return () => {
         container.removeEventListener('scroll', updateArrowVisibility);
       };
@@ -47,7 +45,6 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   }, [availableIdols]);
 
   useEffect(() => {
-    // 초기 로드 시 화살표 표시 여부 설정
     updateArrowVisibility();
   }, [availableIdols]);
 

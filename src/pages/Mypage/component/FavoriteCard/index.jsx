@@ -4,13 +4,11 @@ import IdolCircleImage from '../../../../components/IdolCircleImage';
 import deleteIcon from '@/assets/icons/ic_delete_black.png';
 
 function FavoriteCard({ item, onSelect }) {
-
   const [size, setSize] = useState(window.innerWidth <= 767 ? 80 : 100);
 
   const handleToggleSelect = () => {
     onSelect(item, false);
   };
-
 
   const updateSize = () => {
     if (window.innerWidth <= 767) {
@@ -21,7 +19,7 @@ function FavoriteCard({ item, onSelect }) {
   };
 
   useEffect(() => {
-    updateSize(); // Initial call to set size based on current window size
+    updateSize();
     window.addEventListener('resize', updateSize);
     return () => {
       window.removeEventListener('resize', updateSize);

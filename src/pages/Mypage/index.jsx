@@ -40,7 +40,6 @@ function Mypage() {
           setFavoriteIdols={setFavoriteIdols}
           onSelect={handleSelect}
         />
-        {/* <SelectIdolList idols={idols} favoriteIdols={favoriteIdols} /> */}
         <SelectIdolList
           idols={idols}
           favoriteIdols={favoriteIdols}

@@ -51,12 +51,13 @@
 }
 
 @media (max-width: $width-max-mobile) {
-  .container{
-    padding: 40px 30px;
-  }
-  .credit-state{
-    p{
-      font: 400 10px Pretendard;
+  .container {
+    padding: 30px 22.5px;
+
+    > .credit-state {
+      margin-top: -5px;
+      p{
+         font: 400 10px Pretendard;
     }
   }
 

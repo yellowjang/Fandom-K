@@ -1,12 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import IdolCircleImage from '../../../../components/IdolCircleImage';
 import deleteIcon from '@/assets/icons/ic_delete_black.png';
 
 function FavoriteCard({ item, onSelect }) {
+
+  const [size, setSize] = useState(window.innerWidth <= 767 ? 80 : 100);
+
   const handleToggleSelect = () => {
     onSelect(item, false);
   };
+
+
+  const updateSize = () => {
+    if (window.innerWidth <= 767) {
+      setSize(70);
+    } else {
+      setSize(100);
+    }
+  };
+
+  useEffect(() => {
+    updateSize(); // Initial call to set size based on current window size
+    window.addEventListener('resize', updateSize);
+    return () => {
+      window.removeEventListener('resize', updateSize);
+    };
+  }, []);
 
   return (
     <div className={styles['favorite-card']}>
@@ -14,7 +34,7 @@ function FavoriteCard({ item, onSelect }) {
         <IdolCircleImage
           imgUrl={item.profilePicture}
           idolName={item.name}
-          size={100}
+          size={size}
           outlineWidth='2px'
         />
         <button

@@ -42,3 +42,22 @@
   line-height: 16.71px;
   color: rgba($color: #ffffff, $alpha: 0.6);
 }
+
+
+
+/* Tablet */
+@media (max-width: $width-max-tablet) {
+
+}
+
+/* Mobile */
+@media (max-width: $width-max-mobile) {
+
+  .idol-card {
+    width: 98px;
+    height: 151px;
+  }
+
+
+
+}

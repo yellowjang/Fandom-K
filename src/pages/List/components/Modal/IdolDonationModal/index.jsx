@@ -39,11 +39,13 @@ const IdolDonationModal = ({
   };
 
   const handleSubmit = () => {
-    handleDonate(parseInt(inputCredit, 10));
+    if (isValid) {
+      handleDonate(parseInt(inputCredit, 10));
+    }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && isValid) {
       handleSubmit();
     }
   };

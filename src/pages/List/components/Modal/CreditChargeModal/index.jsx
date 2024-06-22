@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditImg from '@/assets/images/img_diamond.png';
 import creditWhiteImg from '@/assets/images/img_diamond_white.png';
 import ModalBackground from '../components/ModalBackground';
 import Toast from '@/components/Toast';
+import { CreditContext } from '@/contexts/CreditContext';
 
 const ChargeAmount = ({ value, selected, onClick }) => {
   return (
@@ -30,7 +31,8 @@ const ChargeAmount = ({ value, selected, onClick }) => {
   );
 };
 
-const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
+const CreditChargeModal = ({ isModalOpen, closeModal }) => {
+  const { updateCredits } = useContext(CreditContext);
   const [selectedValue, setSelectedValue] = useState(null);
   const [toastMessage, setToastMessage] = useState('');
 
@@ -42,15 +44,15 @@ const CreditChargeModal = ({ isModalOpen, closeModal, updateCredit }) => {
     const currentCredits = parseInt(localStorage.getItem('credits')) || 0;
     const newCredits = currentCredits + parseInt(selectedValue);
     localStorage.setItem('credits', newCredits.toString());
-    updateCredit(newCredits);
+    updateCredits(newCredits);
     setToastMessage('충전이 완료되었습니다!');
-    closeModal();
-    setSelectedValue(null); // 선택 초기화
+    closeModal(setSelectedValue(null));
+    setSelectedValue(null);
   };
 
   useEffect(() => {
     if (!isModalOpen) {
-      setSelectedValue(null); // 모달이 닫힐 때 선택 초기화
+      setSelectedValue(null);
     }
   }, [isModalOpen]);
 

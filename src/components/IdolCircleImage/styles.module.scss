@@ -8,9 +8,7 @@
   padding: 8px;
   font-family: 'Pretendard';
   font-size: 14px;
-
 }
-
 
 .image-container {
   border-radius: 50%;
@@ -23,7 +21,6 @@
   object-fit: cover;
   transform: scale(1.5);
   border: 1px solid rgba(0, 0, 0, 0);
-  
 }
 
 .check-box {
@@ -31,13 +28,12 @@
   object-fit: cover;
   width: 200px;
   height: 200px;
-  background-color:  rgba(248, 111, 101, 0.7);
+  background-color: rgba(248, 111, 101, 0.7);
   z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
 
 .check-icon-container {
   position: absolute;

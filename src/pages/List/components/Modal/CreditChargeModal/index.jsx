@@ -112,7 +112,7 @@ const CreditChargeModal = ({ isModalOpen, closeModal }) => {
             <img src={creditWhiteImg} alt='크레딧 이미지' />
             <button
               disabled={!selectedValue}
-              className={!selectedValue && style['button--disabled']}
+              className={selectedValue ? '' : style['button--disabled']}
               onClick={handleCharge}
             >
               충전하기

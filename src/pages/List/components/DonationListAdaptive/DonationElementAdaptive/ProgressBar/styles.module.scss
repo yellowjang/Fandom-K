@@ -19,7 +19,7 @@
   position: absolute; /* absolute position을 사용하여 컨테이너 내에서 자유롭게 배치 */
   top: 0;
   left: 0;
-  background-color: #f96d69;
+  background-color: $color-orange;
   height: 100%; /* 컨테이너의 높이에 맞추기 */
   transition: width 0.3s ease-in-out;
   z-index: 2; /* progress-container 위에 배치 */

@@ -8,6 +8,7 @@ function ChartListItem({ item, onSelectIdol, selectedIdolId }) {
   return (
     <>
       <label className={styles['list']}>
+        {''}
         <div className={styles['list-content']}>
           <IdolCircleImage
             imgUrl={item.profilePicture}

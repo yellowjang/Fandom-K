@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from './styles.module.scss';
-import logo from '@/assets/images/logo/logo.png';
+import logo from '@/assets/images/logo/fandom_k_logo.svg';
 
 const Logo = () => (
   <Link to='/list'>

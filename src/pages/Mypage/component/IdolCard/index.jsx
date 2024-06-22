@@ -42,8 +42,8 @@ function IdolCard({ item, onSelect }) {
       </button>
 
       <div className={styles['idol-info-container']}>
-        <h3 className={styles['group']}>{item.group}</h3>
         <h3 className={styles['name']}>{item.name}</h3>
+        <h3 className={styles['group']}>{item.group}</h3>
       </div>
     </div>
   );

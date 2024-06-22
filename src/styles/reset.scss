@@ -68,6 +68,10 @@ th {
 } 
 
 body {
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: auto;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }

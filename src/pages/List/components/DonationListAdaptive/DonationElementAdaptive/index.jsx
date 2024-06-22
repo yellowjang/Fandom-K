@@ -25,21 +25,25 @@ function DonationElementAdaptive({ donation, openModal }) {
       transition={{ duration: 0.5 }}
     >
       <div className={styles['image-box']}>
-        <div className={`${styles['gradation']} ${(isExpired || isGoalReached) ? styles['expired'] : ''}`}></div>
+        <div
+          className={`${styles['gradation']} ${isExpired || isGoalReached ? styles['expired'] : ''}`}
+        ></div>
         <img
-          className={`${styles['donation-img']} ${(isExpired || isGoalReached) ? styles['darkened'] : ''}`}
+          className={`${styles['donation-img']} ${isExpired || isGoalReached ? styles['darkened'] : ''}`}
           src={donation.idol.profilePicture}
           alt='후원광고사진'
         />
         {(isExpired || isGoalReached) && (
           <div className={styles['centered-message']}>
-            {isExpired ? '기간 만료' : '🎉목표 달성🎉'}
+            {isExpired ? '기간 만료' : '🎉 목표 달성 🎉'}
           </div>
         )}
         <button
           onClick={() => openModal(donation)}
           disabled={isExpired || isGoalReached}
-          className={`${styles['button']} ${(isExpired || isGoalReached) ? styles['disabled-button'] : ''}`}
+          className={
+            isExpired || isGoalReached ? styles['disabled-button'] : ''
+          }
         >
           {isExpired ? '기간 만료' : isGoalReached ? '목표 달성' : '후원하기'}
         </button>

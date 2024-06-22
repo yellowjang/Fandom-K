@@ -86,10 +86,14 @@
   grid-auto-flow: column;
 
   width: 1198px;
-  // width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
+}
+
+.idol-list-container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .add-btn {

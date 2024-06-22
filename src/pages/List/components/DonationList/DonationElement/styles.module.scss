@@ -66,8 +66,7 @@
     z-index: 3;
   }
 
-  button.expired-button,
-  button.goal-reached-button {
+  button.disabled-button {
     background: gray;
     cursor: not-allowed;
     color: white;

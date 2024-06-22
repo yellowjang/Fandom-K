@@ -44,7 +44,8 @@ function DonationElement({ donation, openModal }) {
         <motion.button
           onClick={() => openModal(donation)}
           disabled={isExpired || isGoalReached}
-          className={(isExpired || isGoalReached) ? styles['expired-button'] : ''}
+
+          className={(isExpired || isGoalReached) ? styles['disabled-button'] : ''}
           whileHover={{ scale: 1.05 }}
         >
           {isExpired ? '기한 만료' : isGoalReached ? '목표 달성' : '후원하기'}

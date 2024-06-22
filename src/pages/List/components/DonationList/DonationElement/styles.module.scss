@@ -39,7 +39,7 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
     transition: background 0.3s;
   }
-  
+
   .gradation.expired,
   .gradation.goal-reached {
     background: linear-gradient(
@@ -67,8 +67,7 @@
     z-index: 3;
   }
 
-  button.expired-button,
-  button.goal-reached-button {
+  button.disabled-button {
     background: gray;
     cursor: not-allowed;
     color: white;
@@ -182,7 +181,6 @@
 }
 
 @media (max-width: $width-max-mobile) {
-
   .list-title {
     font-size: 16px;
     font-weight: 700;

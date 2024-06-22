@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditImg from '@/assets/images/img_diamond.png';
 import style from './styles.module.scss';

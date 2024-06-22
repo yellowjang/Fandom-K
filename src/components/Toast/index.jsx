@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 
 const Toast = ({ message, onClose }) => {
   const [progress, setProgress] = useState(100);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     const duration = 2000;
@@ -14,7 +15,7 @@ const Toast = ({ message, onClose }) => {
     }, duration);
 
     const progressInterval = setInterval(() => {
-      setProgress(prev => Math.max(prev - decrement, 0));
+      setProgress((prev) => Math.max(prev - decrement, 0));
     }, interval);
 
     return () => {
@@ -23,8 +24,18 @@ const Toast = ({ message, onClose }) => {
     };
   }, [onClose]);
 
+  const handleClick = () => {
+    setIsClosing(true);
+    setTimeout(onClose, 500);
+  };
+
   return (
-    <div className={styles.toast}>
+    <div
+      style={{ cursor: 'pointer' }}
+      aria-hidden='true'
+      onClick={handleClick}
+      className={`${styles['toast']} ${isClosing && styles['toast-closing']}`}
+    >
       {message}
       <div className={styles.progressBar}>
         <div className={styles.progress} style={{ width: `${progress}%` }} />

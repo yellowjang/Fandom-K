@@ -45,3 +45,13 @@
     }
   }
 }
+
+@media (max-width: $width-max-mobile) {
+  .container {
+    padding: 30px 22.5px;
+
+    > .credit-state {
+      margin-top: -5px;
+    }
+  }
+}

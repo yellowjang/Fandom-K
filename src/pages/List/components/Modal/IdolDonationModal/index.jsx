@@ -3,7 +3,8 @@ import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/images/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
-import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
+// import CreditAlertModal from '@/pages/List/components/Modal/CreditAlertModal';
+import Toast from '@/components/Toast';
 
 const IdolDonationModal = ({
   donationImg,
@@ -14,9 +15,10 @@ const IdolDonationModal = ({
   handleDonate,
 }) => {
   const [inputCredit, setInputCredit] = useState('');
-  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  // const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [creditValueError, setCreditValueError] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const validate = (value) => {
     if (value === '') {
@@ -41,6 +43,7 @@ const IdolDonationModal = ({
   const handleSubmit = () => {
     if (isValid) {
       handleDonate(parseInt(inputCredit, 10));
+      setToastMessage('후원이 완료되었습니다!');
     }
   };
 
@@ -48,6 +51,10 @@ const IdolDonationModal = ({
     if (e.key === 'Enter' && isValid) {
       handleSubmit();
     }
+  };
+
+  const closeToast = () => {
+    setToastMessage('');
   };
 
   return (
@@ -95,10 +102,12 @@ const IdolDonationModal = ({
         </div>
       </ModalBackground>
 
-      <CreditAlertModal
+      {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
+
+      {/* <CreditAlertModal
         isModalOpen={isAlertModalOpen}
         closeModal={() => setIsAlertModalOpen(false)}
-      />
+      /> */}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import DonationElement from './DonationElementAdaptive';
 import styles from './styles.module.scss';
 import { getDonations, creditDonation } from '@/services/api/donations';
@@ -8,6 +8,7 @@ import CreditAlertModal from '../Modal/CreditAlertModal';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import { useCredit } from '@/contexts/CreditContext';
 import DonationElementAdaptiveSkeleton from './DonationElementAdaptive/DonationElementAdaptiveSkeleton';
+import { useDraggable } from 'react-use-draggable-scroll';
 
 function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
@@ -17,6 +18,8 @@ function DonationListAdaptive() {
   const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
     useAsyncWithRetry(getDonations);
   const { credits, updateCredits } = useCredit();
+  const dragRef = useRef(); // We will use React useRef hook to reference the wrapping div:
+  const { events } = useDraggable(dragRef);
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
@@ -79,7 +82,7 @@ function DonationListAdaptive() {
   return (
     <div className={styles['donation-list']}>
       <p className={styles['list-title']}>후원을 기다리는 조공</p>
-      <div className={styles['components-container']}>
+      <div className={styles['components-container']} {...events} ref={dragRef}>
         <div className={styles['donation-contents']}>
           <div className={styles['components-wrapper']}>
             {isLoadingDonations ? (

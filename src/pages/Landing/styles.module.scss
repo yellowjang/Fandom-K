@@ -1,8 +1,8 @@
 @import '@/styles/import.scss';
 
 $colors: (
-  primary: #02000e,
-  secondary: #f96d69,
+  primary: $color-black,
+  secondary: $color-orange,
   white: #fff,
 );
 
@@ -34,7 +34,7 @@ $colors: (
 }
 ::-webkit-scrollbar {
   width: 7px;
-  background-color: map-get($colors, primary)
+  background-color: map-get($colors, primary);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -92,7 +92,7 @@ $colors: (
     width: 477px;
     height: 48px;
     border-radius: 3px;
-    background: linear-gradient(90deg, #f86f65 0%, #fe5493 100%);
+    background: $gradient-orange-to-pink;
   }
 }
 

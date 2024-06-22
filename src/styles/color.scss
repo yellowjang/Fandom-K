@@ -4,8 +4,8 @@ $color-white-aplha-10: rgba(255, 255, 255, 0.1);
 $color-white-aplha-40: rgba(255, 255, 255, 0.4);
 $color-white-aplha-60: rgba(255, 255, 255, 0.6);
 $color-white-aplha-80: rgba(255, 255, 255, 0.8);
-$color-orange: #f96d69;
 $color-gray-500: #828282;
+$color-black: #02000e;
 
 $gradient-orange-to-pink: linear-gradient(
   90deg,
@@ -17,4 +17,10 @@ $gradient-orange-to-pink-reverse: linear-gradient(
   270deg,
   rgba(248, 111, 101, 1) 0%,
   rgba(254, 84, 147, 1) 100%
+);
+
+$gradient-black-to-black: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0) 58.9%,
+  #000000 100%
 );

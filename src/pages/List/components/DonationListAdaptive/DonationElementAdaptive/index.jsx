@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './styles.module.scss';
 import creditImg from '@/assets/images/img_diamond.png';
 import ProgressBar from './ProgressBar';
@@ -17,7 +18,12 @@ function DonationElementAdaptive({ donation, openModal }) {
   const isGoalReached = donation.receivedDonations >= donation.targetDonation;
 
   return (
-    <div className={styles['donation-element']}>
+    <motion.div
+      className={styles['donation-element']}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className={styles['image-box']}>
         <div className={`${styles['gradation']} ${(isExpired || isGoalReached) ? styles['expired'] : ''}`}></div>
         <img
@@ -63,7 +69,7 @@ function DonationElementAdaptive({ donation, openModal }) {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
-import logoImage from '../../assets/images/logo/logo.png';
+import logoImage from '@/assets/images/logo/fandom_k_logo.png';
 import Description from './components/Description';
 import AnimatedComponent from './components/AnimatedComponent';
 import {
@@ -24,7 +24,7 @@ function Landing() {
             </AnimatedComponent>
             <Link to='/list'>
               <AnimatedComponent animation={logoAnimation}>
-                <img src={logoImage} alt='팬덤 케이' width={509} height={97} />
+                <img src={logoImage} alt='팬덤 케이' width={700} height={100} />
               </AnimatedComponent>
             </Link>
             <AnimatedComponent animation={buttonAnimation}>

@@ -49,3 +49,15 @@
     }
   }
 }
+
+@media (max-width: $width-max-mobile) {
+  .container{
+    padding: 40px 30px;
+  }
+  .credit-state{
+    p{
+      font: 400 10px Pretendard;
+    }
+  }
+
+}

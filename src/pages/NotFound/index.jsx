@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 import logoImage from '@/assets/images/logo/fandom_k_logo.png';
 
-function Landing() {
+function NotFound() {
   return (
     <div className={styles['container']}>
       <div className={styles['main']}>
@@ -26,4 +26,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default NotFound;

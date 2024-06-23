@@ -1,0 +1,54 @@
+@import 'src/styles/import.scss';
+
+.idol-card {
+  width: 128px;
+  height: 183px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.idol-image-container {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0);
+  outline: 1px solid $color-orange;
+}
+
+.idol-click-container {
+  cursor: pointer;
+}
+
+.idol-info-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 8px;
+  gap: 2px;
+}
+
+.group {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.71px;
+  color: rgba($color: #ffffff, $alpha: 0.6);
+}
+
+.name {
+  font-size: 16px;
+  line-height: 27.73px;
+  font-weight: 700;
+  color: #fff;
+}
+
+@media (max-width: $width-max-tablet) {
+}
+
+@media (max-width: $width-max-mobile) {
+  .idol-card {
+    width: 98px;
+    height: 151px;
+  }
+}

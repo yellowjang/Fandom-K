@@ -1,0 +1,65 @@
+@import '@/styles/import.scss';
+
+.list-content {
+  padding: 30px 0;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color-white-aplha-10;
+  padding: 10px;
+  > input[type='radio'] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 3px solid white;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    background-color: gray;
+    box-shadow: 0 0 0 1px gray;
+  }
+  > input[type='radio']:checked {
+    background-color: $color-orange;
+    box-shadow: 0 0 0 1px $color-orange;
+  }
+}
+
+.list-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 167px;
+  height: 70px;
+
+  > h1 {
+    color: $color-orange;
+    margin: 0 12px 0 4px;
+  }
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 66px;
+  height: 38px;
+  white-space: nowrap;
+
+  > h1 {
+    color: white;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.71px;
+  }
+  > h2 {
+    color: #ffffff99;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.71px;
+  }
+}

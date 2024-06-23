@@ -1,0 +1,78 @@
+@import '@/styles/import.scss';
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 339px;
+  height: 331px;
+  background-color: #181d26;
+  border-radius: 12px;
+  box-shadow: 0px 4px 4px $color-white-aplha-10;
+  animation: fadeIn 0.3s ease-in-out;
+
+  > .header {
+    text-align: right;
+    padding: 15px 20px 0px;
+
+    > button {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  > .main {
+    @include Flex(column, flex-start, stretch, 0);
+
+    > img {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+    }
+
+    > span {
+      font: 500 16px/26px Pretendard;
+      text-align: center;
+      color: $color-white;
+      margin: 0px 0px 31px;
+
+      > .strong {
+        color: $color-orange;
+      }
+    }
+  }
+
+  > .footer {
+    @include Flex(row, center, stretch, 0);
+    > button {
+      cursor: pointer;
+      width: 295px;
+      height: 45px;
+      margin: 0 auto;
+      border-radius: 3px;
+      background: $gradient-orange-to-pink;
+      font: 700 14px/26px Pretendard;
+      color: $color-white;
+
+      &:hover {
+        background: $gradient-orange-to-pink-reverse;
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      margin-top: -40px;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

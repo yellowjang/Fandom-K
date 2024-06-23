@@ -1,0 +1,19 @@
+$default-font-family: 'Pretendard', sans-serif;
+
+$width-max-tablet: 1199px;
+$width-max-mobile: 767px;
+
+@mixin font-default {
+  font-family: $default-font-family;
+  font-style: normal;
+}
+
+@mixin Flex($col, $justifyContent, $alignItems, $gap) {
+  display: flex;
+  flex-direction: $col;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+  gap: $gap;
+}
+
+$color-test: aquamarine;

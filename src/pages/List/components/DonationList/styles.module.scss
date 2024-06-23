@@ -1,0 +1,57 @@
+@import '@/styles/import.scss';
+
+.donation-list {
+  background-color: $color-black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+.donnation-contents {
+  margin: 0 auto;
+  display: flex;
+  width: 1200px;
+
+  flex-direction: column;
+  gap: 32px;
+}
+.components-wrapper {
+  display: flex;
+  overflow: scroll;
+  gap: 24px;
+}
+
+.components-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.components-container {
+  display: flex;
+  padding-top: 50px;
+  gap: 40px;
+  align-items: center;
+}
+
+.arrow-button {
+  border: none;
+  background: none;
+  width: 40px;
+  height: 78px;
+  border-radius: 6.67px;
+  background-color: #1b1b1b;
+  cursor: pointer;
+}
+
+.arrow-img {
+  width: 10px;
+  height: 20px;
+}
+
+.list-title {
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 700;
+  color: #f7f7f8;
+  margin-bottom: 32px;
+}

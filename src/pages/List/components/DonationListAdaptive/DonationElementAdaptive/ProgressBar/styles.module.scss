@@ -1,0 +1,42 @@
+@import '@/styles/import.scss';
+
+.progress-container {
+  position: relative;
+  height: 4px;
+  z-index: 1;
+  margin-top: 7px;
+  width: 100%;
+  background-color: #e0e0e0;
+  opacity: 0.8;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $color-orange;
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.progress-text {
+  position: relative;
+  z-index: 3;
+  font-size: 12px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+}
+
+@media (max-width: $width-max-mobile) {
+  .progress-container {
+    margin-top: 10px;
+    height: 4px;
+  }
+}

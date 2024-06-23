@@ -1,0 +1,26 @@
+@import '../../styles/import.scss';
+
+.mypage {
+  background-color: $color-black;
+
+  width: 1314px;
+  max-height: 1080px;
+  display: flex;
+  flex-direction: column;
+  @include font-default;
+  gap: 10px;
+  margin: 0 auto;
+}
+@media (max-width: $width-max-tablet) {
+  .mypage {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: $width-max-mobile) {
+  .mypage {
+    width: 100%;
+    margin: 0 auto;
+  }
+}

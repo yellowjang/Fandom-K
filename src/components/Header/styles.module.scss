@@ -1,0 +1,37 @@
+@import '@/styles/import.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: $color-black;
+  height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+
+  div {
+    width: 32px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .header {
+    padding: 0 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 0 23px;
+  }
+}

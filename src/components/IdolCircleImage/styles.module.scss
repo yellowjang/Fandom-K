@@ -1,0 +1,49 @@
+@import '@/styles/import.scss';
+
+.idol-circle-image {
+  color: $color-white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  font-family: 'Pretendard';
+  font-size: 14px;
+}
+
+.image-container {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(255, 255, 255, 0);
+  position: relative;
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1.5);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.check-box {
+  position: absolute;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(248, 111, 101, 0.7);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.check-icon-container {
+  position: absolute;
+  z-index: 1; // 체크 아이콘을 이미지 위에 표시
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.check-icon {
+  width: 35.12px; // 체크 아이콘 크기
+  height: 25.32px;
+}

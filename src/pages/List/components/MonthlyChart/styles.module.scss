@@ -1,0 +1,92 @@
+@import '@/styles/import.scss';
+
+.montyly-chart {
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Pretendard';
+  font-weight: 300;
+  margin-top: 80px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.gender-tab {
+  display: flex;
+  button {
+    width: 100%;
+  }
+}
+
+.gender-tab {
+  * {
+    color: $color-gray-500;
+    height: 42px;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+    font-family: 'Pretendard';
+  }
+
+  .focus {
+    color: $color-white;
+    background-color: $color-white-aplha-10;
+    border-bottom: 1px solid white;
+  }
+}
+
+.more-btn {
+  font-family: 'Pretendard';
+  font-size: 14px;
+  font-weight: bold;
+  color: $color-white;
+  background-color: $color-white-aplha-10;
+  border: 1px solid $color-white-aplha-80;
+  border-radius: 3px;
+  width: 326px;
+  height: 42px;
+  margin: 27px auto 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: transparent;
+    color: $color-white-aplha-40;
+    border: 1px solid $color-white-aplha-40;
+  }
+}
+
+/* Tablet */
+@media (max-width: $width-max-tablet) {
+  .montyly-chart {
+    margin-top: 60px;
+  }
+
+  .more-btn {
+    margin: 3px auto 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: $width-max-mobile) {
+  .montyly-chart {
+    margin-top: 40px;
+    gap: 16px;
+  }
+  .more-btn {
+    margin: 17px auto 0;
+  }
+}

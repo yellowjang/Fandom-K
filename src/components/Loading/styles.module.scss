@@ -1,0 +1,24 @@
+@import '@/styles/import.scss';
+
+.loading {
+  position: relative;
+  display: flex;
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center; /* 세로 방향 가운데 정렬 */
+}
+
+.loading-img {
+  animation: loading-spin infinite 5s linear;
+  @keyframes loading-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.loading-text {
+  position: absolute;
+}

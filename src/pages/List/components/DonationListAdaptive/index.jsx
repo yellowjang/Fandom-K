@@ -9,6 +9,7 @@ import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import { useCredit } from '@/contexts/CreditContext';
 import DonationElementAdaptiveSkeleton from './DonationElementAdaptive/DonationElementAdaptiveSkeleton';
 import { useDraggable } from 'react-use-draggable-scroll';
+import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
 
 function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
@@ -78,6 +79,16 @@ function DonationListAdaptive() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const currentScrollY = disableScroll();
+
+      return () => {
+        activateScroll(currentScrollY);
+      };
+    }
+  }, [isModalOpen]);
 
   return (
     <div className={styles['donation-list']}>

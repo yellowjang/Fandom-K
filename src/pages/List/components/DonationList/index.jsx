@@ -11,6 +11,7 @@ import ModalPortal from '../Modal/components/ModalPortal';
 import { useCredit } from '@/contexts/CreditContext';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import DonationElementSkeleton from './DonationElement/DonationElementSkeleton';
+import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
 
 function DonationList() {
   const { credits, updateCredits } = useCredit();
@@ -115,6 +116,16 @@ function DonationList() {
 
     return () => clearInterval(interval);
   }, [currentSlideIndex, donations.length]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const currentScrollY = disableScroll();
+
+      return () => {
+        activateScroll(currentScrollY);
+      };
+    }
+  }, [isModalOpen]);
 
   return (
     <div className={styles['donation-list']}>

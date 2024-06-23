@@ -1,14 +1,16 @@
 
-
 import { useState, useRef, useEffect } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
 import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 import plusIcon from '@/assets/icons/Ic_plus.svg';
+import { useDraggable } from 'react-use-draggable-scroll';
 
 function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
-  const containerRef = useRef(null);
+  const containerRef = useRef(null); 
+  const { events } = useDraggable(containerRef); 
+
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [availableIdols, setAvailableIdols] = useState([]);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
@@ -23,7 +25,9 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
       const isScrollable = scrollWidth > containerWidth;
 
       setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(isScrollable && scrollLeft + containerWidth < scrollWidth);
+      setShowRightArrow(
+        isScrollable && scrollLeft + containerWidth < scrollWidth
+      );
     }
   };
 
@@ -105,7 +109,11 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
             </button>
           )}
         </div>
-        <div className={styles['idol-list-container']} ref={containerRef}>
+        <div
+          className={styles['idol-list-container']}
+          {...events}
+          ref={containerRef}
+        >
           {availableIdols.map((item) => (
             <IdolCard key={item.id} item={item} onSelect={handleSelect} />
           ))}

@@ -12,6 +12,8 @@ import { useCredit } from '@/contexts/CreditContext';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import DonationElementSkeleton from './DonationElement/DonationElementSkeleton';
 import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
+import Toast from '@/components/Toast';
+
 
 function DonationList() {
   const { credits, updateCredits } = useCredit();
@@ -20,8 +22,11 @@ function DonationList() {
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
+  const [isLoadingGetDonations, loadGetDonationsError, handleGetDonations] =
     useAsyncWithRetry(getDonations);
+  const [isLoadingCreditDonation, creditDonationError, handleCreditDonation] =
+    useAsyncWithRetry(creditDonation);
+  const [toastMessage, setToastMessage] = useState('');
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
@@ -30,12 +35,12 @@ function DonationList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { list } = await handleLoadDonations();
+      const { list } = await handleGetDonations();
       setDonations(list);
     };
 
     fetchData();
-  }, [handleLoadDonations]);
+  }, [handleGetDonations]);
 
   const openModal = (donation) => {
     setSelectedDonation(donation);
@@ -55,30 +60,30 @@ function DonationList() {
     setIsAlertOpen(false);
   };
 
+  const closeToast = () => {
+    setToastMessage('');
+  };
+
   const handleDonate = async (donationAmount) => {
     if (donationAmount > credits) {
       openAlert();
       return;
     }
 
-    try {
-      await creditDonation({
-        id: selectedDonation.id,
-        data: { amount: donationAmount },
-      });
+    await handleCreditDonation({
+      id: selectedDonation.id,
+      data: { amount: donationAmount },
+    });
 
-      const newCredits = credits - donationAmount;
-      updateCredits(newCredits);
+    const newCredits = credits - donationAmount;
+    updateCredits(newCredits);
 
-      localStorage.setItem('credits', newCredits.toString());
+    localStorage.setItem('credits', newCredits.toString());
 
-      closeModal();
+    closeModal();
 
-      const { list } = await handleLoadDonations();
-      setDonations(list);
-    } catch (error) {
-      console.error('후원 실패!:', error);
-    }
+    const { list } = await handleGetDonations();
+    setDonations(list);
   };
 
   const nextSlide = () => {
@@ -140,7 +145,7 @@ function DonationList() {
         <div className={styles['donation-contents']}>
           <p className={styles['list-title']}>후원을 기다리는 조공</p>
           <div className={styles['components-wrapper']}>
-            {isLoadingDonations ? (
+            {isLoadingGetDonations ? (
               <DonationElementSkeleton />
             ) : (
               currentDonations().map((donation) => (
@@ -171,6 +176,7 @@ function DonationList() {
             isModalOpen={isModalOpen}
             closeModal={closeModal}
             handleDonate={handleDonate}
+            setToastMessage={setToastMessage}
           />
         </ModalPortal>
       )}
@@ -179,6 +185,7 @@ function DonationList() {
           <CreditAlertModal isModalOpen={isAlertOpen} closeModal={closeAlert} />
         </ModalPortal>
       )}
+      {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </div>
   );
 }

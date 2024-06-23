@@ -151,7 +151,7 @@ function MonthlyChart() {
         })}
       </div>
       {isLoadingChart && (chartIdolsList.length === 0 || isMore) && (
-        <Loading size={350} />
+        <Loading size={150} />
       )}
       {loadChartError && <div>{loadChartError.message}</div>}
       <div ref={endOfListRef} />

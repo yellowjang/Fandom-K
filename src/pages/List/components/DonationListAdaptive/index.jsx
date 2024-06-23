@@ -10,6 +10,8 @@ import { useCredit } from '@/contexts/CreditContext';
 import DonationElementAdaptiveSkeleton from './DonationElementAdaptive/DonationElementAdaptiveSkeleton';
 import { useDraggable } from 'react-use-draggable-scroll';
 import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
+import Toast from '@/components/Toast';
+
 
 function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
@@ -18,9 +20,12 @@ function DonationListAdaptive() {
   const [selectedDonation, setSelectedDonation] = useState(null);
   const [isLoadingDonations, loadDonationsError, handleLoadDonations] =
     useAsyncWithRetry(getDonations);
+  const [isLoadingCreditDonation, creditDonationError, handleCreditDonation] =
+    useAsyncWithRetry(creditDonation);
   const { credits, updateCredits } = useCredit();
   const dragRef = useRef(); // We will use React useRef hook to reference the wrapping div:
   const { events } = useDraggable(dragRef);
+  const [toastMessage, setToastMessage] = useState('');
 
   useEffect(() => {
     const initialCredits = parseInt(localStorage.getItem('credits'), 10) || 0;
@@ -45,30 +50,29 @@ function DonationListAdaptive() {
     setIsAlertOpen(false);
   };
 
+  const closeToast = () => {
+    setToastMessage('');
+  };
+
   const handleDonate = async (donationAmount) => {
     if (donationAmount > credits) {
       openAlert();
       return;
     }
+    await handleCreditDonation({
+      id: selectedDonation.id,
+      data: { amount: donationAmount },
+    });
 
-    try {
-      await creditDonation({
-        id: selectedDonation.id,
-        data: { amount: donationAmount },
-      });
+    const newCredits = credits - donationAmount;
+    updateCredits(newCredits);
 
-      const newCredits = credits - donationAmount;
-      updateCredits(newCredits);
+    localStorage.setItem('credits', newCredits.toString());
 
-      localStorage.setItem('credits', newCredits.toString());
+    closeModal();
 
-      closeModal();
-
-      const { list } = await handleLoadDonations();
-      setDonations(list);
-    } catch (error) {
-      console.error('후원 실패!:', error);
-    }
+    const { list } = await handleLoadDonations();
+    setDonations(list);
   };
 
   useEffect(() => {
@@ -119,6 +123,7 @@ function DonationListAdaptive() {
             isModalOpen={isModalOpen}
             closeModal={closeModal}
             handleDonate={handleDonate}
+            setToastMessage={setToastMessage}
           />
         </ModalPortal>
       )}
@@ -127,6 +132,7 @@ function DonationListAdaptive() {
           <CreditAlertModal isModalOpen={isAlertOpen} closeModal={closeAlert} />
         </ModalPortal>
       )}
+      {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </div>
   );
 }

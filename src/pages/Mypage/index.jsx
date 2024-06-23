@@ -44,6 +44,7 @@ function Mypage() {
           idols={idols}
           favoriteIdols={favoriteIdols}
           setFavoriteIdols={setFavoriteIdols}
+          isLoading={isLoadingIdols}
         />
       </div>
     </div>

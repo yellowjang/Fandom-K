@@ -23,7 +23,6 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </div>
-      {/* <Footer /> */}
     </>
   );
 }

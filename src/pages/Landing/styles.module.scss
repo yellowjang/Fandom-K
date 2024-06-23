@@ -91,13 +91,14 @@ $colors: (
 
 .start-button {
   padding-top: 450px;
-
+  
   button {
     @include text-style(map-get($colors, white), 14px);
     width: 477px;
     height: 48px;
     border-radius: 3px;
     background: $gradient-orange-to-pink;
+    cursor: pointer;
   }
 }
 

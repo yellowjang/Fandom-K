@@ -14,13 +14,10 @@ function List() {
       setIsWideScreen(window.innerWidth >= 1200);
     };
 
-    // Initialize the state based on the current window width
     handleResize();
 
-    // Add the event listener
     window.addEventListener('resize', handleResize);
 
-    // Cleanup function to remove the event listener
     return () => {
       window.removeEventListener('resize', handleResize);
     };

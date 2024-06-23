@@ -16,7 +16,6 @@ const IdolDonationModal = ({
   const [inputCredit, setInputCredit] = useState('');
   const [creditValueError, setCreditValueError] = useState('');
   const [isValid, setIsValid] = useState(false);
-  // const [toastMessage, setToastMessage] = useState('');
 
   const validate = (value) => {
     if (value === '') {

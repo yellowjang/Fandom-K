@@ -39,7 +39,6 @@ const MyCredit = () => {
             <div className={style['credit-number']}>
               <CountUp start={0} end={credits} duration={1.5} separator=',' />
             </div>
-            {/* <p>{credits}</p> */}
           </div>
         </div>
         <button onClick={openModal}>충전하기</button>

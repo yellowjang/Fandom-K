@@ -85,6 +85,7 @@ const IdolDonationModal = ({
             <div className={style['input-wrapper']}>
               <input
                 type='number'
+                pattern='\d*'
                 placeholder='크레딧 입력'
                 value={inputCredit}
                 onChange={handleInputChange}

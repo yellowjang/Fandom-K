@@ -62,10 +62,22 @@ const IdolDonationModal = ({
     }
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    setToastMessage('붙여넣기가 금지되었습니다!');
+  };
+
+  const handleTouchStart = (e) => {
+    if (e.target.tagName === 'INPUT') {
+      e.preventDefault();
+      alert('붙여넣기가 금지되었습니다!');
+    }
+  };
+
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} closeModal={closeModal}>
-        <div className={style['container']}>
+        <div className={style['container']} onTouchStart={handleTouchStart}>
           <div className={style['header']}>
             <h2>후원하기</h2>
             <button onClick={closeModal}>
@@ -86,6 +98,7 @@ const IdolDonationModal = ({
                 pattern='\d*'
                 placeholder='크레딧 입력'
                 value={inputCredit}
+                onPaste={handlePaste}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
                 className={creditValueError ? style['input-error'] : ''}
@@ -105,7 +118,6 @@ const IdolDonationModal = ({
           </div>
         </div>
       </ModalBackground>
-
     </>
   );
 };

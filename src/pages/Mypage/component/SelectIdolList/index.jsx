@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import IdolCard from '../IdolCard';
 import styles from './styles.module.scss';
@@ -6,10 +5,11 @@ import arrowLeft from '@/assets/icons/ic_arrow_left.png';
 import arrowRight from '@/assets/icons/ic_arrow_right.png';
 import plusIcon from '@/assets/icons/Ic_plus.svg';
 import { useDraggable } from 'react-use-draggable-scroll';
+import IdolCardSkeleton from '../IdolCard/IdolCardSkeleton';
 
-function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
-  const containerRef = useRef(null); 
-  const { events } = useDraggable(containerRef); 
+function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols, isLoading }) {
+  const containerRef = useRef(null);
+  const { events } = useDraggable(containerRef);
 
   const [selectedIdols, setSelectedIdols] = useState([]);
   const [availableIdols, setAvailableIdols] = useState([]);
@@ -39,11 +39,9 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   }, [idols, favoriteIdols]);
 
   useEffect(() => {
-    // 스크롤 위치가 변경될 때마다 화살표 표시 여부 업데이트
     const container = containerRef.current;
     if (container) {
       container.addEventListener('scroll', updateArrowVisibility);
-      // Clean up the event listener on unmount
       return () => {
         container.removeEventListener('scroll', updateArrowVisibility);
       };
@@ -51,7 +49,6 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
   }, [availableIdols]);
 
   useEffect(() => {
-    // 초기 로드 시 화살표 표시 여부 설정
     updateArrowVisibility();
   }, [availableIdols]);
 
@@ -114,9 +111,13 @@ function SelectIdolList({ idols, favoriteIdols, setFavoriteIdols }) {
           {...events}
           ref={containerRef}
         >
-          {availableIdols.map((item) => (
-            <IdolCard key={item.id} item={item} onSelect={handleSelect} />
-          ))}
+          {isLoading
+            ? Array.from({ length: 16 }).map((_, index) => (
+                <IdolCardSkeleton key={index} />
+              ))
+            : availableIdols.map((item) => (
+                <IdolCard key={item.id} item={item} onSelect={handleSelect} />
+              ))}
         </div>
         <div className={styles['right-arrow-box']}>
           {showRightArrow && (

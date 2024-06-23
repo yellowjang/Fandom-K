@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import creditImg from '@/assets/images/img_diamond.png';
+import creditImg from '@/assets/icons/img_diamond.png';
 import ProgressBar from './ProgressBar';
 import { motion } from 'framer-motion';
 

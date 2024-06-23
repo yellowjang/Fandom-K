@@ -1,35 +1,35 @@
 @import '@/styles/import.scss';
 
 .progress-container {
-  position: relative; /* relative position을 사용하여 absolute positioned 자식 요소를 포함 */
-  height: 4px; /* 높이를 늘려서 더 넓게 만듭니다 */
+  position: relative;
+  height: 4px;
   z-index: 1;
   margin-top: 7px;
   width: 100%;
-  background-color: #e0e0e0; /* 배경색을 약간 더 어둡게 변경 */
-  opacity: 80%;
-  border-radius: 0 0 5px 5px; /* 모서리를 둥글게 만듭니다 */
+  background-color: #e0e0e0;
+  opacity: 0.8;
+  border-radius: 0 0 5px 5px;
   overflow: hidden;
-  display: flex; /* 플렉스 컨테이너로 설정 */
-  align-items: center; /* 수직 중앙 정렬 */
-  justify-content: center; /* 수평 중앙 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .progress-bar {
-  position: absolute; /* absolute position을 사용하여 컨테이너 내에서 자유롭게 배치 */
+  position: absolute;
   top: 0;
   left: 0;
   background-color: $color-orange;
-  height: 100%; /* 컨테이너의 높이에 맞추기 */
+  height: 100%;
   transition: width 0.3s ease-in-out;
-  z-index: 2; /* progress-container 위에 배치 */
+  z-index: 2;
 }
 
 .progress-text {
-  position: relative; /* relative position을 사용하여 플렉스 컨테이너 내에서 배치 */
+  position: relative;
   z-index: 3;
-  font-size: 12px; /* 텍스트 크기를 줄입니다 */
+  font-size: 12px;
   text-align: center;
-  color: #333; /* 어두운 색상으로 변경하여 대비를 높임 */
-  font-weight: bold; /* 텍스트를 두껍게 하여 가독성을 높임 */
+  color: #333;
+  font-weight: bold;
 }

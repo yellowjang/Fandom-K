@@ -12,7 +12,6 @@ import { useDraggable } from 'react-use-draggable-scroll';
 import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
 import Toast from '@/components/Toast';
 
-
 function DonationListAdaptive() {
   const [donations, setDonations] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);

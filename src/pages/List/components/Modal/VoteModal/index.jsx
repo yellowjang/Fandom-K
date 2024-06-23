@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import chartIcon from '@/assets/icons/ic_chart.svg';
-import checkIcon from '@/assets/icons/ic_check.svg';
 import backIcon from '@/assets/icons/icj_arrow_left.svg';
 import ModalChart from './ModalChart';
 import { disableScroll, activateScroll } from '../components/ModalScroll';

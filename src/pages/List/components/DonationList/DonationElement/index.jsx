@@ -25,13 +25,15 @@ function DonationElement({ donation, openModal }) {
     <motion.div
       className={styles['donation-element']}
       variants={elementVariants}
-      initial="initial"
-      animate="animate"
+      initial='initial'
+      animate='animate'
     >
       <div className={styles['image-box']}>
-        <div className={`${styles['gradation']} ${(isExpired || isGoalReached) ? styles['expired'] : ''}`}></div>
+        <div
+          className={`${styles['gradation']} ${isExpired || isGoalReached ? styles['expired'] : ''}`}
+        ></div>
         <motion.img
-          className={`${styles['donation-img']} ${(isExpired || isGoalReached) ? styles['darkened'] : ''}`}
+          className={`${styles['donation-img']} ${isExpired || isGoalReached ? styles['darkened'] : ''}`}
           src={donation.idol.profilePicture}
           alt='후원광고사진'
           whileHover={{ scale: 1.1 }}
@@ -44,8 +46,9 @@ function DonationElement({ donation, openModal }) {
         <motion.button
           onClick={() => openModal(donation)}
           disabled={isExpired || isGoalReached}
-
-          className={(isExpired || isGoalReached) ? styles['disabled-button'] : ''}
+          className={
+            isExpired || isGoalReached ? styles['disabled-button'] : ''
+          }
           whileHover={{ scale: 1.05 }}
         >
           {isExpired ? '기한 만료' : isGoalReached ? '목표 달성' : '후원하기'}

@@ -14,7 +14,6 @@ import DonationElementSkeleton from './DonationElement/DonationElementSkeleton';
 import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
 import Toast from '@/components/Toast';
 
-
 function DonationList() {
   const { credits, updateCredits } = useCredit();
   const [donations, setDonations] = useState([]);

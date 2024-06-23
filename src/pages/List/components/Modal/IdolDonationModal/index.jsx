@@ -54,6 +54,9 @@ const IdolDonationModal = ({
   };
 
   const handleKeyPress = (e) => {
+    if (!/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+    }
     if (e.key === 'Enter' && isValid) {
       handleSubmit();
     }

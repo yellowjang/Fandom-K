@@ -10,6 +10,8 @@ import { postVotes } from '@/services/api/votes';
 import useAsyncWithRetry from '@/hooks/useAsyncWithRetry';
 import Toast from '@/components/Toast';
 import { useCredit } from '@/contexts/CreditContext';
+import ModalBackground from '../components/ModalBackground';
+import ModalPortal from '../components/ModalPortal';
 
 function VoteModal({ items, gender, setItems, setShouldRerender }) {
   const { deductCredits } = useCredit();
@@ -63,6 +65,10 @@ function VoteModal({ items, gender, setItems, setShouldRerender }) {
     setToastMessage('');
   };
 
+  const closeModal = () => {
+    setModal(false);
+  };
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const widthMaxMobile = 767;
 
@@ -82,40 +88,43 @@ function VoteModal({ items, gender, setItems, setShouldRerender }) {
         <p>차트 투표하기</p>
       </button>
 
-      {modal && (
-        <div className={styles['modal']}>
-          <div
-            onClick={toggleModal}
-            className={styles['overlay']}
-            aria-hidden='true'
-          ></div>
-          <div className={styles['modal-content']}>
-            <header>
-              <h2>이달의 {genderCheck} 아이돌</h2>
-              <button onClick={toggleModal}>
-                <img
-                  src={windowWidth > widthMaxMobile ? closeIcon : backIcon}
-                  alt='닫기 아이콘'
-                />
-              </button>
-            </header>
-            <main>
-              <div className={styles['list-container']}>
-                <ModalChart items={items} onSelectIdol={handleSelectIdol} />
+      <ModalPortal>
+        <ModalBackground isModalOpen={modal} closeModal={closeModal}>
+          {modal && (
+            <div className={styles['modal']}>
+              <div
+                onClick={toggleModal}
+                className={styles['overlay']}
+                aria-hidden='true'
+              ></div>
+              <div className={styles['modal-content']}>
+                <header>
+                  <h2>이달의 {genderCheck} 아이돌</h2>
+                  <button onClick={toggleModal}>
+                    <img
+                      src={windowWidth > widthMaxMobile ? closeIcon : backIcon}
+                      alt='닫기 아이콘'
+                    />
+                  </button>
+                </header>
+                <main>
+                  <div className={styles['list-container']}>
+                    <ModalChart items={items} onSelectIdol={handleSelectIdol} />
+                  </div>
+                </main>
+                <footer>
+                  <button onClick={handleVote} disabled={!selectedIdol}>
+                    투표하기
+                  </button>
+                  <span>
+                    투표하는 데 <span>1000 크레딧</span>이 소모됩니다.
+                  </span>
+                </footer>
               </div>
-            </main>
-            <footer>
-              <button onClick={handleVote} disabled={!selectedIdol}>
-                투표하기
-              </button>
-              <span>
-                투표하는 데 <span>1000 크레딧</span>이 소모됩니다.
-              </span>
-            </footer>
-          </div>
-        </div>
-      )}
-
+            </div>
+          )}
+        </ModalBackground>
+      </ModalPortal>
       {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </>
   );

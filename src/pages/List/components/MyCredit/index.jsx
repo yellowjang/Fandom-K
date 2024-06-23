@@ -1,13 +1,33 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import style from './styles.module.scss';
 import creditImg from '@/assets/icons/img_diamond.png';
 import CreditChargeModal from '../Modal/CreditChargeModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 import { CreditContext } from '@/contexts/CreditContext';
 import AnimatedNumbers from 'react-animated-numbers';
+import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
 
-const MyCredit = ({ isModalOpen, closeModal, openModal }) => {
+const MyCredit = () => {
   const { credits, updateCredits } = useContext(CreditContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      const currentScrollY = disableScroll();
+
+      return () => {
+        activateScroll(currentScrollY);
+      };
+    }
+  }, [isModalOpen]);
 
   return (
     <>

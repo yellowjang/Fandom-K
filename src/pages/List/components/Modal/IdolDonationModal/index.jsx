@@ -12,11 +12,12 @@ const IdolDonationModal = ({
   isModalOpen,
   closeModal,
   handleDonate,
+  setToastMessage,
 }) => {
   const [inputCredit, setInputCredit] = useState('');
   const [creditValueError, setCreditValueError] = useState('');
   const [isValid, setIsValid] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
+  // const [toastMessage, setToastMessage] = useState('');
 
   const validate = (value) => {
     if (value === '') {
@@ -38,21 +39,26 @@ const IdolDonationModal = ({
     setInputCredit(value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (isValid) {
-      handleDonate(parseInt(inputCredit, 10));
-      setToastMessage('후원이 완료되었습니다!');
+      try {
+        setIsValid(false);
+        await handleDonate(parseInt(inputCredit, 10));
+        setToastMessage('후원이 완료되었습니다!');
+      } catch (error) {
+        console.error('후원 실패!:', error);
+        throw new Error(error);
+      }
     }
   };
 
   const handleKeyPress = (e) => {
+    if (!/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+    }
     if (e.key === 'Enter' && isValid) {
       handleSubmit();
     }
-  };
-
-  const closeToast = () => {
-    setToastMessage('');
   };
 
   return (

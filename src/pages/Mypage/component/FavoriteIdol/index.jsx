@@ -1,11 +1,11 @@
 import styles from './styles.module.scss';
 import logoImage from '@/assets/images/logo/fandom_k_logo.png';
 import FavoriteCard from '../FavoriteCard';
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 import { useDraggable } from 'react-use-draggable-scroll';
 
 function FavoriteIdol({ favoriteIdols, onSelect }) {
-  const dragRef = useRef(); // We will use React useRef hook to reference the wrapping div:
+  const dragRef = useRef();
   const { events } = useDraggable(dragRef);
   return (
     <div className={styles['favorite-idol']}>

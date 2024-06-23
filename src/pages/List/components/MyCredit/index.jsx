@@ -4,7 +4,7 @@ import creditImg from '@/assets/icons/img_diamond.png';
 import CreditChargeModal from '../Modal/CreditChargeModal';
 import ModalPortal from '../Modal/components/ModalPortal';
 import { CreditContext } from '@/contexts/CreditContext';
-import AnimatedNumbers from 'react-animated-numbers';
+import CountUp from 'react-countup';
 import { disableScroll, activateScroll } from '../Modal/components/ModalScroll';
 
 const MyCredit = () => {
@@ -37,14 +37,7 @@ const MyCredit = () => {
           <div className={style['credit-money']}>
             <img src={creditImg} alt='크레딧 이미지' />
             <div className={style['credit-number']}>
-              <AnimatedNumbers
-                includeComma
-                transitions={(index) => ({
-                  type: 'spring',
-                  duration: index + 0.3,
-                })}
-                animateToNumber={credits}
-              />
+              <CountUp start={0} end={credits} duration={1.5} separator=',' />
             </div>
             {/* <p>{credits}</p> */}
           </div>

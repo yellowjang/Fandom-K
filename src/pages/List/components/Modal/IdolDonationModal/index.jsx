@@ -44,6 +44,8 @@ const IdolDonationModal = ({
         setIsValid(false);
         await handleDonate(parseInt(inputCredit, 10));
         setToastMessage('후원이 완료되었습니다!');
+        setInputCredit('');
+        setCreditValueError('');
       } catch (error) {
         console.error('후원 실패!:', error);
         throw new Error(error);
@@ -85,11 +87,7 @@ const IdolDonationModal = ({
                 value={inputCredit}
                 onChange={handleInputChange}
                 onKeyPress={handleKeyPress}
-                className={
-                  inputCredit !== '' && !isValid
-                    ? style['input-error']
-                    : undefined
-                }
+                className={creditValueError ? style['input-error'] : ''}
               />
               <img src={creditIcon} alt='크레딧 아이콘' />
             </div>

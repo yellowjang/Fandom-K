@@ -79,8 +79,12 @@
   grid-auto-flow: column;
   width: 1198px;
   overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+  // overflow-y: hidden;
+  // scroll-behavior: smooth;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .idol-list-container::-webkit-scrollbar {

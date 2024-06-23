@@ -3,7 +3,6 @@ import style from './styles.module.scss';
 import closeIcon from '@/assets/icons/ic_close.svg';
 import creditIcon from '@/assets/icons/img_diamond.png';
 import ModalBackground from '../components/ModalBackground';
-import Toast from '@/components/Toast';
 
 const IdolDonationModal = ({
   donationImg,
@@ -108,7 +107,6 @@ const IdolDonationModal = ({
         </div>
       </ModalBackground>
 
-      {toastMessage && <Toast message={toastMessage} onClose={closeToast} />}
     </>
   );
 };

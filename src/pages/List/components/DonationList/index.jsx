@@ -86,10 +86,12 @@ function DonationList() {
   };
 
   const nextSlide = () => {
+    if (!donations.length) return;
     setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % donations.length);
   };
 
   const prevSlide = () => {
+    if (!donations.length) return;
     setCurrentSlideIndex(
       (prevIndex) => (prevIndex - 1 + donations.length) % donations.length
     );

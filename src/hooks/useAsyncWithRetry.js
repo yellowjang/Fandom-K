@@ -9,7 +9,6 @@ function useAsyncWithRetry(asyncFunction, retries = 5) {
       let attempt = 0;
       while (attempt < retries) {
         try {
-          if (attempt > 0) console.log('useAsyncWithRetry 재시도!');
           return await wrappedFunction(...args);
         } catch (error) {
           attempt += 1;

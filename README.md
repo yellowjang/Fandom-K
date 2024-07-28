@@ -6,7 +6,7 @@ https://fandom-k-706.netlify.app/
 - 프로젝트 기간: 24.06.10 ~ 24.06.23
 ### 프로젝트 설명
 자신이 좋아하는 아이돌에게 후원 및 인기투표를 하는 사이트입니다.  
-후원 및 인기토표는 크레딧을 통해서 할 수 있고 크레딧을 충전할 수도 있습니다.  
+후원 및 인기투표는 크레딧을 통해서 할 수 있고 크레딧을 충전할 수도 있습니다.  
 후원 상황과 투표수를 실시간으로 확인 할 수 있고 마이페이지에서 관심있는 아이돌을 관리할 수 있습니다.
 ### 팀원 소개
 |<img src="https://avatars.githubusercontent.com/u/144973656?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/166676502?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/58417470?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/166773598?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/166521974?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/155536270?v=4" width="150" height="150"/>|
